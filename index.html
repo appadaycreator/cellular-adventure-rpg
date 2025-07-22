@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>細胞の冒険 - ライフゲームRPG | Cellular Adventure</title>
+    <meta name="description" content="細胞の世界を冒険するシミュレーションRPG。生物学の基礎を楽しく学べる教育ゲーム。Conway's Game of Lifeベースの革新的なRPG体験。">
+    <meta name="keywords" content="ライフゲーム,RPG,細胞,生物学,教育ゲーム,シミュレーション,科学,Conway Game of Life">
+    
+    <!-- SEO & OGP -->
+    <meta property="og:title" content="細胞の冒険 - ライフゲームRPG">
+    <meta property="og:description" content="細胞の世界を冒険するシミュレーションRPG。生物学の基礎を楽しく学べる教育ゲーム。">
+    <meta property="og:image" content="https://cdn1.genspark.ai/user-upload-image/gpt_image_generated/4facf00a-b692-45d6-85a2-16bc601d9da2">
+    <meta property="og:url" content="https://appadaycreator.github.io/cellular-adventure-rpg/">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://cdn1.genspark.ai/user-upload-image/gpt_image_generated/4facf00a-b692-45d6-85a2-16bc601d9da2">
+    
+    <!-- PWA -->
+    <meta name="theme-color" content="#1f2937">
+    <link rel="manifest" href="data:application/manifest+json,{'name':'細胞の冒険','short_name':'CellularRPG','start_url':'/','display':'standalone','background_color':'#1f2937','theme_color':'#1f2937','icons':[{'src':'https://cdn1.genspark.ai/user-upload-image/gpt_image_generated/73e2cebb-fbd2-4064-a9c7-5ada27d04469','sizes':'512x512','type':'image/png'}]}">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="https://cdn1.genspark.ai/user-upload-image/gpt_image_generated/73e2cebb-fbd2-4064-a9c7-5ada27d04469">
+    
+    <!-- Libraries -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-TXQGZRF9');</script>
+    
+    <style>
+        :root {
+            --font-size-xs: 0.75rem;
+            --font-size-sm: 0.875rem;
+            --font-size-base: 1rem;
+            --font-size-lg: 1.125rem;
+            --font-size-xl: 1.25rem;
+        }
+        
+        .font-size-xs { font-size: var(--font-size-xs); }
+        .font-size-sm { font-size: var(--font-size-sm); }
+        .font-size-base { font-size: var(--font-size-base); }
+        .font-size-lg { font-size: var(--font-size-lg); }
+        .font-size-xl { font-size: var(--font-size-xl); }
+        
+        .game-grid {
+            display: grid;
+            gap: 1px;
+            background: #374151;
+            border: 2px solid #4b5563;
+            border-radius: 8px;
+        }
+        
+        .cell {
+            background: #1f2937;
+            transition: all 0.2s ease;
+        }
+        
+        .cell.alive {
+            background: linear-gradient(45deg, #10b981, #34d399);
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+        }
+        
+        .cell.dying {
+            background: linear-gradient(45deg, #f59e0b, #fbbf24);
+        }
+        
+        .cell.born {
+            background: linear-gradient(45deg, #3b82f6, #60a5fa);
+            animation: pulse 0.5s ease-in-out;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        .sidebar-transition {
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        .tooltip {
+            position: relative;
+        }
+        
+        .tooltip::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1f2937;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.2s;
+        }
+        
+        .tooltip:hover::after {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .neon-text {
+            color: #10b981;
+            text-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white font-sans">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TXQGZRF9" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    
+    <!-- Header -->
+    <header class="bg-gray-800 shadow-lg relative z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-4">
+                    <img src="https://cdn1.genspark.ai/user-upload-image/gpt_image_generated/73e2cebb-fbd2-4064-a9c7-5ada27d04469" alt="細胞の冒険" class="w-10 h-10 rounded-full">
+                    <h1 class="text-xl font-bold neon-text">
+                        <span class="font-mono">細胞の冒険</span>
+                        <span class="text-sm text-gray-400 block">Cellular Adventure</span>
+                    </h1>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <nav class="hidden lg:flex space-x-6">
+                    <a href="#game" class="hover:text-green-400 transition-colors" data-translate="nav.game">ゲーム</a>
+                    <a href="#learn" class="hover:text-green-400 transition-colors" data-translate="nav.learn">学習</a>
+                    <a href="#about" class="hover:text-green-400 transition-colors" data-translate="nav.about">使い方</a>
+                    <a href="#contact" class="hover:text-green-400 transition-colors" data-translate="nav.contact">お問い合わせ</a>
+                </nav>
+                
+                <!-- Controls -->
+                <div class="flex items-center space-x-2">
+                    <!-- Font Size Control -->
+                    <div class="relative">
+                        <button id="fontSizeBtn" class="p-2 bg-gray-700 rounded-lg hover:bg-gray-600 tooltip" data-tooltip="文字サイズ変更">
+                            <i class="fas fa-text-height"></i>
+                        </button>
+                        <div id="fontSizeMenu" class="absolute right-0 top-full mt-2 bg-gray-800 rounded-lg shadow-lg p-2 hidden min-w-max">
+                            <button class="font-size-btn block w-full text-left px-3 py-1 hover:bg-gray-700 rounded text-xs" data-size="xs">極小</button>
+                            <button class="font-size-btn block w-full text-left px-3 py-1 hover:bg-gray-700 rounded text-sm" data-size="sm">小</button>
+                            <button class="font-size-btn block w-full text-left px-3 py-1 hover:bg-gray-700 rounded" data-size="base">標準</button>
+                            <button class="font-size-btn block w-full text-left px-3 py-1 hover:bg-gray-700 rounded text-lg" data-size="lg">大</button>
+                            <button class="font-size-btn block w-full text-left px-3 py-1 hover:bg-gray-700 rounded text-xl" data-size="xl">特大</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Language Switch -->
+                    <button id="langBtn" class="p-2 bg-gray-700 rounded-lg hover:bg-gray-600 tooltip" data-tooltip="言語切り替え">
+                        <i class="fas fa-globe"></i>
+                        <span id="currentLang">JP</span>
+                    </button>
+                    
+                    <!-- Mobile Menu Button -->
+                    <button id="mobileMenuBtn" class="lg:hidden p-2 bg-gray-700 rounded-lg hover:bg-gray-600">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Mobile Sidebar -->
+    <div id="mobileSidebar" class="fixed inset-y-0 right-0 w-80 bg-gray-800 transform translate-x-full sidebar-transition lg:hidden z-40">
+        <div class="p-6">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-lg font-bold" data-translate="menu.title">メニュー</h2>
+                <button id="closeMobileMenu" class="p-2 hover:bg-gray-700 rounded-lg">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <nav class="space-y-4">
+                <a href="#game" class="block py-2 px-4 hover:bg-gray-700 rounded-lg" data-translate="nav.game">ゲーム</a>
+                <a href="#learn" class="block py-2 px-4 hover:bg-gray-700 rounded-lg" data-translate="nav.learn">学習</a>
+                <a href="#about" class="block py-2 px-4 hover:bg-gray-700 rounded-lg" data-translate="nav.about">使い方</a>
+                <a href="#contact" class="block py-2 px-4 hover:bg-gray-700 rounded-lg" data-translate="nav.contact">お問い合わせ</a>
+            </nav>
+            
+            <div class="mt-8">
+                <h3 class="font-semibold mb-4" data-translate="menu.settings">設定</h3>
+                <div class="space-y-2">
+                    <button class="w-full text-left p-2 hover:bg-gray-700 rounded-lg" data-translate="menu.tutorial">チュートリアル</button>
+                    <button class="w-full text-left p-2 hover:bg-gray-700 rounded-lg" data-translate="menu.history">履歴</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="flex">
+        <!-- Desktop Left Sidebar -->
+        <aside class="hidden lg:block w-64 bg-gray-800 min-h-screen p-6">
+            <div class="space-y-6">
+                <div>
+                    <h3 class="font-semibold mb-4 flex items-center">
+                        <i class="fas fa-gamepad mr-2 text-green-400"></i>
+                        <span data-translate="sidebar.gamemode">ゲームモード</span>
+                    </h3>
+                    <div class="space-y-2">
+                        <button id="storyMode" class="w-full text-left p-2 bg-green-600 hover:bg-green-700 rounded-lg transition-colors">
+                            <i class="fas fa-book mr-2"></i>
+                            <span data-translate="game.story">ストーリー</span>
+                        </button>
+                        <button id="sandboxMode" class="w-full text-left p-2 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors">
+                            <i class="fas fa-cube mr-2"></i>
+                            <span data-translate="game.sandbox">サンドボックス</span>
+                        </button>
+                        <button id="challengeMode" class="w-full text-left p-2 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors">
+                            <i class="fas fa-trophy mr-2"></i>
+                            <span data-translate="game.challenge">チャレンジ</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="font-semibold mb-4 flex items-center">
+                        <i class="fas fa-microscope mr-2 text-blue-400"></i>
+                        <span data-translate="sidebar.celltype">細胞タイプ</span>
+                    </h3>
+                    <div class="space-y-2">
+                        <div class="p-2 bg-gray-700 rounded-lg">
+                            <div class="flex items-center justify-between">
+                                <span data-translate="cell.normal">通常細胞</span>
+                                <div class="w-4 h-4 bg-green-400 rounded-full"></div>
+                            </div>
+                        </div>
+                        <div class="p-2 bg-gray-700 rounded-lg">
+                            <div class="flex items-center justify-between">
+                                <span data-translate="cell.dividing">分裂細胞</span>
+                                <div class="w-4 h-4 bg-blue-400 rounded-full animate-pulse"></div>
+                            </div>
+                        </div>
+                        <div class="p-2 bg-gray-700 rounded-lg">
+                            <div class="flex items-center justify-between">
+                                <span data-translate="cell.defensive">防御細胞</span>
+                                <div class="w-4 h-4 bg-yellow-400 rounded-full"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="font-semibold mb-4 flex items-center">
+                        <i class="fas fa-chart-line mr-2 text-purple-400"></i>
+                        <span data-translate="sidebar.stats">統計</span>
+                    </h3>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex justify-between">
+                            <span data-translate="stats.generation">世代:</span>
+                            <span id="generation">0</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span data-translate="stats.population">人口:</span>
+                            <span id="population">0</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span data-translate="stats.survival">生存率:</span>
+                            <span id="survivalRate">0%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        
+        <!-- Main Game Area -->
+        <main class="flex-1 p-6">
+            <!-- Hero Section -->
+            <section id="hero" class="mb-12 text-center">
+                <div class="max-w-4xl mx-auto">
+                    <h1 class="text-4xl lg:text-6xl font-bold mb-6 animate-float">
+                        <span class="neon-text font-mono">細胞の冒険</span>
+                    </h1>
+                    <p class="text-xl mb-8 text-gray-300" data-translate="hero.description">
+                        生命の神秘を体験する革新的なライフゲームRPG
+                    </p>
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <button id="startGameBtn" class="px-8 py-3 bg-green-600 hover:bg-green-700 rounded-lg font-semibold transition-all transform hover:scale-105">
+                            <i class="fas fa-play mr-2"></i>
+                            <span data-translate="hero.start">ゲーム開始</span>
+                        </button>
+                        <button id="tutorialBtn" class="px-8 py-3 bg-blue-600 hover:bg-blue-700 rounded-lg font-semibold transition-all transform hover:scale-105">
+                            <i class="fas fa-graduation-cap mr-2"></i>
+                            <span data-translate="hero.tutorial">チュートリアル</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Game Canvas -->
+            <section id="game" class="mb-12">
+                <div class="max-w-4xl mx-auto">
+                    <div class="glass-effect rounded-xl p-6">
+                        <div class="flex flex-wrap justify-between items-center mb-6">
+                            <h2 class="text-2xl font-bold flex items-center">
+                                <i class="fas fa-dna mr-3 text-green-400"></i>
+                                <span data-translate="game.title">細胞シミュレーション</span>
+                            </h2>
+                            
+                            <div class="flex flex-wrap gap-2">
+                                <button id="playPauseBtn" class="px-4 py-2 bg-green-600 hover:bg-green-700 rounded-lg transition-colors">
+                                    <i class="fas fa-play"></i>
+                                    <span class="ml-2" data-translate="game.play">再生</span>
+                                </button>
+                                <button id="resetBtn" class="px-4 py-2 bg-red-600 hover:bg-red-700 rounded-lg transition-colors">
+                                    <i class="fas fa-redo"></i>
+                                    <span class="ml-2" data-translate="game.reset">リセット</span>
+                                </button>
+                                <button id="randomBtn" class="px-4 py-2 bg-purple-600 hover:bg-purple-700 rounded-lg transition-colors">
+                                    <i class="fas fa-random"></i>
+                                    <span class="ml-2" data-translate="game.random">ランダム</span>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Game Grid -->
+                        <div class="flex justify-center mb-6">
+                            <div id="gameGrid" class="game-grid" style="grid-template-columns: repeat(30, 12px); grid-template-rows: repeat(20, 12px);">
+                                <!-- Cells will be generated by JavaScript -->
+                            </div>
+                        </div>
+                        
+                        <!-- Game Controls -->
+                        <div class="flex flex-wrap justify-center gap-4">
+                            <div class="flex items-center space-x-2">
+                                <label for="speedSlider" data-translate="game.speed">速度:</label>
+                                <input type="range" id="speedSlider" min="1" max="10" value="5" class="w-32">
+                                <span id="speedValue">5</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <label for="gridSize" data-translate="game.gridsize">グリッドサイズ:</label>
+                                <select id="gridSize" class="bg-gray-700 rounded px-3 py-1">
+                                    <option value="20x15">20x15</option>
+                                    <option value="30x20" selected>30x20</option>
+                                    <option value="40x30">40x30</option>
+                                    <option value="50x40">50x40</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <!-- Pattern Presets -->
+                        <div class="mt-6">
+                            <h3 class="text-lg font-semibold mb-3" data-translate="game.patterns">パターン選択:</h3>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                                <button class="pattern-btn p-3 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors" data-pattern="glider">
+                                    <i class="fas fa-paper-plane mb-2"></i>
+                                    <div data-translate="pattern.glider">グライダー</div>
+                                </button>
+                                <button class="pattern-btn p-3 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors" data-pattern="oscillator">
+                                    <i class="fas fa-sync-alt mb-2"></i>
+                                    <div data-translate="pattern.oscillator">振動子</div>
+                                </button>
+                                <button class="pattern-btn p-3 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors" data-pattern="still">
+                                    <i class="fas fa-square mb-2"></i>
+                                    <div data-translate="pattern.still">静物</div>
+                                </button>
+                                <button class="pattern-btn p-3 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors" data-pattern="gun">
+                                    <i class="fas fa-crosshairs mb-2"></i>
+                                    <div data-translate="pattern.gun">ガン</div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Learning Section -->
+            <section id="learn" class="mb-12">
+                <div class="max-w-4xl mx-auto">
+                    <h2 class="text-3xl font-bold mb-8 text-center">
+                        <i class="fas fa-microscope mr-3 text-blue-400"></i>
+                        <span data-translate="learn.title">生物学を学ぼう</span>
+                    </h2>
+                    
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="glass-effect rounded-xl p-6">
+                            <h3 class="text-xl font-semibold mb-4 flex items-center">
+                                <i class="fas fa-dna mr-2 text-green-400"></i>
+                                <span data-translate="learn.cellular">細胞について</span>
+                            </h3>
+                            <p class="text-gray-300 mb-4" data-translate="learn.cellular.desc">
+                                細胞は生命の基本単位です。単細胞生物から多細胞生物まで、すべての生命は細胞から構成されています。
+                            </p>
+                            <button class="text-blue-400 hover:text-blue-300 transition-colors" data-translate="learn.more">
+                                詳しく学ぶ →
+                            </button>
+                        </div>
+                        
+                        <div class="glass-effect rounded-xl p-6">
+                            <h3 class="text-xl font-semibold mb-4 flex items-center">
+                                <i class="fas fa-seedling mr-2 text-green-400"></i>
+                                <span data-translate="learn.evolution">進化論</span>
+                            </h3>
+                            <p class="text-gray-300 mb-4" data-translate="learn.evolution.desc">
+                                生物は環境に適応しながら進化します。自然選択、遺伝的多様性、適応などの原理を学びましょう。
+                            </p>
+                            <button class="text-blue-400 hover:text-blue-300 transition-colors" data-translate="learn.more">
+                                詳しく学ぶ →
+                            </button>
+                        </div>
+                        
+                        <div class="glass-effect rounded-xl p-6">
+                            <h3 class="text-xl font-semibold mb-4 flex items-center">
+                                <i class="fas fa-project-diagram mr-2 text-purple-400"></i>
+                                <span data-translate="learn.ecosystem">生態系</span>
+                            </h3>
+                            <p class="text-gray-300 mb-4" data-translate="learn.ecosystem.desc">
+                                生物は相互に作用し合い、複雑な生態系を形成します。食物連鎖や共生関係について学習しましょう。
+                            </p>
+                            <button class="text-blue-400 hover:text-blue-300 transition-colors" data-translate="learn.more">
+                                詳しく学ぶ →
+                            </button>
+                        </div>
+                        
+                        <div class="glass-effect rounded-xl p-6">
+                            <h3 class="text-xl font-semibold mb-4 flex items-center">
+                                <i class="fas fa-calculator mr-2 text-yellow-400"></i>
+                                <span data-translate="learn.gameoflife">ライフゲーム</span>
+                            </h3>
+                            <p class="text-gray-300 mb-4" data-translate="learn.gameoflife.desc">
+                                数学者コンウェイが考案したシミュレーション。単純なルールから複雑なパターンが生まれます。
+                            </p>
+                            <button class="text-blue-400 hover:text-blue-300 transition-colors" data-translate="learn.more">
+                                詳しく学ぶ →
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Affiliate Section -->
+                    <div class="mt-12 p-6 bg-gradient-to-r from-blue-900 to-purple-900 rounded-xl">
+                        <h3 class="text-xl font-semibold mb-4 text-center">
+                            <i class="fas fa-book-open mr-2"></i>
+                            <span data-translate="affiliate.title">おすすめ学習教材</span>
+                        </h3>
+                        <div class="grid md:grid-cols-3 gap-4">
+                            <a href="#" class="affiliate-link block p-4 bg-white bg-opacity-10 rounded-lg hover:bg-opacity-20 transition-colors">
+                                <div class="text-center">
+                                    <i class="fas fa-book text-3xl mb-2 text-blue-400"></i>
+                                    <h4 class="font-semibold mb-2" data-translate="affiliate.biology">生物学入門書</h4>
+                                    <p class="text-sm text-gray-300" data-translate="affiliate.biology.desc">基礎から学べる生物学の教科書</p>
+                                </div>
+                            </a>
+                            <a href="#" class="affiliate-link block p-4 bg-white bg-opacity-10 rounded-lg hover:bg-opacity-20 transition-colors">
+                                <div class="text-center">
+                                    <i class="fas fa-microscope text-3xl mb-2 text-green-400"></i>
+                                    <h4 class="font-semibold mb-2" data-translate="affiliate.microscope">顕微鏡セット</h4>
+                                    <p class="text-sm text-gray-300" data-translate="affiliate.microscope.desc">実際の細胞観察ができる</p>
+                                </div>
+                            </a>
+                            <a href="#" class="affiliate-link block p-4 bg-white bg-opacity-10 rounded-lg hover:bg-opacity-20 transition-colors">
+                                <div class="text-center">
+                                    <i class="fas fa-gamepad text-3xl mb-2 text-purple-400"></i>
+                                    <h4 class="font-semibold mb-2" data-translate="affiliate.simulation">シミュレーションソフト</h4>
+                                    <p class="text-sm text-gray-300" data-translate="affiliate.simulation.desc">高度な生物シミュレーション</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- About Section -->
+            <section id="about" class="mb-12">
+                <div class="max-w-4xl mx-auto">
+                    <h2 class="text-3xl font-bold mb-8 text-center" data-translate="about.title">使い方</h2>
+                    
+                    <div class="glass-effect rounded-xl p-6">
+                        <div class="space-y-6">
+                            <div>
+                                <h3 class="text-xl font-semibold mb-3 flex items-center">
+                                    <i class="fas fa-mouse-pointer mr-2 text-blue-400"></i>
+                                    <span data-translate="about.basic">基本操作</span>
+                                </h3>
+                                <ul class="list-disc list-inside space-y-2 text-gray-300">
+                                    <li data-translate="about.click">グリッドをクリックして細胞を配置</li>
+                                    <li data-translate="about.play">再生ボタンでシミュレーション開始</li>
+                                    <li data-translate="about.pause">一時停止で観察や編集</li>
+                                    <li data-translate="about.reset">リセットで初期状態に戻す</li>
+                                </ul>
+                            </div>
+                            
+                            <div>
+                                <h3 class="text-xl font-semibold mb-3 flex items-center">
+                                    <i class="fas fa-cogs mr-2 text-green-400"></i>
+                                    <span data-translate="about.rules">ライフゲームのルール</span>
+                                </h3>
+                                <ul class="list-disc list-inside space-y-2 text-gray-300">
+                                    <li data-translate="rule.1">生きている細胞は2〜3個の隣接細胞があると生存</li>
+                                    <li data-translate="rule.2">死んでいる細胞はちょうど3個の隣接細胞で誕生</li>
+                                    <li data-translate="rule.3">その他の場合は死亡または死の状態を維持</li>
+                                    <li data-translate="rule.4">すべての細胞が同時に次の状態に変化</li>
+                                </ul>
+                            </div>
+                            
+                            <div>
+                                <h3 class="text-xl font-semibold mb-3 flex items-center">
+                                    <i class="fas fa-lightbulb mr-2 text-yellow-400"></i>
+                                    <span data-translate="about.tips">使い方のコツ</span>
+                                </h3>
+                                <ul class="list-disc list-inside space-y-2 text-gray-300">
+                                    <li data-translate="tip.1">パターン選択で有名な構造を試そう</li>
+                                    <li data-translate="tip.2">速度を調整してじっくり観察</li>
+                                    <li data-translate="tip.3">ランダムボタンで意外な発見も</li>
+                                    <li data-translate="tip.4">履歴機能で過去のパターンを振り返り</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Share Section -->
+            <section id="share" class="mb-12">
+                <div class="max-w-4xl mx-auto">
+                    <div class="glass-effect rounded-xl p-6 text-center">
+                        <h3 class="text-xl font-semibold mb-4" data-translate="share.title">結果をシェア</h3>
+                        <div class="flex flex-wrap justify-center gap-4">
+                            <button id="shareTwitter" class="px-6 py-3 bg-blue-500 hover:bg-blue-600 rounded-lg transition-colors">
+                                <i class="fab fa-twitter mr-2"></i>
+                                Twitter
+                            </button>
+                            <button id="shareFacebook" class="px-6 py-3 bg-blue-700 hover:bg-blue-800 rounded-lg transition-colors">
+                                <i class="fab fa-facebook mr-2"></i>
+                                Facebook
+                            </button>
+                            <button id="shareLine" class="px-6 py-3 bg-green-500 hover:bg-green-600 rounded-lg transition-colors">
+                                <i class="fab fa-line mr-2"></i>
+                                LINE
+                            </button>
+                            <button id="copyLink" class="px-6 py-3 bg-gray-600 hover:bg-gray-700 rounded-lg transition-colors">
+                                <i class="fas fa-copy mr-2"></i>
+                                <span data-translate="share.copy">リンクコピー</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="bg-gray-800 py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="font-bold mb-4 flex items-center">
+                        <img src="https://cdn1.genspark.ai/user-upload-image/gpt_image_generated/73e2cebb-fbd2-4064-a9c7-5ada27d04469" alt="細胞の冒険" class="w-6 h-6 mr-2">
+                        細胞の冒険
+                    </h3>
+                    <p class="text-gray-400 text-sm" data-translate="footer.description">
+                        生命の神秘を体験する教育的ライフゲームRPG
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4" data-translate="footer.links">リンク</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#game" class="text-gray-400 hover:text-white transition-colors" data-translate="nav.game">ゲーム</a></li>
+                        <li><a href="#learn" class="text-gray-400 hover:text-white transition-colors" data-translate="nav.learn">学習</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-white transition-colors" data-translate="nav.about">使い方</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white transition-colors" data-translate="nav.contact">お問い合わせ</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4" data-translate="footer.legal">法的情報</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#privacy" class="text-gray-400 hover:text-white transition-colors" data-translate="footer.privacy">プライバシーポリシー</a></li>
+                        <li><a href="#terms" class="text-gray-400 hover:text-white transition-colors" data-translate="footer.terms">利用規約</a></li>
+                        <li><a href="#disclaimer" class="text-gray-400 hover:text-white transition-colors" data-translate="footer.disclaimer">免責事項</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4" data-translate="footer.contact">お問い合わせ</h4>
+                    <p class="text-gray-400 text-sm">
+                        <i class="fas fa-envelope mr-2"></i>
+                        contact@cellular-adventure.com
+                    </p>
+                    <div class="flex space-x-3 mt-4">
+                        <a href="#" class="text-gray-400 hover:text-blue-400 transition-colors">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-blue-600 transition-colors">
+                            <i class="fab fa-facebook text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-red-500 transition-colors">
+                            <i class="fab fa-youtube text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+                <p class="text-gray-400 text-sm">
+                    &copy; 2024 細胞の冒険 - Cellular Adventure. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Overlay for mobile menu -->
+    <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden lg:hidden z-30"></div>
+
+    <script>
+        console.log('🧬 細胞の冒険 - Cellular Adventure RPG が起動しました');
+        
+        // Game State
+        let gameState = {
+            grid: [],
+            width: 30,
+            height: 20,
+            isRunning: false,
+            generation: 0,
+            speed: 5,
+            intervalId: null,
+            history: [],
+            currentLanguage: 'ja'
+        };
+        
+        // Translations
+        const translations = {
+            ja: {
+                'nav.game': 'ゲーム',
+                'nav.learn': '学習',
+                'nav.about': '使い方',
+                'nav.contact': 'お問い合わせ',
+                'hero.description': '生命の神秘を体験する革新的なライフゲームRPG',
+                'hero.start': 'ゲーム開始',
+                'hero.tutorial': 'チュートリアル',
+                'game.title': '細胞シミュレーション',
+                'game.play': '再生',
+                'game.pause': '一時停止',
+                'game.reset': 'リセット',
+                'game.random': 'ランダム',
+                'share.title': '結果をシェア',
+                'share.copy': 'リンクコピー'
+            },
+            en: {
+                'nav.game': 'Game',
+                'nav.learn': 'Learn',
+                'nav.about': 'How to use',
+                'nav.contact': 'Contact',
+                'hero.description': 'Revolutionary Life Game RPG to Experience the Mystery of Life',
+                'hero.start': 'Start Game',
+                'hero.tutorial': 'Tutorial',
+                'game.title': 'Cellular Simulation',
+                'game.play': 'Play',
+                'game.pause': 'Pause',
+                'game.reset': 'Reset',
+                'game.random': 'Random',
+                'share.title': 'Share Results',
+                'share.copy': 'Copy Link'
+            }
+        };
+        
+        // Initialize Game
+        function initGame() {
+            console.log('🎮 ゲームを初期化中...');
+            createGrid();
+            setupEventListeners();
+            loadFromStorage();
+            updateUI();
+            console.log('✅ ゲーム初期化完了');
+        }
+        
+        // Create Game Grid
+        function createGrid() {
+            const gridElement = document.getElementById('gameGrid');
+            gridElement.innerHTML = '';
+            gridElement.style.gridTemplateColumns = `repeat(${gameState.width}, 12px)`;
+            gridElement.style.gridTemplateRows = `repeat(${gameState.height}, 12px)`;
+            
+            // Initialize grid array
+            gameState.grid = Array(gameState.height).fill().map(() => Array(gameState.width).fill(false));
+            
+            // Create DOM elements
+            for (let y = 0; y < gameState.height; y++) {
+                for (let x = 0; x < gameState.width; x++) {
+                    const cell = document.createElement('div');
+                    cell.className = 'cell';
+                    cell.dataset.x = x;
+                    cell.dataset.y = y;
+                    cell.addEventListener('click', () => toggleCell(x, y));
+                    gridElement.appendChild(cell);
+                }
+            }
+            console.log(`🔧 グリッド作成完了: ${gameState.width}x${gameState.height}`);
+        }
+        
+        // Toggle Cell State
+        function toggleCell(x, y) {
+            gameState.grid[y][x] = !gameState.grid[y][x];
+            updateCellDisplay(x, y);
+            updateStats();
+            console.log(`🔄 細胞状態変更: (${x}, ${y}) -> ${gameState.grid[y][x]}`);
+        }
+        
+        // Update Cell Display
+        function updateCellDisplay(x, y) {
+            const cell = document.querySelector(`[data-x="${x}"][data-y="${y}"]`);
+            if (cell) {
+                cell.className = gameState.grid[y][x] ? 'cell alive' : 'cell';
+            }
+        }
+        
+        // Update All Cells Display
+        function updateAllCells() {
+            for (let y = 0; y < gameState.height; y++) {
+                for (let x = 0; x < gameState.width; x++) {
+                    updateCellDisplay(x, y);
+                }
+            }
+        }
+        
+        // Game of Life Rules
+        function nextGeneration() {
+            const newGrid = Array(gameState.height).fill().map(() => Array(gameState.width).fill(false));
+            let changedCells = [];
+            
+            for (let y = 0; y < gameState.height; y++) {
+                for (let x = 0; x < gameState.width; x++) {
+                    const neighbors = countNeighbors(x, y);
+                    const current = gameState.grid[y][x];
+                    
+                    if (current) {
+                        // Living cell
+                        newGrid[y][x] = neighbors === 2 || neighbors === 3;
+                    } else {
+                        // Dead cell
+                        newGrid[y][x] = neighbors === 3;
+                    }
+                    
+                    if (newGrid[y][x] !== current) {
+                        changedCells.push({ x, y, born: !current });
+                    }
+                }
+            }
+            
+            gameState.grid = newGrid;
+            gameState.generation++;
+            
+            // Animate changed cells
+            changedCells.forEach(({ x, y, born }) => {
+                const cell = document.querySelector(`[data-x="${x}"][data-y="${y}"]`);
+                if (cell) {
+                    cell.className = `cell ${gameState.grid[y][x] ? 'alive' : ''} ${born ? 'born' : 'dying'}`;
+                    setTimeout(() => {
+                        cell.className = gameState.grid[y][x] ? 'cell alive' : 'cell';
+                    }, 500);
+                }
+            });
+            
+            updateStats();
+            saveToStorage();
+            console.log(`⏭️ 世代 ${gameState.generation}: ${changedCells.length} 個の細胞が変化`);
+        }
+        
+        // Count Neighbors
+        function countNeighbors(x, y) {
+            let count = 0;
+            for (let dy = -1; dy <= 1; dy++) {
+                for (let dx = -1; dx <= 1; dx++) {
+                    if (dx === 0 && dy === 0) continue;
+                    
+                    const nx = x + dx;
+                    const ny = y + dy;
+                    
+                    if (nx >= 0 && nx < gameState.width && ny >= 0 && ny < gameState.height) {
+                        if (gameState.grid[ny][nx]) count++;
+                    }
+                }
+            }
+            return count;
+        }
+        
+        // Update Statistics
+        function updateStats() {
+            let population = 0;
+            for (let y = 0; y < gameState.height; y++) {
+                for (let x = 0; x < gameState.width; x++) {
+                    if (gameState.grid[y][x]) population++;
+                }
+            }
+            
+            const totalCells = gameState.width * gameState.height;
+            const survivalRate = Math.round((population / totalCells) * 100);
+            
+            document.getElementById('generation').textContent = gameState.generation;
+            document.getElementById('population').textContent = population;
+            document.getElementById('survivalRate').textContent = `${survivalRate}%`;
+        }
+        
+        // Game Control Functions
+        function playPause() {
+            if (gameState.isRunning) {
+                clearInterval(gameState.intervalId);
+                gameState.isRunning = false;
+                document.getElementById('playPauseBtn').innerHTML = '<i class="fas fa-play"></i><span class="ml-2">再生</span>';
+                console.log('⏸️ ゲーム一時停止');
+            } else {
+                const delay = 1100 - gameState.speed * 100;
+                gameState.intervalId = setInterval(nextGeneration, delay);
+                gameState.isRunning = true;
+                document.getElementById('playPauseBtn').innerHTML = '<i class="fas fa-pause"></i><span class="ml-2">一時停止</span>';
+                console.log(`▶️ ゲーム開始 (速度: ${gameState.speed}, 間隔: ${delay}ms)`);
+            }
+        }
+        
+        function resetGame() {
+            if (gameState.isRunning) {
+                playPause();
+            }
+            
+            gameState.grid = Array(gameState.height).fill().map(() => Array(gameState.width).fill(false));
+            gameState.generation = 0;
+            updateAllCells();
+            updateStats();
+            console.log('🔄 ゲームリセット完了');
+        }
+        
+        function randomize() {
+            for (let y = 0; y < gameState.height; y++) {
+                for (let x = 0; x < gameState.width; x++) {
+                    gameState.grid[y][x] = Math.random() < 0.3;
+                }
+            }
+            gameState.generation = 0;
+            updateAllCells();
+            updateStats();
+            console.log('🎲 ランダムパターン生成完了');
+        }
+        
+        // Pattern Functions
+        const patterns = {
+            glider: [
+                [0, 1, 0],
+                [0, 0, 1],
+                [1, 1, 1]
+            ],
+            oscillator: [
+                [0, 1, 0],
+                [0, 1, 0],
+                [0, 1, 0]
+            ],
+            still: [
+                [0, 1, 1, 0],
+                [1, 0, 0, 1],
+                [0, 1, 1, 0]
+            ],
+            gun: [
+                [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0],
+                [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0],
+                [0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1],
+                [0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1],
+                [1,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+                [1,1,0,0,0,0,0,0,0,0,1,0,0,0,1,0,1,1,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0],
+                [0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0],
+                [0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+                [0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+            ]
+        };
+        
+        function placePattern(patternName) {
+            const pattern = patterns[patternName];
+            if (!pattern) return;
+            
+            resetGame();
+            
+            const startX = Math.floor((gameState.width - pattern[0].length) / 2);
+            const startY = Math.floor((gameState.height - pattern.length) / 2);
+            
+            for (let y = 0; y < pattern.length; y++) {
+                for (let x = 0; x < pattern[y].length; x++) {
+                    const gridX = startX + x;
+                    const gridY = startY + y;
+                    
+                    if (gridX >= 0 && gridX < gameState.width && gridY >= 0 && gridY < gameState.height) {
+                        gameState.grid[gridY][gridX] = pattern[y][x] === 1;
+                    }
+                }
+            }
+            
+            updateAllCells();
+            updateStats();
+            console.log(`🎯 パターン "${patternName}" を配置しました`);
+        }
+        
+        // UI Functions
+        function updateUI() {
+            document.getElementById('speedValue').textContent = gameState.speed;
+            document.getElementById('currentLang').textContent = gameState.currentLanguage === 'ja' ? 'JP' : 'EN';
+        }
+        
+        function updateLanguage() {
+            const elements = document.querySelectorAll('[data-translate]');
+            elements.forEach(element => {
+                const key = element.getAttribute('data-translate');
+                const translation = translations[gameState.currentLanguage][key];
+                if (translation) {
+                    element.textContent = translation;
+                }
+            });
+        }
+        
+        function toggleLanguage() {
+            gameState.currentLanguage = gameState.currentLanguage === 'ja' ? 'en' : 'ja';
+            document.documentElement.lang = gameState.currentLanguage;
+            updateLanguage();
+            updateUI();
+            saveToStorage();
+            console.log(`🌐 言語を ${gameState.currentLanguage} に変更しました`);
+        }
+        
+        // Font Size Control
+        function changeFontSize(size) {
+            document.documentElement.className = `font-size-${size}`;
+            localStorage.setItem('fontSize', size);
+            console.log(`🔤 フォントサイズを ${size} に変更しました`);
+        }
+        
+        // Storage Functions
+        function saveToStorage() {
+            const data = {
+                grid: gameState.grid,
+                generation: gameState.generation,
+                language: gameState.currentLanguage,
+                timestamp: Date.now()
+            };
+            
+            // Save current state
+            localStorage.setItem('cellularGame', JSON.stringify(data));
+            
+            // Save to history
+            let history = JSON.parse(localStorage.getItem('cellularHistory') || '[]');
+            history.push(data);
+            if (history.length > 50) history = history.slice(-50); // Keep last 50 states
+            localStorage.setItem('cellularHistory', JSON.stringify(history));
+        }
+        
+        function loadFromStorage() {
+            const saved = localStorage.getItem('cellularGame');
+            if (saved) {
+                try {
+                    const data = JSON.parse(saved);
+                    if (data.grid && data.grid.length === gameState.height && data.grid[0].length === gameState.width) {
+                        gameState.grid = data.grid;
+                        gameState.generation = data.generation || 0;
+                        if (data.language) {
+                            gameState.currentLanguage = data.language;
+                            document.documentElement.lang = gameState.currentLanguage;
+                        }
+                        updateAllCells();
+                        updateStats();
+                        updateLanguage();
+                        console.log('💾 保存されたゲーム状態を読み込みました');
+                    }
+                } catch (error) {
+                    console.error('❌ 保存データの読み込みエラー:', error);
+                }
+            }
+            
+            // Load font size
+            const fontSize = localStorage.getItem('fontSize') || 'base';
+            changeFontSize(fontSize);
+        }
+        
+        // Share Functions
+        function shareToTwitter() {
+            const text = `細胞の冒険で${gameState.generation}世代目まで到達！人口${document.getElementById('population').textContent}の生態系を作りました 🧬✨`;
+            const url = window.location.href;
+            const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}&hashtags=細胞の冒険,ライフゲーム,生物学`;
+            window.open(twitterUrl, '_blank');
+            console.log('🐦 Twitterでシェアしました');
+        }
+        
+        function shareToFacebook() {
+            const url = window.location.href;
+            const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+            window.open(facebookUrl, '_blank');
+            console.log('📘 Facebookでシェアしました');
+        }
+        
+        function shareToLine() {
+            const text = `細胞の冒険で生命のシミュレーションを体験中！`;
+            const url = window.location.href;
+            const lineUrl = `https://line.me/R/msg/text/?${encodeURIComponent(text + ' ' + url)}`;
+            window.open(lineUrl, '_blank');
+            console.log('💚 LINEでシェアしました');
+        }
+        
+        function copyLink() {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                // Show toast notification
+                const toast = document.createElement('div');
+                toast.className = 'fixed top-4 right-4 bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg z-50';
+                toast.textContent = 'リンクをコピーしました！';
+                document.body.appendChild(toast);
+                setTimeout(() => toast.remove(), 3000);
+                console.log('📋 リンクをコピーしました');
+            });
+        }
+        
+        // Event Listeners
+        function setupEventListeners() {
+            // Game controls
+            document.getElementById('playPauseBtn').addEventListener('click', playPause);
+            document.getElementById('resetBtn').addEventListener('click', resetGame);
+            document.getElementById('randomBtn').addEventListener('click', randomize);
+            
+            // Speed control
+            const speedSlider = document.getElementById('speedSlider');
+            speedSlider.addEventListener('input', (e) => {
+                gameState.speed = parseInt(e.target.value);
+                updateUI();
+                
+                if (gameState.isRunning) {
+                    clearInterval(gameState.intervalId);
+                    const delay = 1100 - gameState.speed * 100;
+                    gameState.intervalId = setInterval(nextGeneration, delay);
+                }
+                console.log(`⚡ 速度を ${gameState.speed} に変更しました`);
+            });
+            
+            // Grid size control
+            document.getElementById('gridSize').addEventListener('change', (e) => {
+                const [width, height] = e.target.value.split('x').map(Number);
+                gameState.width = width;
+                gameState.height = height;
+                createGrid();
+                updateStats();
+                console.log(`📏 グリッドサイズを ${width}x${height} に変更しました`);
+            });
+            
+            // Pattern buttons
+            document.querySelectorAll('.pattern-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const pattern = btn.dataset.pattern;
+                    placePattern(pattern);
+                });
+            });
+            
+            // Mobile menu
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileSidebar = document.getElementById('mobileSidebar');
+            const closeMobileMenu = document.getElementById('closeMobileMenu');
+            const overlay = document.getElementById('overlay');
+            
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileSidebar.classList.remove('translate-x-full');
+                overlay.classList.remove('hidden');
+                console.log('📱 モバイルメニューを開きました');
+            });
+            
+            [closeMobileMenu, overlay].forEach(element => {
+                element.addEventListener('click', () => {
+                    mobileSidebar.classList.add('translate-x-full');
+                    overlay.classList.add('hidden');
+                    console.log('📱 モバイルメニューを閉じました');
+                });
+            });
+            
+            // Language toggle
+            document.getElementById('langBtn').addEventListener('click', toggleLanguage);
+            
+            // Font size controls
+            document.getElementById('fontSizeBtn').addEventListener('click', () => {
+                const menu = document.getElementById('fontSizeMenu');
+                menu.classList.toggle('hidden');
+            });
+            
+            document.querySelectorAll('.font-size-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const size = e.target.dataset.size;
+                    changeFontSize(size);
+                    document.getElementById('fontSizeMenu').classList.add('hidden');
+                });
+            });
+            
+            // Share buttons
+            document.getElementById('shareTwitter').addEventListener('click', shareToTwitter);
+            document.getElementById('shareFacebook').addEventListener('click', shareToFacebook);
+            document.getElementById('shareLine').addEventListener('click', shareToLine);
+            document.getElementById('copyLink').addEventListener('click', copyLink);
+            
+            // Game mode buttons
+            document.getElementById('storyMode').addEventListener('click', () => {
+                console.log('📚 ストーリーモードは準備中です');
+                // Coming Soon functionality
+            });
+            
+            document.getElementById('sandboxMode').addEventListener('click', () => {
+                resetGame();
+                console.log('🏗️ サンドボックスモードに切り替えました');
+            });
+            
+            document.getElementById('challengeMode').addEventListener('click', () => {
+                console.log('🏆 チャレンジモードは準備中です');
+                // Coming Soon functionality
+            });
+            
+            // Start game button
+            document.getElementById('startGameBtn').addEventListener('click', () => {
+                document.getElementById('game').scrollIntoView({ behavior: 'smooth' });
+                if (!gameState.isRunning) {
+                    randomize();
+                    setTimeout(() => playPause(), 1000);
+                }
+            });
+            
+            // Tutorial button
+            document.getElementById('tutorialBtn').addEventListener('click', () => {
+                // Place glider pattern and explain
+                placePattern('glider');
+                document.getElementById('game').scrollIntoView({ behavior: 'smooth' });
+                
+                const tutorial = document.createElement('div');
+                tutorial.className = 'fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50';
+                tutorial.innerHTML = `
+                    <div class="bg-gray-800 p-6 rounded-xl max-w-md">
+                        <h3 class="text-xl font-bold mb-4">🎓 チュートリアル</h3>
+                        <p class="mb-4">グライダーパターンを配置しました！再生ボタンを押して動きを観察してみましょう。</p>
+                        <button class="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg" onclick="this.parentElement.parentElement.remove()">
+                            理解しました
+                        </button>
+                    </div>
+                `;
+                document.body.appendChild(tutorial);
+                console.log('🎓 チュートリアルを表示しました');
+            });
+            
+            // Close dropdowns when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('#fontSizeBtn') && !e.target.closest('#fontSizeMenu')) {
+                    document.getElementById('fontSizeMenu').classList.add('hidden');
+                }
+            });
+            
+            console.log('🎯 イベントリスナー設定完了');
+        }
+        
+        // Service Worker Registration (PWA)
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                const swCode = `
+                const CACHE_NAME = 'cellular-adventure-v1';
+                const urlsToCache = [
+                    '/',
+                    'https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css',
+                    'https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css'
+                ];
+                
+                self.addEventListener('install', event => {
+                    event.waitUntil(
+                        caches.open(CACHE_NAME)
+                            .then(cache => cache.addAll(urlsToCache))
+                    );
+                });
+                
+                self.addEventListener('fetch', event => {
+                    event.respondWith(
+                        caches.match(event.request)
+                            .then(response => {
+                                return response || fetch(event.request);
+                            })
+                    );
+                });
+                `;
+                
+                const blob = new Blob([swCode], { type: 'application/javascript' });
+                const swUrl = URL.createObjectURL(blob);
+                
+                navigator.serviceWorker.register(swUrl)
+                    .then(registration => {
+                        console.log('🔧 Service Worker登録成功:', registration.scope);
+                    })
+                    .catch(error => {
+                        console.log('❌ Service Worker登録失敗:', error);
+                    });
+            });
+        }
+        
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', initGame);
+        
+        // Performance monitoring
+        window.addEventListener('load', () => {
+            const loadTime = performance.now();
+            console.log(`⚡ ページ読み込み完了: ${Math.round(loadTime)}ms`);
+            
+            // Log performance metrics
+            if ('performance' in window && 'getEntriesByType' in performance) {
+                const navEntries = performance.getEntriesByType('navigation')[0];
+                console.log('📊 パフォーマンス指標:', {
+                    '読み込み時間': `${Math.round(navEntries.loadEventEnd - navEntries.fetchStart)}ms`,
+                    'DOM構築': `${Math.round(navEntries.domContentLoadedEventEnd - navEntries.domContentLoadedEventStart)}ms`,
+                    'ネットワーク': `${Math.round(navEntries.responseEnd - navEntries.requestStart)}ms`
+                });
+            }
+        });
+        
+        console.log('🎮 細胞の冒険 - スクリプト読み込み完了');
+    </script>
+</body>
+</html>
