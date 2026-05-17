@@ -292,6 +292,19 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- ミッション表示 -->
+                <div class="mt-4 p-3 rounded-lg" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);">
+                    <div style="font-size:0.8rem;font-weight:bold;color:#a78bfa;margin-bottom:8px;">🎯 ミッション</div>
+                    <div id="missionList" style="font-size:0.72rem;space-y:4px;">
+                        <div style="color:#6ee7b7;margin-bottom:2px;">🌱 20世代生存</div>
+                        <div style="color:#fbbf24;margin-bottom:2px;">🌿 細胞50個達成</div>
+                        <div style="color:#f87171;margin-bottom:2px;">🌲 細胞100個達成</div>
+                        <div style="color:#60a5fa;margin-bottom:2px;">⏰ 50世代×10個</div>
+                        <div style="color:#c084fc;">🏆 100世代到達</div>
+                    </div>
+                    <div id="missionCount" style="font-size:0.7rem;color:#94a3b8;margin-top:6px;text-align:center;">達成: 0/5</div>
+                </div>
             </div>
         </aside>
         
@@ -806,6 +819,16 @@
             return count;
         }
         
+        // ミッション定義
+        const MISSIONS = [
+            { id: 1, name: '🌱 最初の生存', desc: '20世代間、細胞を1つ以上生き残らせる', check: (gen, pop) => gen >= 20 && pop >= 1 },
+            { id: 2, name: '🌿 個体群拡大', desc: 'いつでも50個以上の細胞を同時に存在させる', check: (gen, pop) => pop >= 50 },
+            { id: 3, name: '🌲 大繁殖', desc: 'いつでも100個以上の細胞を同時に存在させる', check: (gen, pop) => pop >= 100 },
+            { id: 4, name: '⏰ 長期生存', desc: '50世代間、細胞を10個以上生き残らせる', check: (gen, pop) => gen >= 50 && pop >= 10 },
+            { id: 5, name: '🏆 100世代到達', desc: '100世代まで細胞が生存し続ける', check: (gen, pop) => gen >= 100 && pop >= 1 },
+        ];
+        if (!gameState.clearedMissions) gameState.clearedMissions = [];
+
         // Update Statistics
         function updateStats() {
             let population = 0;
@@ -814,14 +837,51 @@
                     if (gameState.grid[y][x]) population++;
                 }
             }
-            
+
             const totalCells = gameState.width * gameState.height;
             const survivalRate = Math.round((population / totalCells) * 100);
-            
+
             document.getElementById('generation').textContent = gameState.generation;
             document.getElementById('population').textContent = population;
             document.getElementById('survivalRate').textContent = `${survivalRate}%`;
+
+            // ミッションチェック
+            MISSIONS.forEach(m => {
+                if (!gameState.clearedMissions.includes(m.id) && m.check(gameState.generation, population)) {
+                    gameState.clearedMissions.push(m.id);
+                    showMissionClear(m);
+                    saveMissions();
+                }
+            });
         }
+
+        function updateMissionUI() {
+            const count = gameState.clearedMissions.length;
+            const countEl = document.getElementById('missionCount');
+            if (countEl) countEl.textContent = `達成: ${count}/5 ${count === 5 ? '🏆 全達成！' : ''}`;
+            const listEl = document.getElementById('missionList');
+            if (listEl) {
+                listEl.innerHTML = MISSIONS.map(m => {
+                    const cleared = gameState.clearedMissions.includes(m.id);
+                    return `<div style="color:${cleared ? '#6ee7b7' : '#94a3b8'};margin-bottom:2px;text-decoration:${cleared ? 'none' : 'none'};">
+                        ${cleared ? '✅' : '○'} ${m.name.replace(/[🌱🌿🌲⏰🏆]\s/g, '')}
+                    </div>`;
+                }).join('');
+            }
+        }
+
+        function showMissionClear(mission) {
+            const banner = document.createElement('div');
+            banner.style.cssText = 'position:fixed;top:20px;right:20px;background:linear-gradient(135deg,#10b981,#059669);color:white;padding:16px 20px;border-radius:14px;z-index:9999;font-weight:bold;box-shadow:0 8px 24px rgba(0,0,0,0.3);animation:slideIn 0.5s ease;max-width:280px;';
+            banner.innerHTML = `<div style="font-size:1.1em;">🎉 ミッション達成！</div><div style="font-size:0.9em;margin-top:4px;">${mission.name}</div>`;
+            document.body.appendChild(banner);
+            setTimeout(() => banner.remove(), 3000);
+        }
+
+        function saveMissions() {
+            try { localStorage.setItem('cellular_missions', JSON.stringify(gameState.clearedMissions)); } catch(e) {}
+        }
+        try { gameState.clearedMissions = JSON.parse(localStorage.getItem('cellular_missions') || '[]'); } catch(e) { gameState.clearedMissions = []; }
         
         // Game Control Functions
         function playPause() {
@@ -1233,5 +1293,12 @@
         
         console.log('🎮 細胞の冒険 - スクリプト読み込み完了');
     </script>
+
+    <div id="other-games-section" style="background:#f8fafc;border-top:1px solid #e2e8f0;padding:16px;margin-top:16px;">
+        <p style="font-size:0.82rem;font-weight:bold;color:#64748b;margin-bottom:10px;text-align:center;">🎮 他のゲームも試してみよう</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;">
+            <a href="https://appadaycreator.github.io/chemical-quest/" style="background:white;border:1px solid #e2e8f0;border-radius:10px;padding:10px 14px;text-decoration:none;text-align:center;display:flex;flex-direction:column;align-items:center;min-width:80px;transition:box-shadow .2s;" onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)'" onmouseout="this.style.boxShadow='none'"><span style="font-size:1.5rem;">⚗️</span><span style="font-size:0.72rem;font-weight:bold;color:#374151;margin-top:4px;">化学式パズル</span><span style="font-size:0.65rem;color:#94a3b8;">理科系</span></a><a href="https://appadaycreator.github.io/block-balance-game/" style="background:white;border:1px solid #e2e8f0;border-radius:10px;padding:10px 14px;text-decoration:none;text-align:center;display:flex;flex-direction:column;align-items:center;min-width:80px;transition:box-shadow .2s;" onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)'" onmouseout="this.style.boxShadow='none'"><span style="font-size:1.5rem;">⚖️</span><span style="font-size:0.72rem;font-weight:bold;color:#374151;margin-top:4px;">ブロックバランス</span><span style="font-size:0.65rem;color:#94a3b8;">物理系</span></a><a href="https://appadaycreator.github.io/sound-master-training/" style="background:white;border:1px solid #e2e8f0;border-radius:10px;padding:10px 14px;text-decoration:none;text-align:center;display:flex;flex-direction:column;align-items:center;min-width:80px;transition:box-shadow .2s;" onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)'" onmouseout="this.style.boxShadow='none'"><span style="font-size:1.5rem;">🎵</span><span style="font-size:0.72rem;font-weight:bold;color:#374151;margin-top:4px;">音感トレーニング</span><span style="font-size:0.65rem;color:#94a3b8;">感覚系</span></a>
+        </div>
+    </div>
 </body>
 </html>
