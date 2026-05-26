@@ -810,7 +810,6 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
     <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden lg:hidden z-30"></div>
 
     <script>
-        console.log('🧬 細胞の冒険 - Cellular Adventure RPG が起動しました');
         
         // Game State
         let gameState = {
@@ -863,12 +862,10 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
         
         // Initialize Game
         function initGame() {
-            console.log('🎮 ゲームを初期化中...');
             createGrid();
             setupEventListeners();
             loadFromStorage();
             updateUI();
-            console.log('✅ ゲーム初期化完了');
         }
         
         // Create Game Grid
@@ -892,7 +889,6 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
                     gridElement.appendChild(cell);
                 }
             }
-            console.log(`🔧 グリッド作成完了: ${gameState.width}x${gameState.height}`);
         }
         
         // Toggle Cell State
@@ -900,7 +896,6 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
             gameState.grid[y][x] = !gameState.grid[y][x];
             updateCellDisplay(x, y);
             updateStats();
-            console.log(`🔄 細胞状態変更: (${x}, ${y}) -> ${gameState.grid[y][x]}`);
         }
         
         // Update Cell Display
@@ -960,7 +955,6 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
             
             updateStats();
             saveToStorage();
-            console.log(`⏭️ 世代 ${gameState.generation}: ${changedCells.length} 個の細胞が変化`);
         }
         
         // Count Neighbors
@@ -1051,13 +1045,11 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
                 clearInterval(gameState.intervalId);
                 gameState.isRunning = false;
                 document.getElementById('playPauseBtn').innerHTML = '<i class="fas fa-play"></i><span class="ml-2">再生</span>';
-                console.log('⏸️ ゲーム一時停止');
             } else {
                 const delay = 1100 - gameState.speed * 100;
                 gameState.intervalId = setInterval(nextGeneration, delay);
                 gameState.isRunning = true;
                 document.getElementById('playPauseBtn').innerHTML = '<i class="fas fa-pause"></i><span class="ml-2">一時停止</span>';
-                console.log(`▶️ ゲーム開始 (速度: ${gameState.speed}, 間隔: ${delay}ms)`);
             }
         }
         
@@ -1070,7 +1062,6 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
             gameState.generation = 0;
             updateAllCells();
             updateStats();
-            console.log('🔄 ゲームリセット完了');
         }
         
         function randomize() {
@@ -1082,7 +1073,6 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
             gameState.generation = 0;
             updateAllCells();
             updateStats();
-            console.log('🎲 ランダムパターン生成完了');
         }
         
         // Pattern Functions
@@ -1137,7 +1127,6 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
             
             updateAllCells();
             updateStats();
-            console.log(`🎯 パターン "${patternName}" を配置しました`);
         }
         
         // UI Functions
@@ -1163,14 +1152,12 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
             updateLanguage();
             updateUI();
             saveToStorage();
-            console.log(`🌐 言語を ${gameState.currentLanguage} に変更しました`);
         }
         
         // Font Size Control
         function changeFontSize(size) {
             document.documentElement.className = `font-size-${size}`;
             localStorage.setItem('fontSize', size);
-            console.log(`🔤 フォントサイズを ${size} に変更しました`);
         }
         
         // Storage Functions
@@ -1207,7 +1194,6 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
                         updateAllCells();
                         updateStats();
                         updateLanguage();
-                        console.log('💾 保存されたゲーム状態を読み込みました');
                     }
                 } catch (error) {
                     console.error('❌ 保存データの読み込みエラー:', error);
@@ -1225,14 +1211,12 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
             const url = window.location.href;
             const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}&hashtags=細胞の冒険,ライフゲーム,生物学`;
             window.open(twitterUrl, '_blank');
-            console.log('🐦 Twitterでシェアしました');
         }
         
         function shareToFacebook() {
             const url = window.location.href;
             const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
             window.open(facebookUrl, '_blank');
-            console.log('📘 Facebookでシェアしました');
         }
         
         function shareToLine() {
@@ -1240,7 +1224,6 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
             const url = window.location.href;
             const lineUrl = `https://line.me/R/msg/text/?${encodeURIComponent(text + ' ' + url)}`;
             window.open(lineUrl, '_blank');
-            console.log('💚 LINEでシェアしました');
         }
         
         function copyLink() {
@@ -1251,7 +1234,6 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
                 toast.textContent = 'リンクをコピーしました！';
                 document.body.appendChild(toast);
                 setTimeout(() => toast.remove(), 3000);
-                console.log('📋 リンクをコピーしました');
             });
         }
         
@@ -1273,7 +1255,6 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
                     const delay = 1100 - gameState.speed * 100;
                     gameState.intervalId = setInterval(nextGeneration, delay);
                 }
-                console.log(`⚡ 速度を ${gameState.speed} に変更しました`);
             });
             
             // Grid size control
@@ -1283,7 +1264,6 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
                 gameState.height = height;
                 createGrid();
                 updateStats();
-                console.log(`📏 グリッドサイズを ${width}x${height} に変更しました`);
             });
             
             // Pattern buttons
@@ -1303,14 +1283,12 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
             mobileMenuBtn.addEventListener('click', () => {
                 mobileSidebar.classList.remove('translate-x-full');
                 overlay.classList.remove('hidden');
-                console.log('📱 モバイルメニューを開きました');
             });
             
             [closeMobileMenu, overlay].forEach(element => {
                 element.addEventListener('click', () => {
                     mobileSidebar.classList.add('translate-x-full');
                     overlay.classList.add('hidden');
-                    console.log('📱 モバイルメニューを閉じました');
                 });
             });
             
@@ -1339,17 +1317,14 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
             
             // Game mode buttons
             document.getElementById('storyMode').addEventListener('click', () => {
-                console.log('📚 ストーリーモードは準備中です');
                 // Coming Soon functionality
             });
             
             document.getElementById('sandboxMode').addEventListener('click', () => {
                 resetGame();
-                console.log('🏗️ サンドボックスモードに切り替えました');
             });
             
             document.getElementById('challengeMode').addEventListener('click', () => {
-                console.log('🏆 チャレンジモードは準備中です');
                 // Coming Soon functionality
             });
             
@@ -1380,7 +1355,6 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
                     </div>
                 `;
                 document.body.appendChild(tutorial);
-                console.log('🎓 チュートリアルを表示しました');
             });
             
             // Close dropdowns when clicking outside
@@ -1390,7 +1364,6 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
                 }
             });
             
-            console.log('🎯 イベントリスナー設定完了');
         }
         
         // Service Worker Registration (PWA)
@@ -1426,10 +1399,8 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
                 
                 navigator.serviceWorker.register(swUrl)
                     .then(registration => {
-                        console.log('🔧 Service Worker登録成功:', registration.scope);
                     })
                     .catch(error => {
-                        console.log('❌ Service Worker登録失敗:', error);
                     });
             });
         }
@@ -1440,20 +1411,9 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
         // Performance monitoring
         window.addEventListener('load', () => {
             const loadTime = performance.now();
-            console.log(`⚡ ページ読み込み完了: ${Math.round(loadTime)}ms`);
             
-            // Log performance metrics
-            if ('performance' in window && 'getEntriesByType' in performance) {
-                const navEntries = performance.getEntriesByType('navigation')[0];
-                console.log('📊 パフォーマンス指標:', {
-                    '読み込み時間': `${Math.round(navEntries.loadEventEnd - navEntries.fetchStart)}ms`,
-                    'DOM構築': `${Math.round(navEntries.domContentLoadedEventEnd - navEntries.domContentLoadedEventStart)}ms`,
-                    'ネットワーク': `${Math.round(navEntries.responseEnd - navEntries.requestStart)}ms`
-                });
-            }
         });
         
-        console.log('🎮 細胞の冒険 - スクリプト読み込み完了');
     </script>
 
     <div id="other-games-section" style="background:linear-gradient(135deg,#f8f4ff 0%,#fef3f8 100%);border-top:2px solid #e8d5ff;padding:20px 16px;margin-top:20px;border-bottom-left-radius:0;border-bottom-right-radius:0;">
