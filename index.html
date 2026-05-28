@@ -35,7 +35,6 @@
         
     <!-- Libraries -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     
     <!-- Google Tag Manager -->
@@ -247,7 +246,7 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
                     <!-- Font Size Control -->
                     <div class="relative">
                         <button id="fontSizeBtn" class="p-2 bg-gray-700 rounded-lg hover:bg-gray-600 tooltip" data-tooltip="文字サイズ変更">
-                            <i class="fas fa-text-height"></i>
+                            <span aria-hidden="true">🔡</span>
                         </button>
                         <div id="fontSizeMenu" class="absolute right-0 top-full mt-2 bg-gray-800 rounded-lg shadow-lg p-2 hidden min-w-max">
                             <button class="font-size-btn block w-full text-left px-3 py-1 hover:bg-gray-700 rounded text-xs" data-size="xs">極小</button>
@@ -260,13 +259,13 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
                     
                     <!-- Language Switch -->
                     <button id="langBtn" class="p-2 bg-gray-700 rounded-lg hover:bg-gray-600 tooltip" data-tooltip="言語切り替え">
-                        <i class="fas fa-globe"></i>
+                        <span aria-hidden="true">🌐</span>
                         <span id="currentLang">JP</span>
                     </button>
                     
                     <!-- Mobile Menu Button -->
                     <button id="mobileMenuBtn" class="lg:hidden p-2 bg-gray-700 rounded-lg hover:bg-gray-600">
-                        <i class="fas fa-bars"></i>
+                        <span aria-hidden="true">☰</span>
                     </button>
                 </div>
             </div>
@@ -279,7 +278,7 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
             <div class="flex justify-between items-center mb-6">
                 <h2 class="text-lg font-bold" data-translate="menu.title">メニュー</h2>
                 <button id="closeMobileMenu" class="p-2 hover:bg-gray-700 rounded-lg">
-                    <i class="fas fa-times"></i>
+                    <span aria-hidden="true">✕</span>
                 </button>
             </div>
             
@@ -307,20 +306,20 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
             <div class="space-y-6">
                 <div>
                     <h3 class="font-semibold mb-4 flex items-center">
-                        <i class="fas fa-gamepad mr-2 text-green-400"></i>
+                        <span aria-hidden="true" class="mr-2 text-green-400">🎮</span>
                         <span data-translate="sidebar.gamemode">ゲームモード</span>
                     </h3>
                     <div class="space-y-2">
                         <button id="storyMode" class="w-full text-left p-2 bg-green-600 hover:bg-green-700 rounded-lg transition-colors">
-                            <i class="fas fa-book mr-2"></i>
+                            <span aria-hidden="true" class="mr-2">📖</span>
                             <span data-translate="game.story">ストーリー</span>
                         </button>
                         <button id="sandboxMode" class="w-full text-left p-2 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors">
-                            <i class="fas fa-cube mr-2"></i>
+                            <span aria-hidden="true" class="mr-2">🧊</span>
                             <span data-translate="game.sandbox">サンドボックス</span>
                         </button>
                         <button id="challengeMode" class="w-full text-left p-2 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors">
-                            <i class="fas fa-trophy mr-2"></i>
+                            <span aria-hidden="true" class="mr-2">🏆</span>
                             <span data-translate="game.challenge">チャレンジ</span>
                         </button>
                     </div>
@@ -328,7 +327,7 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
                 
                 <div>
                     <h3 class="font-semibold mb-4 flex items-center">
-                        <i class="fas fa-microscope mr-2 text-blue-400"></i>
+                        <span aria-hidden="true" class="mr-2 text-blue-400">🔬</span>
                         <span data-translate="sidebar.celltype">細胞タイプ</span>
                     </h3>
                     <div class="space-y-2">
@@ -355,7 +354,7 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
                 
                 <div>
                     <h3 class="font-semibold mb-4 flex items-center">
-                        <i class="fas fa-chart-line mr-2 text-purple-400"></i>
+                        <span aria-hidden="true" class="mr-2 text-purple-400">📈</span>
                         <span data-translate="sidebar.stats">統計</span>
                     </h3>
                     <div class="space-y-2 text-sm">
@@ -402,11 +401,11 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
                     </p>
                     <div class="flex flex-wrap justify-center gap-4">
                         <button id="startGameBtn" class="px-8 py-3 bg-green-600 hover:bg-green-700 rounded-lg font-semibold transition-all transform hover:scale-105">
-                            <i class="fas fa-play mr-2"></i>
+                            <span aria-hidden="true" class="mr-2">▶</span>
                             <span data-translate="hero.start">ゲーム開始</span>
                         </button>
                         <button id="tutorialBtn" class="px-8 py-3 bg-blue-600 hover:bg-blue-700 rounded-lg font-semibold transition-all transform hover:scale-105">
-                            <i class="fas fa-graduation-cap mr-2"></i>
+                            <span aria-hidden="true" class="mr-2">🎓</span>
                             <span data-translate="hero.tutorial">チュートリアル</span>
                         </button>
                     </div>
@@ -419,21 +418,21 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
                     <div class="glass-effect rounded-xl p-6">
                         <div class="flex flex-wrap justify-between items-center mb-6">
                             <h2 class="text-2xl font-bold flex items-center">
-                                <i class="fas fa-dna mr-3 text-green-400"></i>
+                                <span aria-hidden="true" class="mr-3 text-green-400">🧬</span>
                                 <span data-translate="game.title">細胞シミュレーション</span>
                             </h2>
                             
                             <div class="flex flex-wrap gap-2">
                                 <button id="playPauseBtn" class="px-4 py-2 bg-green-600 hover:bg-green-700 rounded-lg transition-colors">
-                                    <i class="fas fa-play"></i>
+                                    <span aria-hidden="true">▶</span>
                                     <span class="ml-2" data-translate="game.play">再生</span>
                                 </button>
                                 <button id="resetBtn" class="px-4 py-2 bg-red-600 hover:bg-red-700 rounded-lg transition-colors">
-                                    <i class="fas fa-redo"></i>
+                                    <span aria-hidden="true">🔄</span>
                                     <span class="ml-2" data-translate="game.reset">リセット</span>
                                 </button>
                                 <button id="randomBtn" class="px-4 py-2 bg-purple-600 hover:bg-purple-700 rounded-lg transition-colors">
-                                    <i class="fas fa-random"></i>
+                                    <span aria-hidden="true">🎲</span>
                                     <span class="ml-2" data-translate="game.random">ランダム</span>
                                 </button>
                             </div>
@@ -469,19 +468,19 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
                             <h3 class="text-lg font-semibold mb-3" data-translate="game.patterns">パターン選択:</h3>
                             <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
                                 <button class="pattern-btn p-3 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors" data-pattern="glider">
-                                    <i class="fas fa-paper-plane mb-2"></i>
+                                    <span aria-hidden="true" class="block mb-2">✈</span>
                                     <div data-translate="pattern.glider">グライダー</div>
                                 </button>
                                 <button class="pattern-btn p-3 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors" data-pattern="oscillator">
-                                    <i class="fas fa-sync-alt mb-2"></i>
+                                    <span aria-hidden="true" class="block mb-2">🔄</span>
                                     <div data-translate="pattern.oscillator">振動子</div>
                                 </button>
                                 <button class="pattern-btn p-3 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors" data-pattern="still">
-                                    <i class="fas fa-square mb-2"></i>
+                                    <span aria-hidden="true" class="block mb-2">⬛</span>
                                     <div data-translate="pattern.still">静物</div>
                                 </button>
                                 <button class="pattern-btn p-3 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors" data-pattern="gun">
-                                    <i class="fas fa-crosshairs mb-2"></i>
+                                    <span aria-hidden="true" class="block mb-2">🎯</span>
                                     <div data-translate="pattern.gun">ガン</div>
                                 </button>
                             </div>
@@ -494,14 +493,14 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
             <section id="learn" class="mb-12">
                 <div class="max-w-4xl mx-auto">
                     <h2 class="text-3xl font-bold mb-8 text-center">
-                        <i class="fas fa-microscope mr-3 text-blue-400"></i>
+                        <span aria-hidden="true" class="mr-3 text-blue-400">🔬</span>
                         <span data-translate="learn.title">生物学を学ぼう</span>
                     </h2>
                     
                     <div class="grid md:grid-cols-2 gap-8">
                         <div class="glass-effect rounded-xl p-6">
                             <h3 class="text-xl font-semibold mb-4 flex items-center">
-                                <i class="fas fa-dna mr-2 text-green-400"></i>
+                                <span aria-hidden="true" class="mr-2 text-green-400">🧬</span>
                                 <span data-translate="learn.cellular">細胞について</span>
                             </h3>
                             <p class="text-gray-300 mb-4" data-translate="learn.cellular.desc">
@@ -514,7 +513,7 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
                         
                         <div class="glass-effect rounded-xl p-6">
                             <h3 class="text-xl font-semibold mb-4 flex items-center">
-                                <i class="fas fa-seedling mr-2 text-green-400"></i>
+                                <span aria-hidden="true" class="mr-2 text-green-400">🌱</span>
                                 <span data-translate="learn.evolution">進化論</span>
                             </h3>
                             <p class="text-gray-300 mb-4" data-translate="learn.evolution.desc">
@@ -527,7 +526,7 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
                         
                         <div class="glass-effect rounded-xl p-6">
                             <h3 class="text-xl font-semibold mb-4 flex items-center">
-                                <i class="fas fa-project-diagram mr-2 text-purple-400"></i>
+                                <span aria-hidden="true" class="mr-2 text-purple-400">🕸️</span>
                                 <span data-translate="learn.ecosystem">生態系</span>
                             </h3>
                             <p class="text-gray-300 mb-4" data-translate="learn.ecosystem.desc">
@@ -540,7 +539,7 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
                         
                         <div class="glass-effect rounded-xl p-6">
                             <h3 class="text-xl font-semibold mb-4 flex items-center">
-                                <i class="fas fa-calculator mr-2 text-yellow-400"></i>
+                                <span aria-hidden="true" class="mr-2 text-yellow-400">🔢</span>
                                 <span data-translate="learn.gameoflife">ライフゲーム</span>
                             </h3>
                             <p class="text-gray-300 mb-4" data-translate="learn.gameoflife.desc">
@@ -555,27 +554,27 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
                     <!-- Affiliate Section -->
                     <div class="mt-12 p-6 bg-gradient-to-r from-blue-900 to-purple-900 rounded-xl">
                         <h3 class="text-xl font-semibold mb-4 text-center">
-                            <i class="fas fa-book-open mr-2"></i>
+                            <span aria-hidden="true" class="mr-2">📚</span>
                             <span data-translate="affiliate.title">おすすめ学習教材</span>
                         </h3>
                         <div class="grid md:grid-cols-3 gap-4">
                             <a href="https://www.amazon.co.jp/s?k=生物学+入門+教科書&tag=appadaycrea0f-22" target="_blank" rel="noopener noreferrer" class="js-track-affiliate affiliate-link block p-4 bg-white bg-opacity-10 rounded-lg hover:bg-opacity-20 transition-colors" data-platform="Amazon" data-item-name="生物学入門書">
                                 <div class="text-center">
-                                    <i class="fas fa-book text-3xl mb-2 text-blue-400"></i>
+                                    <span aria-hidden="true" class="text-3xl mb-2 text-blue-400 block">📖</span>
                                     <h4 class="font-semibold mb-2" data-translate="affiliate.biology">生物学入門書</h4>
                                     <p class="text-sm text-gray-300" data-translate="affiliate.biology.desc">基礎から学べる生物学の教科書</p>
                                 </div>
                             </a>
                             <a href="https://www.amazon.co.jp/s?k=顕微鏡+子供+学習&tag=appadaycrea0f-22" target="_blank" rel="noopener noreferrer" class="js-track-affiliate affiliate-link block p-4 bg-white bg-opacity-10 rounded-lg hover:bg-opacity-20 transition-colors" data-platform="Amazon" data-item-name="顕微鏡セット">
                                 <div class="text-center">
-                                    <i class="fas fa-microscope text-3xl mb-2 text-green-400"></i>
+                                    <span aria-hidden="true" class="text-3xl mb-2 text-green-400 block">🔬</span>
                                     <h4 class="font-semibold mb-2" data-translate="affiliate.microscope">顕微鏡セット</h4>
                                     <p class="text-sm text-gray-300" data-translate="affiliate.microscope.desc">実際の細胞観察ができる</p>
                                 </div>
                             </a>
                             <a href="https://www.amazon.co.jp/s?k=生物+サイエンス+ゲーム&tag=appadaycrea0f-22" target="_blank" rel="noopener noreferrer" class="js-track-affiliate affiliate-link block p-4 bg-white bg-opacity-10 rounded-lg hover:bg-opacity-20 transition-colors" data-platform="Amazon" data-item-name="生物シミュレーション">
                                 <div class="text-center">
-                                    <i class="fas fa-gamepad text-3xl mb-2 text-purple-400"></i>
+                                    <span aria-hidden="true" class="text-3xl mb-2 text-purple-400 block">🎮</span>
                                     <h4 class="font-semibold mb-2" data-translate="affiliate.simulation">シミュレーションソフト</h4>
                                     <p class="text-sm text-gray-300" data-translate="affiliate.simulation.desc">高度な生物シミュレーション</p>
                                 </div>
@@ -594,7 +593,7 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
                         <div class="space-y-6">
                             <div>
                                 <h3 class="text-xl font-semibold mb-3 flex items-center">
-                                    <i class="fas fa-mouse-pointer mr-2 text-blue-400"></i>
+                                    <span aria-hidden="true" class="mr-2 text-blue-400">🖱️</span>
                                     <span data-translate="about.basic">基本操作</span>
                                 </h3>
                                 <ul class="list-disc list-inside space-y-2 text-gray-300">
@@ -607,7 +606,7 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
                             
                             <div>
                                 <h3 class="text-xl font-semibold mb-3 flex items-center">
-                                    <i class="fas fa-cogs mr-2 text-green-400"></i>
+                                    <span aria-hidden="true" class="mr-2 text-green-400">⚙️</span>
                                     <span data-translate="about.rules">ライフゲームのルール</span>
                                 </h3>
                                 <ul class="list-disc list-inside space-y-2 text-gray-300">
@@ -620,7 +619,7 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
                             
                             <div>
                                 <h3 class="text-xl font-semibold mb-3 flex items-center">
-                                    <i class="fas fa-lightbulb mr-2 text-yellow-400"></i>
+                                    <span aria-hidden="true" class="mr-2 text-yellow-400">💡</span>
                                     <span data-translate="about.tips">使い方のコツ</span>
                                 </h3>
                                 <ul class="list-disc list-inside space-y-2 text-gray-300">
@@ -642,19 +641,19 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
                         <h3 class="text-xl font-semibold mb-4" data-translate="share.title">結果をシェア</h3>
                         <div class="flex flex-wrap justify-center gap-4">
                             <button id="shareTwitter" class="px-6 py-3 bg-blue-500 hover:bg-blue-600 rounded-lg transition-colors">
-                                <i class="fab fa-twitter mr-2"></i>
+                                <span aria-hidden="true" class="mr-2">𝕏</span>
                                 Twitter
                             </button>
                             <button id="shareFacebook" class="px-6 py-3 bg-blue-700 hover:bg-blue-800 rounded-lg transition-colors">
-                                <i class="fab fa-facebook mr-2"></i>
+                                <span aria-hidden="true" class="mr-2">📘</span>
                                 Facebook
                             </button>
                             <button id="shareLine" class="px-6 py-3 bg-green-500 hover:bg-green-600 rounded-lg transition-colors">
-                                <i class="fab fa-line mr-2"></i>
+                                <span aria-hidden="true" class="mr-2">💬</span>
                                 LINE
                             </button>
                             <button id="copyLink" class="px-6 py-3 bg-gray-600 hover:bg-gray-700 rounded-lg transition-colors">
-                                <i class="fas fa-copy mr-2"></i>
+                                <span aria-hidden="true" class="mr-2">📋</span>
                                 <span data-translate="share.copy">リンクコピー</span>
                             </button>
                         </div>
@@ -789,18 +788,18 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
                 <div>
                     <h4 class="font-semibold mb-4" data-translate="footer.contact">お問い合わせ</h4>
                     <p class="text-gray-400 text-sm">
-                        <i class="fas fa-envelope mr-2"></i>
+                        <span aria-hidden="true" class="mr-2">✉️</span>
                         contact@cellular-adventure.com
                     </p>
                     <div class="flex space-x-3 mt-4">
-                        <a href="#" class="text-gray-400 hover:text-blue-400 transition-colors">
-                            <i class="fab fa-twitter text-xl"></i>
+                        <a href="https://twitter.com/intent/tweet?text=細胞の冒険【無料ゲーム】生物・理科を楽しく学ぶライフゲームRPG&url=https://appadaycreator.com/cellular-adventure-rpg/" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-blue-400 transition-colors" aria-label="Twitterでシェア">
+                            <span aria-hidden="true" class="text-xl">𝕏</span>
                         </a>
-                        <a href="#" class="text-gray-400 hover:text-blue-600 transition-colors">
-                            <i class="fab fa-facebook text-xl"></i>
+                        <a href="https://www.facebook.com/sharer/sharer.php?u=https://appadaycreator.com/cellular-adventure-rpg/" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-blue-600 transition-colors" aria-label="Facebookでシェア">
+                            <span aria-hidden="true" class="text-xl">📘</span>
                         </a>
-                        <a href="#" class="text-gray-400 hover:text-red-500 transition-colors">
-                            <i class="fab fa-youtube text-xl"></i>
+                        <a href="https://www.youtube.com/@appadaycreator" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-red-500 transition-colors" aria-label="YouTubeチャンネル">
+                            <span aria-hidden="true" class="text-xl">▶️</span>
                         </a>
                     </div>
                 </div>
@@ -1055,12 +1054,12 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
             if (gameState.isRunning) {
                 clearInterval(gameState.intervalId);
                 gameState.isRunning = false;
-                document.getElementById('playPauseBtn').innerHTML = '<i class="fas fa-play"></i><span class="ml-2">再生</span>';
+                document.getElementById('playPauseBtn').innerHTML = '<span aria-hidden="true">▶</span><span class="ml-2">再生</span>';
             } else {
                 const delay = 1100 - gameState.speed * 100;
                 gameState.intervalId = setInterval(nextGeneration, delay);
                 gameState.isRunning = true;
-                document.getElementById('playPauseBtn').innerHTML = '<i class="fas fa-pause"></i><span class="ml-2">一時停止</span>';
+                document.getElementById('playPauseBtn').innerHTML = '<span aria-hidden="true">⏸</span><span class="ml-2">一時停止</span>';
             }
         }
         
@@ -1381,11 +1380,10 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 const swCode = `
-                const CACHE_NAME = 'cellular-adventure-v1';
+                const CACHE_NAME = 'cellular-adventure-v2';
                 const urlsToCache = [
                     '/',
-                    'https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css',
-                    'https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css'
+                    'https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css'
                 ];
                 
                 self.addEventListener('install', event => {
