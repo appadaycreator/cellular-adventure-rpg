@@ -4,7 +4,7 @@
   "description": "生命の神秘を体験する教育的ライフゲームRPG",
   "start_url": "/cellular-adventure-rpg/",
   "display": "standalone",
-  "background_color": "#1f2937",
+  "background_color": "#ffffff",
   "theme_color": "#10b981",
   "orientation": "portrait-primary",
   "scope": "/cellular-adventure-rpg/",
