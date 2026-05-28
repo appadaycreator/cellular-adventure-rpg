@@ -2,15 +2,19 @@
   "name": "細胞の冒険 - Cellular Adventure",
   "short_name": "細胞の冒険",
   "description": "生命の神秘を体験する教育的ライフゲームRPG",
-  "start_url": "/",
+  "start_url": "/cellular-adventure-rpg/",
   "display": "standalone",
   "background_color": "#1f2937",
   "theme_color": "#10b981",
   "orientation": "portrait-primary",
-  "scope": "/",
+  "scope": "/cellular-adventure-rpg/",
   "lang": "ja",
   "dir": "ltr",
-  "categories": ["education", "games", "simulation"],
+  "categories": [
+    "education",
+    "games",
+    "simulation"
+  ],
   "icons": [
     {
       "src": "https://cdn1.genspark.ai/user-upload-image/gpt_image_generated/73e2cebb-fbd2-4064-a9c7-5ada27d04469",
@@ -65,4 +69,4 @@
   "edge_side_panel": {
     "preferred_width": 400
   }
-} 
+}
