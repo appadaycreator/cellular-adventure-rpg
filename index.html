@@ -143,6 +143,7 @@
         }
     
 /* Phase 8: Mobile Optimization */
+html, body { overflow-x: hidden; max-width: 100%; }
 input, select, textarea { font-size: 16px !important; }
 button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min-width: 48px; touch-action: manipulation; }
 @media (max-width: 640px) {
@@ -235,7 +236,7 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
                     <img loading="lazy" src="https://cdn1.genspark.ai/user-upload-image/gpt_image_generated/73e2cebb-fbd2-4064-a9c7-5ada27d04469" alt="細胞の冒険" class="w-10 h-10 rounded-full">
                     <h1 class="text-xl font-bold neon-text">
                         <span class="font-mono">細胞の冒険</span>
-                        <span class="text-sm text-gray-400 block">Cellular Adventure</span>
+                        <span class="text-sm text-gray-400 hidden sm:block">Cellular Adventure</span>
                     </h1>
                 </div>
                 
@@ -244,7 +245,7 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
                     <a href="#game" class="hover:text-green-400 transition-colors" data-translate="nav.game">ゲーム</a>
                     <a href="#learn" class="hover:text-green-400 transition-colors" data-translate="nav.learn">学習</a>
                     <a href="#about" class="hover:text-green-400 transition-colors" data-translate="nav.about">使い方</a>
-                    <a href="#contact" class="hover:text-green-400 transition-colors" data-translate="nav.contact">お問い合わせ</a>
+                    <a href="contact.html" class="hover:text-green-400 transition-colors" data-translate="nav.contact">お問い合わせ</a>
                 </nav>
                 
                 <!-- Controls -->
@@ -292,7 +293,7 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
                 <a href="#game" class="block py-2 px-4 hover:bg-gray-700 rounded-lg" data-translate="nav.game">ゲーム</a>
                 <a href="#learn" class="block py-2 px-4 hover:bg-gray-700 rounded-lg" data-translate="nav.learn">学習</a>
                 <a href="#about" class="block py-2 px-4 hover:bg-gray-700 rounded-lg" data-translate="nav.about">使い方</a>
-                <a href="#contact" class="block py-2 px-4 hover:bg-gray-700 rounded-lg" data-translate="nav.contact">お問い合わせ</a>
+                <a href="contact.html" class="block py-2 px-4 hover:bg-gray-700 rounded-lg" data-translate="nav.contact">お問い合わせ</a>
             </nav>
             
             <div class="mt-8">
@@ -306,7 +307,7 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
     </div>
     
     <!-- Main Content -->
-    <div class="flex">
+    <div class="flex overflow-x-hidden">
         <!-- Desktop Left Sidebar -->
         <aside class="hidden lg:block w-64 bg-gray-800 min-h-screen p-6">
             <div class="space-y-6">
@@ -406,15 +407,15 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
                     <h1 class="text-4xl lg:text-6xl font-bold mb-6 animate-float">
                         <span class="neon-text font-mono">細胞の冒険</span>
                     </h1>
-                    <p class="text-xl mb-8 text-gray-300" data-translate="hero.description">
-                        生命の神秘を体験する革新的なライフゲームRPG
+                    <p class="text-base sm:text-xl mb-8 text-gray-300" style="word-break:break-all;overflow-wrap:anywhere;" data-translate="hero.description">
+                        生命の神秘を体験する<br class="sm:hidden">革新的なライフゲームRPG
                     </p>
-                    <div class="flex flex-wrap justify-center gap-4">
-                        <button id="startGameBtn" class="px-8 py-3 bg-green-600 hover:bg-green-700 rounded-lg font-semibold transition-all transform hover:scale-105">
+                    <div class="flex flex-col sm:flex-row justify-center items-center gap-4 w-full max-w-xs sm:max-w-none mx-auto">
+                        <button id="startGameBtn" class="px-8 py-3 bg-green-600 hover:bg-green-700 rounded-lg font-semibold transition-all transform hover:scale-105 w-full sm:w-auto">
                             <span aria-hidden="true" class="mr-2">▶</span>
                             <span data-translate="hero.start">ゲーム開始</span>
                         </button>
-                        <button id="tutorialBtn" class="px-8 py-3 bg-blue-600 hover:bg-blue-700 rounded-lg font-semibold transition-all transform hover:scale-105">
+                        <button id="tutorialBtn" class="px-8 py-3 bg-blue-600 hover:bg-blue-700 rounded-lg font-semibold transition-all transform hover:scale-105 w-full sm:w-auto">
                             <span aria-hidden="true" class="mr-2">🎓</span>
                             <span data-translate="hero.tutorial">チュートリアル</span>
                         </button>
@@ -432,18 +433,22 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
                                 <span data-translate="game.title">細胞シミュレーション</span>
                             </h2>
                             
-                            <div class="flex flex-wrap gap-2">
-                                <button id="playPauseBtn" class="px-4 py-2 bg-green-600 hover:bg-green-700 rounded-lg transition-colors">
+                            <div class="flex flex-wrap gap-2 w-full sm:w-auto">
+                                <button id="playPauseBtn" class="px-3 sm:px-4 py-2 bg-green-600 hover:bg-green-700 rounded-lg transition-colors">
                                     <span aria-hidden="true">▶</span>
-                                    <span class="ml-2" data-translate="game.play">再生</span>
+                                    <span class="ml-1 sm:ml-2" data-translate="game.play">再生</span>
                                 </button>
-                                <button id="resetBtn" class="px-4 py-2 bg-red-600 hover:bg-red-700 rounded-lg transition-colors">
+                                <button id="resetBtn" class="px-3 sm:px-4 py-2 bg-red-600 hover:bg-red-700 rounded-lg transition-colors">
                                     <span aria-hidden="true">🔄</span>
-                                    <span class="ml-2" data-translate="game.reset">リセット</span>
+                                    <span class="ml-1 sm:ml-2" data-translate="game.reset">リセット</span>
                                 </button>
-                                <button id="randomBtn" class="px-4 py-2 bg-purple-600 hover:bg-purple-700 rounded-lg transition-colors">
+                                <button id="randomBtn" class="px-3 sm:px-4 py-2 bg-purple-600 hover:bg-purple-700 rounded-lg transition-colors">
                                     <span aria-hidden="true">🎲</span>
-                                    <span class="ml-2" data-translate="game.random">ランダム</span>
+                                    <span class="ml-1 sm:ml-2" data-translate="game.random">ランダム</span>
+                                </button>
+                                <button id="stepBtn" class="px-3 sm:px-4 py-2 bg-gray-600 hover:bg-gray-500 rounded-lg transition-colors tooltip" data-tooltip="一時停止中に1世代進む (→キー)">
+                                    <span aria-hidden="true">⏭</span>
+                                    <span class="ml-1 sm:ml-2">1ステップ</span>
                                 </button>
                             </div>
                         </div>
@@ -473,6 +478,14 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
                             </div>
                         </div>
                         
+                        <!-- モバイル統計パネル（デスクトップでは非表示） -->
+                        <div class="lg:hidden mt-4 flex justify-around text-center text-xs bg-gray-800 rounded-lg p-2">
+                            <div class="flex flex-col items-center px-1"><div class="text-gray-400 mb-1">世代</div><div id="gen-mobile" class="font-bold text-green-400 text-sm">0</div></div>
+                            <div class="flex flex-col items-center px-1"><div class="text-gray-400 mb-1">個体数</div><div id="pop-mobile" class="font-bold text-blue-400 text-sm">0</div></div>
+                            <div class="flex flex-col items-center px-1"><div class="text-gray-400 mb-1">最大</div><div id="max-mobile" class="font-bold text-yellow-400 text-sm">0</div></div>
+                            <div class="flex flex-col items-center px-1"><div class="text-gray-400 mb-1">達成</div><div id="mission-mobile" class="font-bold text-purple-400 text-sm">0/5</div></div>
+                        </div>
+
                         <!-- Pattern Presets -->
                         <div class="mt-6">
                             <h3 class="text-lg font-semibold mb-3" data-translate="game.patterns">パターン選択:</h3>
@@ -782,7 +795,7 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
                         <li><a href="#game" class="text-gray-400 hover:text-white transition-colors" data-translate="nav.game">ゲーム</a></li>
                         <li><a href="#learn" class="text-gray-400 hover:text-white transition-colors" data-translate="nav.learn">学習</a></li>
                         <li><a href="#about" class="text-gray-400 hover:text-white transition-colors" data-translate="nav.about">使い方</a></li>
-                        <li><a href="#contact" class="text-gray-400 hover:text-white transition-colors" data-translate="nav.contact">お問い合わせ</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-white transition-colors" data-translate="nav.contact">お問い合わせ</a></li>
                     </ul>
                 </div>
                 
@@ -879,6 +892,13 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
             }
         };
         
+        // セルDOM参照キャッシュ・ドラッグ状態
+        let cellElements = [];
+        let isDragging = false;
+        let dragMode = false;
+        let touchDrawing = false;
+        let lastTouchCell = null;
+
         // Initialize Game
         function initGame() {
             createGrid();
@@ -900,6 +920,7 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
         function createGrid() {
             const gridElement = document.getElementById('gameGrid');
             gridElement.innerHTML = '';
+            cellElements = [];
             const cellSize = calcCellSize();
             gridElement.style.gridTemplateColumns = `repeat(${gameState.width}, ${cellSize}px)`;
             gridElement.style.gridTemplateRows = `repeat(${gameState.height}, ${cellSize}px)`;
@@ -907,6 +928,7 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
             gameState.grid = Array(gameState.height).fill().map(() => Array(gameState.width).fill(false));
 
             for (let y = 0; y < gameState.height; y++) {
+                cellElements[y] = [];
                 for (let x = 0; x < gameState.width; x++) {
                     const cell = document.createElement('div');
                     cell.className = 'cell';
@@ -914,34 +936,10 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
                     cell.dataset.y = y;
                     cell.addEventListener('click', () => toggleCell(x, y));
                     gridElement.appendChild(cell);
+                    cellElements[y][x] = cell;
                 }
             }
-
-            // タッチドラッグで複数セルを描画
-            let touchDrawing = false;
-            let lastTouchCell = null;
-            gridElement.addEventListener('touchstart', (e) => {
-                touchDrawing = true;
-                lastTouchCell = null;
-                e.preventDefault();
-            }, { passive: false });
-            gridElement.addEventListener('touchmove', (e) => {
-                if (!touchDrawing) return;
-                e.preventDefault();
-                const touch = e.touches[0];
-                const el = document.elementFromPoint(touch.clientX, touch.clientY);
-                if (el && el.dataset.x !== undefined && el !== lastTouchCell) {
-                    lastTouchCell = el;
-                    const cx = parseInt(el.dataset.x);
-                    const cy = parseInt(el.dataset.y);
-                    if (!gameState.grid[cy][cx]) {
-                        gameState.grid[cy][cx] = true;
-                        updateCellDisplay(cx, cy);
-                        updateStats();
-                    }
-                }
-            }, { passive: false });
-            gridElement.addEventListener('touchend', () => { touchDrawing = false; });
+            // タッチ・マウスドラッグはsetupEventListenersで1回のみ登録
         }
         
         // Toggle Cell State
@@ -951,9 +949,9 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
             updateStats();
         }
         
-        // Update Cell Display
+        // Update Cell Display（キャッシュ使用でDOM検索を排除）
         function updateCellDisplay(x, y) {
-            const cell = document.querySelector(`[data-x="${x}"][data-y="${y}"]`);
+            const cell = cellElements[y] && cellElements[y][x];
             if (cell) {
                 cell.className = gameState.grid[y][x] ? 'cell alive' : 'cell';
             }
@@ -995,9 +993,9 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
             gameState.grid = newGrid;
             gameState.generation++;
             
-            // Animate changed cells
+            // Animate changed cells（キャッシュ使用）
             changedCells.forEach(({ x, y, born }) => {
-                const cell = document.querySelector(`[data-x="${x}"][data-y="${y}"]`);
+                const cell = cellElements[y] && cellElements[y][x];
                 if (cell) {
                     cell.className = `cell ${gameState.grid[y][x] ? 'alive' : ''} ${born ? 'born' : 'dying'}`;
                     setTimeout(() => {
@@ -1057,6 +1055,14 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
             const maxPopEl = document.getElementById('maxPopulation');
             if (maxPopEl) maxPopEl.textContent = `${gameState.maxPopulation}個`;
 
+            // モバイル統計パネル更新
+            const genM = document.getElementById('gen-mobile');
+            if (genM) genM.textContent = gameState.generation;
+            const popM = document.getElementById('pop-mobile');
+            if (popM) popM.textContent = population;
+            const maxM = document.getElementById('max-mobile');
+            if (maxM) maxM.textContent = gameState.maxPopulation;
+
             // ミッションチェック
             MISSIONS.forEach(m => {
                 if (!gameState.clearedMissions.includes(m.id) && m.check(gameState.generation, population)) {
@@ -1065,12 +1071,23 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
                     saveMissions();
                 }
             });
+
+            // 全滅チェック（実行中かつ世代が進んでいる場合）
+            if (gameState.isRunning && population === 0 && gameState.generation > 0) {
+                playPause();
+                if (typeof showToast === 'function') {
+                    showToast(`💀 全滅！ ${gameState.generation}世代で絶滅しました`, 'error');
+                }
+            }
         }
 
         function updateMissionUI() {
             const count = gameState.clearedMissions.length;
             const countEl = document.getElementById('missionCount');
             if (countEl) countEl.textContent = `達成: ${count}/5 ${count === 5 ? '🏆 全達成！' : ''}`;
+            // モバイルミッション達成数更新
+            const missionM = document.getElementById('mission-mobile');
+            if (missionM) missionM.textContent = `${count}/5`;
             const listEl = document.getElementById('missionList');
             if (listEl) {
                 listEl.innerHTML = MISSIONS.map(m => {
@@ -1169,25 +1186,38 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
         function placePattern(patternName) {
             const pattern = patterns[patternName];
             if (!pattern) return;
-            
-            resetGame();
-            
+
+            if (gameState.isRunning) playPause();
+
+            // ガンパターン(幅36)はデフォルト30幅に収まらないため40x30に自動拡張
+            if (patternName === 'gun' && (gameState.width < 40 || gameState.height < 30)) {
+                gameState.width = 40;
+                gameState.height = 30;
+                const sizeSelect = document.getElementById('gridSize');
+                if (sizeSelect) sizeSelect.value = '40x30';
+                createGrid();
+            }
+
+            gameState.grid = Array(gameState.height).fill().map(() => Array(gameState.width).fill(false));
+            gameState.generation = 0;
+            gameState.maxPopulation = 0;
+
             const startX = Math.floor((gameState.width - pattern[0].length) / 2);
             const startY = Math.floor((gameState.height - pattern.length) / 2);
-            
+
             for (let y = 0; y < pattern.length; y++) {
                 for (let x = 0; x < pattern[y].length; x++) {
                     const gridX = startX + x;
                     const gridY = startY + y;
-                    
                     if (gridX >= 0 && gridX < gameState.width && gridY >= 0 && gridY < gameState.height) {
                         gameState.grid[gridY][gridX] = pattern[y][x] === 1;
                     }
                 }
             }
-            
+
             updateAllCells();
             updateStats();
+            saveToStorage(true);
         }
         
         // UI Functions
@@ -1318,8 +1348,9 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
                 }
             });
             
-            // Grid size control
+            // Grid size control（変更時は実行中なら自動停止）
             document.getElementById('gridSize').addEventListener('change', (e) => {
+                if (gameState.isRunning) playPause();
                 const [width, height] = e.target.value.split('x').map(Number);
                 gameState.width = width;
                 gameState.height = height;
@@ -1376,6 +1407,11 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
             document.getElementById('shareLine').addEventListener('click', shareToLine);
             document.getElementById('copyLink').addEventListener('click', copyLink);
             
+            // 1ステップ実行（一時停止中のみ）
+            document.getElementById('stepBtn').addEventListener('click', () => {
+                if (!gameState.isRunning) nextGeneration();
+            });
+
             // Game mode buttons
             document.getElementById('storyMode').addEventListener('click', () => {
                 showToast('🚧 ストーリーモードは近日公開予定です！', 'info');
@@ -1436,6 +1472,74 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
                     gridElement.style.gridTemplateRows = `repeat(${gameState.height}, ${cellSize}px)`;
                 }, 200);
             });
+
+            // キーボードショートカット（Space=再生/停止 / →=1ステップ / R=リセット）
+            document.addEventListener('keydown', (e) => {
+                const tag = e.target.tagName;
+                if (tag === 'INPUT' || tag === 'SELECT' || tag === 'TEXTAREA') return;
+                if (e.code === 'Space') {
+                    e.preventDefault();
+                    playPause();
+                } else if (e.code === 'ArrowRight') {
+                    e.preventDefault();
+                    if (!gameState.isRunning) nextGeneration();
+                } else if (e.key === 'r' || e.key === 'R') {
+                    if (!gameState.isRunning) resetGame();
+                }
+            });
+
+            // PCマウスドラッグ描画（gameGridは常に同一要素なので1回のみ登録）
+            const gameGridEl = document.getElementById('gameGrid');
+            gameGridEl.addEventListener('mousedown', (e) => {
+                if (e.button !== 0) return;
+                const target = e.target.closest('.cell');
+                if (!target) return;
+                isDragging = true;
+                const cx = parseInt(target.dataset.x);
+                const cy = parseInt(target.dataset.y);
+                dragMode = !gameState.grid[cy][cx];
+                gameState.grid[cy][cx] = dragMode;
+                updateCellDisplay(cx, cy);
+                updateStats();
+                e.preventDefault();
+            });
+            gameGridEl.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                const target = e.target.closest('.cell');
+                if (!target) return;
+                const cx = parseInt(target.dataset.x);
+                const cy = parseInt(target.dataset.y);
+                if (gameState.grid[cy][cx] !== dragMode) {
+                    gameState.grid[cy][cx] = dragMode;
+                    updateCellDisplay(cx, cy);
+                    updateStats();
+                }
+            });
+            document.addEventListener('mouseup', () => { isDragging = false; });
+
+            // タッチドラッグ（モバイル用 - createGridではなくここで1回のみ登録）
+            gameGridEl.addEventListener('touchstart', (e) => {
+                touchDrawing = true;
+                lastTouchCell = null;
+                e.preventDefault();
+            }, { passive: false });
+            gameGridEl.addEventListener('touchmove', (e) => {
+                if (!touchDrawing) return;
+                e.preventDefault();
+                const touch = e.touches[0];
+                const el = document.elementFromPoint(touch.clientX, touch.clientY);
+                if (el && el.dataset.x !== undefined && el !== lastTouchCell) {
+                    lastTouchCell = el;
+                    const cx = parseInt(el.dataset.x);
+                    const cy = parseInt(el.dataset.y);
+                    if (!gameState.grid[cy][cx]) {
+                        gameState.grid[cy][cx] = true;
+                        updateCellDisplay(cx, cy);
+                        updateStats();
+                    }
+                }
+            }, { passive: false });
+            gameGridEl.addEventListener('touchend', () => { touchDrawing = false; });
         }
         
         // 学習モーダル
