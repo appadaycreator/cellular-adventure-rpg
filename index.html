@@ -159,7 +159,7 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
   a[href]::after{content:none!important}
 }
 
-.card{background:#fff;border-radius:12px;box-shadow:0 4px 16px rgba(0,0,0,0.08);overflow:hidden;}
+.card{background:#1f2937;border-radius:12px;box-shadow:0 4px 16px rgba(0,0,0,0.3);overflow:hidden;color:#e5e7eb;}
 </style>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoGame","name":"細胞の冒険 - ライフゲームRPG","url":"https://appadaycreator.com/cellular-adventure-rpg/","description":"生命のゲームをRPG風に体験。細胞の進化をシミュレーション。","operatingSystem":"All","offers":{"@type":"Offer","price":"0","priceCurrency":"JPY"}}</script>
     <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://appadaycreator.com/"}, {"@type": "ListItem", "position": 2, "name": "細胞の冒険 - ライフゲームRPG | Cellular Adventure", "item": "https://appadaycreator.com/cellular-adventure-rpg/"}]}</script>
@@ -372,6 +372,10 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
                             <span data-translate="stats.survival">生存率:</span>
                             <span id="survivalRate">0%</span>
                         </div>
+                        <div class="flex justify-between text-yellow-400">
+                            <span>最大:</span>
+                            <span id="maxPopulation">0個</span>
+                        </div>
                     </div>
                 </div>
 
@@ -508,11 +512,11 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
                             <p class="text-gray-300 mb-4" data-translate="learn.cellular.desc">
                                 細胞は生命の基本単位です。単細胞生物から多細胞生物まで、すべての生命は細胞から構成されています。
                             </p>
-                            <button class="text-blue-400 hover:text-blue-300 transition-colors" data-translate="learn.more">
+                            <button class="text-blue-400 hover:text-blue-300 transition-colors" onclick="showLearnModal('cellular')" data-translate="learn.more">
                                 詳しく学ぶ →
                             </button>
                         </div>
-                        
+
                         <div class="glass-effect rounded-xl p-6">
                             <h3 class="text-xl font-semibold mb-4 flex items-center">
                                 <span aria-hidden="true" class="mr-2 text-green-400">🌱</span>
@@ -521,11 +525,11 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
                             <p class="text-gray-300 mb-4" data-translate="learn.evolution.desc">
                                 生物は環境に適応しながら進化します。自然選択、遺伝的多様性、適応などの原理を学びましょう。
                             </p>
-                            <button class="text-blue-400 hover:text-blue-300 transition-colors" data-translate="learn.more">
+                            <button class="text-blue-400 hover:text-blue-300 transition-colors" onclick="showLearnModal('evolution')" data-translate="learn.more">
                                 詳しく学ぶ →
                             </button>
                         </div>
-                        
+
                         <div class="glass-effect rounded-xl p-6">
                             <h3 class="text-xl font-semibold mb-4 flex items-center">
                                 <span aria-hidden="true" class="mr-2 text-purple-400">🕸️</span>
@@ -534,11 +538,11 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
                             <p class="text-gray-300 mb-4" data-translate="learn.ecosystem.desc">
                                 生物は相互に作用し合い、複雑な生態系を形成します。食物連鎖や共生関係について学習しましょう。
                             </p>
-                            <button class="text-blue-400 hover:text-blue-300 transition-colors" data-translate="learn.more">
+                            <button class="text-blue-400 hover:text-blue-300 transition-colors" onclick="showLearnModal('ecosystem')" data-translate="learn.more">
                                 詳しく学ぶ →
                             </button>
                         </div>
-                        
+
                         <div class="glass-effect rounded-xl p-6">
                             <h3 class="text-xl font-semibold mb-4 flex items-center">
                                 <span aria-hidden="true" class="mr-2 text-yellow-400">🔢</span>
@@ -547,7 +551,7 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
                             <p class="text-gray-300 mb-4" data-translate="learn.gameoflife.desc">
                                 数学者コンウェイが考案したシミュレーション。単純なルールから複雑なパターンが生まれます。
                             </p>
-                            <button class="text-blue-400 hover:text-blue-300 transition-colors" data-translate="learn.more">
+                            <button class="text-blue-400 hover:text-blue-300 transition-colors" onclick="showLearnModal('gameoflife')" data-translate="learn.more">
                                 詳しく学ぶ →
                             </button>
                         </div>
@@ -708,19 +712,19 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
     
     <!-- phase8-social-proof -->
     <div class="card p-5 mb-4">
-      <h3 class="font-bold text-gray-800 mb-3 text-sm">💬 こんなふうに活用できます</h3>
+      <h3 class="font-bold text-gray-300 mb-3 text-sm">💬 こんなふうに活用できます</h3>
       <div class="space-y-3">
-        <div class="bg-gray-50 rounded-lg p-3">
-          <p class="text-xs text-gray-700">🔬 <strong>理科・生物の学習に</strong> 細胞の働きをRPGで体験することで教科書より直感的に理解できる。</p>
+        <div style="background:#374151;" class="rounded-lg p-3">
+          <p class="text-xs text-gray-300">🔬 <strong>理科・生物の学習に</strong> 細胞の働きをRPGで体験することで教科書より直感的に理解できる。</p>
         </div>
-        <div class="bg-gray-50 rounded-lg p-3">
-          <p class="text-xs text-gray-700">🏫 <strong>授業の発展学習に</strong> 授業で習った細胞・免疫の仕組みを冒険として体験し、記憶に定着させられる。</p>
+        <div style="background:#374151;" class="rounded-lg p-3">
+          <p class="text-xs text-gray-300">🏫 <strong>授業の発展学習に</strong> 授業で習った細胞・免疫の仕組みを冒険として体験し、記憶に定着させられる。</p>
         </div>
-        <div class="bg-gray-50 rounded-lg p-3">
-          <p class="text-xs text-gray-700">🎮 <strong>理科好きな子どもの知的好奇心に</strong> 「なぜ？」という疑問をゲームを通じて楽しく探求できる。</p>
+        <div style="background:#374151;" class="rounded-lg p-3">
+          <p class="text-xs text-gray-300">🎮 <strong>理科好きな子どもの知的好奇心に</strong> 「なぜ？」という疑問をゲームを通じて楽しく探求できる。</p>
         </div>
       </div>
-      <p class="text-xs text-gray-400 mt-2">※ご利用イメージです</p>
+      <p class="text-xs text-gray-500 mt-2">※ご利用イメージです</p>
       <div class="flex gap-2 mt-4">
         <a href="https://line.me/R/share?text=細胞の冒険【無料ゲーム】生物・理科を楽しく学ぶライフゲームRPG%20https://appadaycreator.com/cellular-adventure-rpg/" target="_blank" rel="noopener"
            style="flex:1;display:block;text-align:center;background:#06C755;color:white;padding:8px;border-radius:8px;font-size:12px;font-weight:bold;text-decoration:none;">
@@ -734,7 +738,7 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
     </div>
     <!-- phase9-related-links -->
     <div class="card p-5 mb-4">
-      <h3 class="font-bold text-gray-700 mb-2 text-sm">🔗 関連サービス</h3>
+      <h3 class="font-bold text-gray-300 mb-2 text-sm">🔗 関連サービス</h3>
       <a href="https://appadaycreator.com/block-balance-game/" class="block text-sm text-indigo-600 hover:underline py-1">→ ブロックバランス - 物理演算積み木ゲーム | 創造力とバランス感覚を育む知育アプリ</a>
       <a href="https://appadaycreator.com/board-game-advisor/" class="block text-sm text-indigo-600 hover:underline py-1">→ ボードゲーム選び診断無料診断・アドバイス</a>
       <a href="https://appadaycreator.com/chemical-quest/" class="block text-sm text-indigo-600 hover:underline py-1">→ 化学式パズル元素記号で遊んで理科が得意になる</a>
@@ -809,7 +813,7 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
             
             <div class="border-t border-gray-700 mt-8 pt-8 text-center">
                 <p class="text-gray-400 text-sm">
-                    &copy; 2024 細胞の冒険 - Cellular Adventure. All rights reserved.
+                    &copy; 2026 細胞の冒険 - Cellular Adventure. All rights reserved.
                 </p>
             </div>
         </div>
@@ -831,7 +835,8 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
             speed: 5,
             intervalId: null,
             history: [],
-            currentLanguage: 'ja'
+            currentLanguage: 'ja',
+            maxPopulation: 0
         };
         
         // Translations
@@ -876,14 +881,24 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
             setupEventListeners();
             loadFromStorage();
             updateUI();
+            updateMissionUI();
         }
         
+        // 画面幅に応じたセルサイズを計算
+        function calcCellSize() {
+            const gameSection = document.getElementById('game');
+            const availWidth = gameSection ? gameSection.clientWidth - 96 : window.innerWidth - 96;
+            const maxCellByWidth = Math.floor(availWidth / gameState.width);
+            return Math.max(8, Math.min(16, maxCellByWidth));
+        }
+
         // Create Game Grid
         function createGrid() {
             const gridElement = document.getElementById('gameGrid');
             gridElement.innerHTML = '';
-            gridElement.style.gridTemplateColumns = `repeat(${gameState.width}, 12px)`;
-            gridElement.style.gridTemplateRows = `repeat(${gameState.height}, 12px)`;
+            const cellSize = calcCellSize();
+            gridElement.style.gridTemplateColumns = `repeat(${gameState.width}, ${cellSize}px)`;
+            gridElement.style.gridTemplateRows = `repeat(${gameState.height}, ${cellSize}px)`;
 
             gameState.grid = Array(gameState.height).fill().map(() => Array(gameState.width).fill(false));
 
@@ -1031,9 +1046,12 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
             const totalCells = gameState.width * gameState.height;
             const survivalRate = Math.round((population / totalCells) * 100);
 
+            if (population > gameState.maxPopulation) gameState.maxPopulation = population;
             document.getElementById('generation').textContent = gameState.generation;
             document.getElementById('population').textContent = population;
             document.getElementById('survivalRate').textContent = `${survivalRate}%`;
+            const maxPopEl = document.getElementById('maxPopulation');
+            if (maxPopEl) maxPopEl.textContent = `${gameState.maxPopulation}個`;
 
             // ミッションチェック
             MISSIONS.forEach(m => {
@@ -1066,6 +1084,7 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
             banner.innerHTML = `<div style="font-size:1.1em;">🎉 ミッション達成！</div><div style="font-size:0.9em;margin-top:4px;">${mission.name}</div>`;
             document.body.appendChild(banner);
             setTimeout(() => banner.remove(), 3000);
+            updateMissionUI();
         }
 
         function saveMissions() {
@@ -1096,6 +1115,7 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
             }
             gameState.grid = Array(gameState.height).fill().map(() => Array(gameState.width).fill(false));
             gameState.generation = 0;
+            gameState.maxPopulation = 0;
             updateAllCells();
             updateStats();
             saveToStorage(true);
@@ -1354,15 +1374,15 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
             
             // Game mode buttons
             document.getElementById('storyMode').addEventListener('click', () => {
-                // Coming Soon functionality
+                showToast('🚧 ストーリーモードは近日公開予定です！', 'info');
             });
-            
+
             document.getElementById('sandboxMode').addEventListener('click', () => {
                 resetGame();
             });
-            
+
             document.getElementById('challengeMode').addEventListener('click', () => {
-                // Coming Soon functionality
+                showToast('🚧 チャレンジモードは近日公開予定です！', 'info');
             });
             
             // Start game button
@@ -1400,9 +1420,94 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
                     document.getElementById('fontSizeMenu').classList.add('hidden');
                 }
             });
-            
+
+            // リサイズ時にグリッドセルサイズを再計算
+            let resizeTimer;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(() => {
+                    const gridElement = document.getElementById('gameGrid');
+                    const cellSize = calcCellSize();
+                    gridElement.style.gridTemplateColumns = `repeat(${gameState.width}, ${cellSize}px)`;
+                    gridElement.style.gridTemplateRows = `repeat(${gameState.height}, ${cellSize}px)`;
+                }, 200);
+            });
         }
         
+        // 学習モーダル
+        const learnContent = {
+            cellular: {
+                title: '🧬 細胞について',
+                body: `<p class="mb-3">細胞は生命の最小単位で、すべての生物はひとつ以上の細胞から成り立っています。</p>
+                    <ul class="list-disc list-inside space-y-2 text-gray-300 text-sm">
+                        <li><strong>細胞膜</strong>: 細胞の境界を形成し、物質の出入りを制御</li>
+                        <li><strong>細胞核</strong>: DNAを保持し、細胞の司令塔として機能</li>
+                        <li><strong>ミトコンドリア</strong>: ATPを産生するエネルギー工場</li>
+                        <li><strong>細胞分裂</strong>: 1個の細胞が2個に分かれる増殖プロセス</li>
+                    </ul>
+                    <p class="mt-3 text-sm text-gray-400">ライフゲームの各マスは「細胞」を表しており、周囲の細胞数によって生死が決まります。</p>`,
+                link: 'https://www.amazon.co.jp/s?k=細胞生物学+入門&tag=appadaycrea0f-22'
+            },
+            evolution: {
+                title: '🌱 進化論',
+                body: `<p class="mb-3">進化論はチャールズ・ダーウィンが提唱した、生物が世代を経て変化する理論です。</p>
+                    <ul class="list-disc list-inside space-y-2 text-gray-300 text-sm">
+                        <li><strong>自然選択</strong>: 環境に適した個体が生き残り子孫を残す</li>
+                        <li><strong>変異</strong>: DNA複製のエラーや突然変異による多様性</li>
+                        <li><strong>遺伝</strong>: 親から子へ形質が引き継がれる</li>
+                        <li><strong>適者生存</strong>: 環境への適応度が高い個体が繁栄する</li>
+                    </ul>
+                    <p class="mt-3 text-sm text-gray-400">ライフゲームでも「生き延びるパターン」と「消滅するパターン」があり、自然選択の縮図といえます。</p>`,
+                link: 'https://www.amazon.co.jp/s?k=進化論+わかりやすい&tag=appadaycrea0f-22'
+            },
+            ecosystem: {
+                title: '🕸️ 生態系',
+                body: `<p class="mb-3">生態系とは、生物と非生物環境が相互に関連し合うシステムです。</p>
+                    <ul class="list-disc list-inside space-y-2 text-gray-300 text-sm">
+                        <li><strong>食物連鎖</strong>: 植物→草食動物→肉食動物のエネルギー移動</li>
+                        <li><strong>共生</strong>: 異なる生物が互いに利益を得る関係（腸内細菌など）</li>
+                        <li><strong>競争</strong>: 同じ資源をめぐる種内・種間の争い</li>
+                        <li><strong>均衡</strong>: 捕食者と被食者の個体数が均衡する動的平衡</li>
+                    </ul>
+                    <p class="mt-3 text-sm text-gray-400">ライフゲームのグライダーが周囲の細胞と干渉しながら移動する様子は、生態系の相互作用に似ています。</p>`,
+                link: 'https://www.amazon.co.jp/s?k=生態系+図鑑+子供&tag=appadaycrea0f-22'
+            },
+            gameoflife: {
+                title: '🔢 ライフゲームとは',
+                body: `<p class="mb-3">ライフゲームは1970年に数学者ジョン・ホートン・コンウェイが考案したセルオートマトンです。</p>
+                    <ul class="list-disc list-inside space-y-2 text-gray-300 text-sm">
+                        <li><strong>生存</strong>: 生きた細胞は2〜3個の隣接細胞があると次世代も生存</li>
+                        <li><strong>誕生</strong>: 死んだ細胞はちょうど3個の隣接細胞があると誕生</li>
+                        <li><strong>死亡</strong>: それ以外は死亡（過密または孤立）</li>
+                        <li><strong>チューリング完全</strong>: このルールだけで任意の計算が可能</li>
+                    </ul>
+                    <p class="mt-3 text-sm text-gray-400">単純な3つのルールから無限のパターンが生まれる「創発」の好例です。グライダーガンを試してみましょう！</p>`,
+                link: 'https://www.amazon.co.jp/s?k=コンウェイ+ライフゲーム+数学&tag=appadaycrea0f-22'
+            }
+        };
+
+        function showLearnModal(topic) {
+            const content = learnContent[topic];
+            if (!content) return;
+            const modal = document.createElement('div');
+            modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.75);display:flex;align-items:center;justify-content:center;z-index:9999;padding:16px;';
+            modal.innerHTML = `
+                <div style="background:#1f2937;border:1px solid #374151;border-radius:16px;padding:24px;max-width:480px;width:100%;max-height:80vh;overflow-y:auto;">
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+                        <h3 style="font-size:1.15rem;font-weight:700;color:#10b981;">${content.title}</h3>
+                        <button onclick="this.closest('[style]').remove()" style="color:#9ca3af;font-size:1.5rem;line-height:1;background:none;border:none;cursor:pointer;">✕</button>
+                    </div>
+                    <div style="color:#d1d5db;line-height:1.7;">${content.body}</div>
+                    <a href="${content.link}" target="_blank" rel="noopener noreferrer"
+                       style="display:block;margin-top:16px;text-align:center;background:#1d4ed8;color:white;padding:10px;border-radius:8px;font-weight:bold;font-size:0.85rem;text-decoration:none;">
+                        📚 関連書籍をAmazonで探す →
+                    </a>
+                </div>
+            `;
+            modal.addEventListener('click', (e) => { if (e.target === modal) modal.remove(); });
+            document.body.appendChild(modal);
+        }
+
         // Service Worker Registration (PWA)
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
