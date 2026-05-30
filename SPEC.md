@@ -415,6 +415,18 @@ jobs:
 
 ## 変更履歴
 
+### v1.4.0 (2026-05-30) [improve_auto]
+- **P1**: PWA manifest `background_color`/`theme_color` を `#10b981`(緑) → `#111827`/`#1f2937`(ダーク) に変更（スプラッシュ画面のダークテーマ統一）
+- **P1**: `index.html` の `<meta name="theme-color">` も同様に `#1f2937` に変更
+- **P1**: `ux-behavior` スクリプトのセレクターを `button:not([type=reset]):not([data-ux])` → `button[type=submit],input[type=submit]` に修正（全ゲームボタンが disabled + テキスト上書きされる致命的バグ解消）
+- **P1**: フッターの法的情報リンクを `#privacy`/`#terms`/`#disclaimer`（存在しないアンカー）→ `privacy-policy.html`/`terms.html`/`privacy.html` に修正
+- **P1**: 白・ライトカラー背景の6セクション（他のゲームも・お問い合わせ・計算の仕組み・理科講座・学習サービス・related-link）をダークテーマ統一
+- **P2**: よくある質問を3問 → 7問に拡充（ライフゲームとは・データ保存・オフライン・キーボードショートカット追加）
+- **P2**: HowTo schema ステップを汎用テキスト → 実際のライフゲーム操作手順（配置→再生→速度調整→パターン→ミッション）に書き換え
+- **P2**: Service Worker の二重登録（インラインBlob SW + 外部service-worker.js）を解消。外部SWのみに統一
+- **P3**: `@media (prefers-reduced-motion: reduce)` 追加（animate-float・cell.born/.dying・sidebar-transition をオフ、WCAG 2.1 AA 対応強化）
+- **P4**: Schema.org `dateModified` を `2026-05-23` → `2026-05-30` に更新
+
 ### v1.3.0 (2026-05-29) [improve_auto]
 - **P1**: モバイルヒーローボタンを `flex-col sm:flex-row` + `w-full` で縦並びレイアウトに修正（390px幅でボタン切れ解消）
 - **P1**: ヒーロー説明文に `<br class="sm:hidden">` 追加 + `text-base sm:text-xl` でモバイル折り返し対応

@@ -9,7 +9,7 @@
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#10b981">
+<meta name="theme-color" content="#1f2937">
     <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
     <link rel="dns-prefetch" href="https://www.clarity.ms">
     <link rel="dns-prefetch" href="https://www.googletagmanager.com">
@@ -151,6 +151,14 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
   .max-w-lg { padding-left: 1rem; padding-right: 1rem; }
 }
 
+/* アニメーション軽減設定（WCAG 2.1 AA アクセシビリティ対応） */
+@media (prefers-reduced-motion: reduce) {
+  .animate-float { animation: none !important; }
+  .cell.born, .cell.dying { animation: none !important; transition: background 0.1s ease !important; }
+  .sidebar-transition { transition: none !important; }
+  * { animation-duration: 0.01ms !important; transition-duration: 0.1ms !important; }
+}
+
 @media print{
   header,footer,nav,button,.no-print,
   [class*="share"],[class*="affiliate"],[id*="share"],
@@ -163,8 +171,8 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
 
 .card{background:#1f2937;border-radius:12px;box-shadow:0 4px 16px rgba(0,0,0,0.3);overflow:hidden;color:#e5e7eb;}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;}
-.related-link{padding:10px;text-align:center;border:1px solid #ddd;border-radius:4px;text-decoration:none;color:#333;display:block;transition:background 0.15s;}
-.related-link:hover{background:#f5f5f5;}
+.related-link{padding:10px;text-align:center;border:1px solid #374151;border-radius:4px;text-decoration:none;color:#93c5fd;display:block;transition:background 0.15s;background:#1f2937;}
+.related-link:hover{background:#374151;color:#bfdbfe;}
 </style>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoGame","name":"細胞の冒険 - ライフゲームRPG","url":"https://appadaycreator.com/cellular-adventure-rpg/","description":"生命のゲームをRPG風に体験。細胞の進化をシミュレーション。","operatingSystem":"All","offers":{"@type":"Offer","price":"0","priceCurrency":"JPY"}}</script>
     <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://appadaycreator.com/"}, {"@type": "ListItem", "position": 2, "name": "細胞の冒険 - ライフゲームRPG | Cellular Adventure", "item": "https://appadaycreator.com/cellular-adventure-rpg/"}]}</script>
@@ -201,7 +209,7 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
     "headline": "細胞の冒険【無料ゲーム】生物・理科を楽しく学ぶライフゲームRPG",
     "description": "細胞の世界を冒険するシミュレーションRPG。生物学の基礎を楽しく学べる教育ゲーム。Conway's Game of Lifeベースの革新的なRPG体験。",
     "datePublished": "2026-05-23",
-    "dateModified": "2026-05-23",
+    "dateModified": "2026-05-30",
     "author": {
       "@type": "Organization",
       "name": "appadaycreator"
@@ -222,7 +230,7 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
 @media(max-width:480px){button,[class*=btn]{min-height:48px!important;font-size:15px!important;}input,select,textarea{font-size:16px!important;min-height:44px!important;}[class*=card],[class*=max-w]{padding:16px!important;}}
 </style>
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"細胞の冒険【無料ゲーム】生物・理科を楽しく学ぶライフゲームRPGの使い方","step":[{"@type":"HowToStep","position":1,"name":"難易度・モードを選択","text":"プレイしたい難易度やゲームモードを選んで設定する"},{"@type":"HowToStep","position":2,"name":"ゲームを開始する","text":"「スタート」ボタンを押してゲームを始める"},{"@type":"HowToStep","position":3,"name":"問題・課題に回答する","text":"表示される問題や課題に答えて得点を積み上げる"},{"@type":"HowToStep","position":4,"name":"結果・スコアを確認する","text":"ゲーム終了後にスコアと正答率・ランキングを確認する"},{"@type":"HowToStep","position":5,"name":"記録を更新して上達する","text":"繰り返しプレイして自己ベストを更新し、スキルアップを目指す"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"細胞の冒険【無料ゲーム】生物・理科を楽しく学ぶライフゲームRPGの遊び方","step":[{"@type":"HowToStep","position":1,"name":"グリッドに細胞を配置する","text":"ゲームグリッドをクリック（またはタッチ）して細胞を配置する。ドラッグで複数セルを一気に描画できる"},{"@type":"HowToStep","position":2,"name":"再生ボタンでシミュレーション開始","text":"「▶ 再生」ボタンを押してライフゲームのシミュレーションを開始。細胞が自動的に世代を重ねていく"},{"@type":"HowToStep","position":3,"name":"速度スライダーで観察しやすい速度に調整","text":"速度スライダーを動かしてシミュレーション速度を1〜10段階で調整。じっくり観察したいときは低速に設定"},{"@type":"HowToStep","position":4,"name":"パターン選択で有名な構造を試す","text":"グライダー・振動子・静物・ガンパターンからプリセットを選んで配置。Gosper Glider Gunは無限にグライダーを射出する"},{"@type":"HowToStep","position":5,"name":"ミッション達成で生態系を極める","text":"20世代生存・細胞100個達成・100世代到達など5つのミッションに挑戦。全達成で生態系マスターに"}]}</script>
 <style id="ux-enhanced">
 button,input[type=submit],input[type=button],[class*=btn]{min-height:44px;cursor:pointer;transition:opacity .15s,transform .1s;}
 button:active,[class*=btn]:active{opacity:.75;transform:scale(.98);}
@@ -725,9 +733,17 @@ select,input[type=text],input[type=number],input[type=email],textarea{min-height
     <dt style="font-weight:600;margin-top:12px;">Q: 細胞の冒険は無料ですか？</dt>
     <dd style="margin-left:16px;color:#d1d5db;">はい、完全無料・登録不要でご利用いただけます。</dd>
     <dt style="font-weight:600;margin-top:12px;">Q: スマートフォンでも使えますか？</dt>
-    <dd style="margin-left:16px;color:#d1d5db;">はい、PC・スマートフォン・タブレットすべてに対応しています。</dd>
+    <dd style="margin-left:16px;color:#d1d5db;">はい、PC・スマートフォン・タブレットすべてに対応しています。タッチ操作でのドラッグ描画にも対応しています。</dd>
     <dt style="font-weight:600;margin-top:12px;">Q: 入力データはサーバーに送信されますか？</dt>
     <dd style="margin-left:16px;color:#d1d5db;">いいえ。すべての処理はブラウザ内で完結し、データの外部送信は行いません。</dd>
+    <dt style="font-weight:600;margin-top:12px;">Q: ライフゲームとは何ですか？</dt>
+    <dd style="margin-left:16px;color:#d1d5db;">数学者コンウェイが1970年に考案したセルオートマトンです。隣接するセルの数によって生存・死亡が決まる単純なルールから、複雑で美しいパターンが生まれます。数学・コンピューターサイエンスの基礎概念を楽しく学べます。</dd>
+    <dt style="font-weight:600;margin-top:12px;">Q: ゲームの進行状況は保存されますか？</dt>
+    <dd style="margin-left:16px;color:#d1d5db;">はい、グリッドの状態・世代数・ミッション達成状況はブラウザのローカルストレージに自動保存されます。ブラウザのデータを削除するとリセットされます。</dd>
+    <dt style="font-weight:600;margin-top:12px;">Q: オフラインで遊べますか？</dt>
+    <dd style="margin-left:16px;color:#d1d5db;">初回アクセス後はService Workerによるキャッシュを利用してオフラインでも遊べます。PWAとしてスマートフォンのホーム画面にも追加できます。</dd>
+    <dt style="font-weight:600;margin-top:12px;">Q: キーボードショートカットはありますか？</dt>
+    <dd style="margin-left:16px;color:#d1d5db;">はい。スペースキーで再生/停止、矢印キー(→)で1世代進む、Rキーでリセットができます。PCでのプレイにご活用ください。</dd>
   </dl>
 </section></main>
     </div>
@@ -778,11 +794,11 @@ select,input[type=text],input[type=number],input[type=email],textarea{min-height
     </div>
     <!-- Footer -->
     
-<section style="background:#f0f9ff;border-top:1px solid #bae6fd;padding:16px;text-align:center;font-size:12px;color:#0369a1;">
-  <p style="margin:0 0 4px;font-weight:600;">📧 お問い合わせ</p>
-  <p style="margin:0;">ご意見・ご要望・不具合のご報告は <a href="mailto:appadaycreator@gmail.com" style="color:#0369a1;font-weight:bold;">appadaycreator@gmail.com</a> または <a href="contact.html" style="color:#0369a1;">お問い合わせフォーム</a> へ</p>
+<section style="background:#1e293b;border-top:1px solid #334155;padding:16px;text-align:center;font-size:12px;color:#94a3b8;">
+  <p style="margin:0 0 4px;font-weight:600;color:#cbd5e1;">📧 お問い合わせ</p>
+  <p style="margin:0;">ご意見・ご要望・不具合のご報告は <a href="mailto:appadaycreator@gmail.com" style="color:#60a5fa;font-weight:bold;">appadaycreator@gmail.com</a> または <a href="contact.html" style="color:#60a5fa;">お問い合わせフォーム</a> へ</p>
 </section>
-<div style="background:#fafafa;border:1px solid #e2e8f0;border-radius:10px;padding:12px;margin:10px 0;"><h2 style="font-size:13px;font-weight:700;margin-bottom:6px;color:#374151;">🔍 計算・判定の仕組み</h2><p style="font-size:12px;color:#6b7280;line-height:1.7;">入力された値を計算式やスコアリングロジックで処理し、あなたに合った結果を算出します。本ツールの結果はあくまで参考情報です。</p></div>
+<div style="background:#1e293b;border:1px solid #334155;border-radius:10px;padding:12px;margin:10px 0;"><h2 style="font-size:13px;font-weight:700;margin-bottom:6px;color:#cbd5e1;">🔍 シミュレーションの仕組み</h2><p style="font-size:12px;color:#94a3b8;line-height:1.7;">Conway's Game of Life のルール（生存・誕生・死滅）に基づいてセル状態を計算します。単純なルールから複雑なパターンが生まれる数学的現象を体験できます。</p></div>
 <footer class="bg-gray-800 py-12">
         <div class="container mx-auto px-4">
             <div class="grid md:grid-cols-4 gap-8">
@@ -809,9 +825,9 @@ select,input[type=text],input[type=number],input[type=email],textarea{min-height
                 <div>
                     <h4 class="font-semibold mb-4" data-translate="footer.legal">法的情報</h4>
                     <ul class="space-y-2 text-sm">
-                        <li><a href="#privacy" class="text-gray-400 hover:text-white transition-colors" data-translate="footer.privacy">プライバシーポリシー</a></li>
-                        <li><a href="#terms" class="text-gray-400 hover:text-white transition-colors" data-translate="footer.terms">利用規約</a></li>
-                        <li><a href="#disclaimer" class="text-gray-400 hover:text-white transition-colors" data-translate="footer.disclaimer">免責事項</a></li>
+                        <li><a href="privacy-policy.html" class="text-gray-400 hover:text-white transition-colors" data-translate="footer.privacy">プライバシーポリシー</a></li>
+                        <li><a href="terms.html" class="text-gray-400 hover:text-white transition-colors" data-translate="footer.terms">利用規約</a></li>
+                        <li><a href="privacy.html" class="text-gray-400 hover:text-white transition-colors" data-translate="footer.disclaimer">免責事項</a></li>
                     </ul>
                 </div>
                 
@@ -1623,41 +1639,11 @@ select,input[type=text],input[type=number],input[type=email],textarea{min-height
             document.body.appendChild(modal);
         }
 
-        // Service Worker Registration (PWA)
+        // Service Worker Registration (PWA) - 外部ファイルのみ使用（インラインBlob SW との二重登録を防止）
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                const swCode = `
-                const CACHE_NAME = 'cellular-adventure-v2';
-                const urlsToCache = [
-                    '/',
-                    'https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css'
-                ];
-                
-                self.addEventListener('install', event => {
-                    event.waitUntil(
-                        caches.open(CACHE_NAME)
-                            .then(cache => cache.addAll(urlsToCache))
-                    );
-                });
-                
-                self.addEventListener('fetch', event => {
-                    event.respondWith(
-                        caches.match(event.request)
-                            .then(response => {
-                                return response || fetch(event.request);
-                            })
-                    );
-                });
-                `;
-                
-                const blob = new Blob([swCode], { type: 'application/javascript' });
-                const swUrl = URL.createObjectURL(blob);
-                
-                navigator.serviceWorker.register(swUrl)
-                    .then(registration => {
-                    })
-                    .catch(error => {
-                    });
+                navigator.serviceWorker.register('/cellular-adventure-rpg/service-worker.js')
+                    .catch(() => {});
             });
         }
         
@@ -1672,13 +1658,13 @@ select,input[type=text],input[type=number],input[type=email],textarea{min-height
         
     </script>
 
-    <div id="other-games-section" style="background:linear-gradient(135deg,#f8f4ff 0%,#fef3f8 100%);border-top:2px solid #e8d5ff;padding:20px 16px;margin-top:20px;border-bottom-left-radius:0;border-bottom-right-radius:0;">
-        <p style="font-size:0.82rem;font-weight:bold;color:#64748b;margin-bottom:10px;text-align:center;">🎮 他のゲームも試してみよう</p>
+    <div id="other-games-section" style="background:linear-gradient(135deg,#1a1f2e 0%,#1e2438 100%);border-top:2px solid #374151;padding:20px 16px;margin-top:20px;">
+        <p style="font-size:0.82rem;font-weight:bold;color:#9ca3af;margin-bottom:10px;text-align:center;">🎮 他のゲームも試してみよう</p>
         <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;">
-            <a href="https://appadaycreator.com/chemical-quest/" style="background:white;border:1px solid #e2e8f0;border-radius:14px;padding:12px 16px;text-decoration:none;text-align:center;display:flex;flex-direction:column;align-items:center;min-width:76px;box-shadow:0 2px 8px rgba(0,0,0,0.06);transition:all .2s;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 6px 16px rgba(0,0,0,0.12)'" onmouseout="this.style.transform='none';this.style.boxShadow='0 2px 8px rgba(0,0,0,0.06)'"><span style="font-size:1.5rem;">⚗️</span><span style="font-size:0.72rem;font-weight:bold;color:#374151;margin-top:4px;">化学式パズル</span><span style="font-size:0.65rem;color:#94a3b8;">理科系</span></a><a href="https://appadaycreator.com/block-balance-game/" style="background:white;border:1px solid #e2e8f0;border-radius:14px;padding:12px 16px;text-decoration:none;text-align:center;display:flex;flex-direction:column;align-items:center;min-width:76px;box-shadow:0 2px 8px rgba(0,0,0,0.06);transition:all .2s;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 6px 16px rgba(0,0,0,0.12)'" onmouseout="this.style.transform='none';this.style.boxShadow='0 2px 8px rgba(0,0,0,0.06)'"><span style="font-size:1.5rem;">⚖️</span><span style="font-size:0.72rem;font-weight:bold;color:#374151;margin-top:4px;">ブロックバランス</span><span style="font-size:0.65rem;color:#94a3b8;">物理系</span></a><a href="https://appadaycreator.com/sound-master-training/" style="background:white;border:1px solid #e2e8f0;border-radius:14px;padding:12px 16px;text-decoration:none;text-align:center;display:flex;flex-direction:column;align-items:center;min-width:76px;box-shadow:0 2px 8px rgba(0,0,0,0.06);transition:all .2s;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 6px 16px rgba(0,0,0,0.12)'" onmouseout="this.style.transform='none';this.style.boxShadow='0 2px 8px rgba(0,0,0,0.06)'"><span style="font-size:1.5rem;">🎵</span><span style="font-size:0.72rem;font-weight:bold;color:#374151;margin-top:4px;">音感トレーニング</span><span style="font-size:0.65rem;color:#94a3b8;">感覚系</span></a>
+            <a href="https://appadaycreator.com/chemical-quest/" style="background:#374151;border:1px solid #4b5563;border-radius:14px;padding:12px 16px;text-decoration:none;text-align:center;display:flex;flex-direction:column;align-items:center;min-width:76px;box-shadow:0 2px 8px rgba(0,0,0,0.3);transition:all .2s;" onmouseover="this.style.transform='translateY(-2px)';this.style.background='#4b5563'" onmouseout="this.style.transform='none';this.style.background='#374151'"><span style="font-size:1.5rem;">⚗️</span><span style="font-size:0.72rem;font-weight:bold;color:#e5e7eb;margin-top:4px;">化学式パズル</span><span style="font-size:0.65rem;color:#9ca3af;">理科系</span></a><a href="https://appadaycreator.com/block-balance-game/" style="background:#374151;border:1px solid #4b5563;border-radius:14px;padding:12px 16px;text-decoration:none;text-align:center;display:flex;flex-direction:column;align-items:center;min-width:76px;box-shadow:0 2px 8px rgba(0,0,0,0.3);transition:all .2s;" onmouseover="this.style.transform='translateY(-2px)';this.style.background='#4b5563'" onmouseout="this.style.transform='none';this.style.background='#374151'"><span style="font-size:1.5rem;">⚖️</span><span style="font-size:0.72rem;font-weight:bold;color:#e5e7eb;margin-top:4px;">ブロックバランス</span><span style="font-size:0.65rem;color:#9ca3af;">物理系</span></a><a href="https://appadaycreator.com/sound-master-training/" style="background:#374151;border:1px solid #4b5563;border-radius:14px;padding:12px 16px;text-decoration:none;text-align:center;display:flex;flex-direction:column;align-items:center;min-width:76px;box-shadow:0 2px 8px rgba(0,0,0,0.3);transition:all .2s;" onmouseover="this.style.transform='translateY(-2px)';this.style.background='#4b5563'" onmouseout="this.style.transform='none';this.style.background='#374151'"><span style="font-size:1.5rem;">🎵</span><span style="font-size:0.72rem;font-weight:bold;color:#e5e7eb;margin-top:4px;">音感トレーニング</span><span style="font-size:0.65rem;color:#9ca3af;">感覚系</span></a>
         </div>
     </div>
-<div style="margin:20px auto;max-width:800px;padding:16px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;"><p style="font-size:0.85rem;font-weight:bold;color:#166534;margin-bottom:10px;">🎮 ゲーム・理科通信講座</p><div style="display:flex;flex-wrap:wrap;gap:10px;"><a href="https://px.a8.net/svt/ejp?a8mat=3Z9QKI+CELLR1+XXXX+SCI001" rel="nofollow noopener noreferrer" target="_blank" style="background:#16a34a;color:#fff;padding:8px 14px;border-radius:8px;font-size:0.82em;font-weight:bold;text-decoration:none;">🔬 理科・生物通信講座</a><a href="https://px.a8.net/svt/ejp?a8mat=3Z9QKI+CELLR2+XXXX+SCI002" rel="nofollow noopener noreferrer" target="_blank" style="background:#15803d;color:#fff;padding:8px 14px;border-radius:8px;font-size:0.82em;font-weight:bold;text-decoration:none;">🎓 Z会・通信教育講座</a></div><img src="https://www15.a8.net/0.gif?a8mat=3Z9QKI+CELLR1+XXXX+SCI001" width="1" height="1" style="border:none;" alt=""/><img src="https://www17.a8.net/0.gif?a8mat=3Z9QKI+CELLR2+XXXX+SCI002" width="1" height="1" style="border:none;" alt=""/></div>
+<div style="margin:20px auto;max-width:800px;padding:16px;background:#1a2e1e;border:1px solid #166534;border-radius:12px;"><p style="font-size:0.85rem;font-weight:bold;color:#86efac;margin-bottom:10px;">🎮 ゲーム・理科通信講座</p><div style="display:flex;flex-wrap:wrap;gap:10px;"><a href="https://px.a8.net/svt/ejp?a8mat=3Z9QKI+CELLR1+XXXX+SCI001" rel="nofollow noopener noreferrer" target="_blank" style="background:#16a34a;color:#fff;padding:8px 14px;border-radius:8px;font-size:0.82em;font-weight:bold;text-decoration:none;">🔬 理科・生物通信講座</a><a href="https://px.a8.net/svt/ejp?a8mat=3Z9QKI+CELLR2+XXXX+SCI002" rel="nofollow noopener noreferrer" target="_blank" style="background:#15803d;color:#fff;padding:8px 14px;border-radius:8px;font-size:0.82em;font-weight:bold;text-decoration:none;">🎓 Z会・通信教育講座</a></div><img src="https://www15.a8.net/0.gif?a8mat=3Z9QKI+CELLR1+XXXX+SCI001" width="1" height="1" style="border:none;" alt=""/><img src="https://www17.a8.net/0.gif?a8mat=3Z9QKI+CELLR2+XXXX+SCI002" width="1" height="1" style="border:none;" alt=""/></div>
 <div id="page-loader-car" class="loading" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(255,255,255,0.95);z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;">
   <div class="spinner" style="width:40px;height:40px;border:4px solid #d1fae5;border-top-color:#10b981;border-radius:50%;animation:spin-car 0.8s linear infinite;"></div>
   <p class="loading-text" style="margin-top:12px;font-size:0.85rem;color:#6b7280;">読み込み中...</p>
@@ -1703,7 +1689,7 @@ document.addEventListener("DOMContentLoaded",function(){try{var l=document.getEl
 <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8427583028015858" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
 <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 </div>
-<section style="max-width:800px;margin:0 auto 14px;padding:12px;background:#f0fdf4;border-radius:12px;"><h2 style="font-size:0.85rem;font-weight:bold;color:#16a34a;margin-bottom:8px;text-align:center;">🎮 ゲーム・理科学習サービス</h2><div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;"><a href="https://appadaycreator.com/chemical-quest/" style="background:#fff;border:2px solid #bbf7d0;border-radius:10px;padding:9px 12px;text-decoration:none;text-align:center;min-width:95px;" onmouseover="this.style.borderColor='#16a34a'" onmouseout="this.style.borderColor='#bbf7d0'"><div style="font-size:1.2rem;">🔬</div><div style="font-size:0.72rem;font-weight:bold;color:#374151;margin-top:2px;">化学クエスト</div></a><a href="https://appadaycreator.com/kanji-tower-defense/" style="background:#fff;border:2px solid #bbf7d0;border-radius:10px;padding:9px 12px;text-decoration:none;text-align:center;min-width:95px;" onmouseover="this.style.borderColor='#16a34a'" onmouseout="this.style.borderColor='#bbf7d0'"><div style="font-size:1.2rem;">🏯</div><div style="font-size:0.72rem;font-weight:bold;color:#374151;margin-top:2px;">漢字ゲーム</div></a><a href="https://appadaycreator.com/codebreaker-puzzle/" style="background:#fff;border:2px solid #bbf7d0;border-radius:10px;padding:9px 12px;text-decoration:none;text-align:center;min-width:95px;" onmouseover="this.style.borderColor='#16a34a'" onmouseout="this.style.borderColor='#bbf7d0'"><div style="font-size:1.2rem;">🔐</div><div style="font-size:0.72rem;font-weight:bold;color:#374151;margin-top:2px;">暗号解読</div></a></div></section>
+<section style="max-width:800px;margin:0 auto 14px;padding:12px;background:#1a2e1e;border:1px solid #166534;border-radius:12px;"><h2 style="font-size:0.85rem;font-weight:bold;color:#86efac;margin-bottom:8px;text-align:center;">🎮 ゲーム・理科学習サービス</h2><div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;"><a href="https://appadaycreator.com/chemical-quest/" style="background:#1e3a24;border:2px solid #166534;border-radius:10px;padding:9px 12px;text-decoration:none;text-align:center;min-width:95px;" onmouseover="this.style.borderColor='#4ade80'" onmouseout="this.style.borderColor='#166534'"><div style="font-size:1.2rem;">🔬</div><div style="font-size:0.72rem;font-weight:bold;color:#d1fae5;margin-top:2px;">化学クエスト</div></a><a href="https://appadaycreator.com/kanji-tower-defense/" style="background:#1e3a24;border:2px solid #166534;border-radius:10px;padding:9px 12px;text-decoration:none;text-align:center;min-width:95px;" onmouseover="this.style.borderColor='#4ade80'" onmouseout="this.style.borderColor='#166534'"><div style="font-size:1.2rem;">🏯</div><div style="font-size:0.72rem;font-weight:bold;color:#d1fae5;margin-top:2px;">漢字ゲーム</div></a><a href="https://appadaycreator.com/codebreaker-puzzle/" style="background:#1e3a24;border:2px solid #166534;border-radius:10px;padding:9px 12px;text-decoration:none;text-align:center;min-width:95px;" onmouseover="this.style.borderColor='#4ade80'" onmouseout="this.style.borderColor='#166534'"><div style="font-size:1.2rem;">🔐</div><div style="font-size:0.72rem;font-weight:bold;color:#d1fae5;margin-top:2px;">暗号解読</div></a></div></section>
 <div style="text-align:center;margin:14px auto;max-width:800px;padding:0 16px;">
 <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8427583028015858" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
 <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
@@ -1781,8 +1767,8 @@ document.addEventListener("DOMContentLoaded",function(){try{var l=document.getEl
 (function(){
 'use strict';
 function init(){
-  // ローディング状態
-  document.querySelectorAll('button:not([type=reset]):not([data-ux]),input[type=submit]').forEach(function(b){
+  // ローディング状態（type=submit のフォームボタンのみ対象、ゲームUIボタンは除外）
+  document.querySelectorAll('button[type=submit],input[type=submit]').forEach(function(b){
     b.dataset.ux='1';
     var orig=b.tagName==='BUTTON'?b.textContent:(b.value||'実行');
     b.addEventListener('click',function(){
