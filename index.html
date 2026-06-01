@@ -9,7 +9,8 @@
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#1f2937">
+<meta name="theme-color" content="#059669" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#059669">
     <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
     <link rel="dns-prefetch" href="https://www.clarity.ms">
     <link rel="dns-prefetch" href="https://www.googletagmanager.com">
@@ -479,7 +480,7 @@ select,input[type=text],input[type=number],input[type=email],textarea{min-height
                         <div class="flex flex-wrap justify-center gap-4">
                             <div class="flex items-center space-x-2">
                                 <label for="speedSlider" data-translate="game.speed">速度:</label>
-                                <input type="range" id="speedSlider" min="1" max="10" value="5" class="w-32" aria-label="入力フォーム">
+                                <input type="range" id="speedSlider" min="1" max="10" value="5" class="w-32" aria-label="シミュレーション速度 (1-10)" aria-valuenow="5" aria-valuemin="1" aria-valuemax="10">
                                 <span id="speedValue">5</span>
                             </div>
                             <div class="flex items-center space-x-2">
@@ -504,22 +505,38 @@ select,input[type=text],input[type=number],input[type=email],textarea{min-height
                         <!-- Pattern Presets -->
                         <div class="mt-6">
                             <h3 class="text-lg font-semibold mb-3" data-translate="game.patterns">パターン選択:</h3>
-                            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-                                <button class="pattern-btn p-3 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors" data-pattern="glider">
-                                    <span aria-hidden="true" class="block mb-2">✈</span>
-                                    <div data-translate="pattern.glider">グライダー</div>
+                            <div class="grid grid-cols-4 gap-2">
+                                <button class="pattern-btn p-2 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors text-sm tooltip" data-pattern="glider" data-tooltip="移動するパターン（period-4）">
+                                    <span aria-hidden="true" class="block mb-1 text-lg">✈</span>
+                                    <div class="text-xs">グライダー</div>
                                 </button>
-                                <button class="pattern-btn p-3 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors" data-pattern="oscillator">
-                                    <span aria-hidden="true" class="block mb-2">🔄</span>
-                                    <div data-translate="pattern.oscillator">振動子</div>
+                                <button class="pattern-btn p-2 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors text-sm tooltip" data-pattern="oscillator" data-tooltip="3マスの振動子（blinker）">
+                                    <span aria-hidden="true" class="block mb-1 text-lg">🔄</span>
+                                    <div class="text-xs">振動子</div>
                                 </button>
-                                <button class="pattern-btn p-3 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors" data-pattern="still">
-                                    <span aria-hidden="true" class="block mb-2">⬛</span>
-                                    <div data-translate="pattern.still">静物</div>
+                                <button class="pattern-btn p-2 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors text-sm tooltip" data-pattern="still" data-tooltip="変化しない安定パターン（beehive）">
+                                    <span aria-hidden="true" class="block mb-1 text-lg">⬛</span>
+                                    <div class="text-xs">静物</div>
                                 </button>
-                                <button class="pattern-btn p-3 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors" data-pattern="gun">
-                                    <span aria-hidden="true" class="block mb-2">🎯</span>
-                                    <div data-translate="pattern.gun">ガン</div>
+                                <button class="pattern-btn p-2 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors text-sm tooltip" data-pattern="gun" data-tooltip="グライダーを無限に射出">
+                                    <span aria-hidden="true" class="block mb-1 text-lg">🎯</span>
+                                    <div class="text-xs">ガン</div>
+                                </button>
+                                <button class="pattern-btn p-2 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors text-sm tooltip" data-pattern="pulsar" data-tooltip="美しい対称振動子（period-3）">
+                                    <span aria-hidden="true" class="block mb-1 text-lg">💫</span>
+                                    <div class="text-xs">パルサー</div>
+                                </button>
+                                <button class="pattern-btn p-2 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors text-sm tooltip" data-pattern="block" data-tooltip="2×2の最小安定パターン">
+                                    <span aria-hidden="true" class="block mb-1 text-lg">🟩</span>
+                                    <div class="text-xs">ブロック</div>
+                                </button>
+                                <button class="pattern-btn p-2 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors text-sm tooltip" data-pattern="rpentomino" data-tooltip="5細胞から1103世代変化し続ける">
+                                    <span aria-hidden="true" class="block mb-1 text-lg">🌀</span>
+                                    <div class="text-xs">R五面体</div>
+                                </button>
+                                <button class="pattern-btn p-2 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors text-sm tooltip" data-pattern="diehard" data-tooltip="7細胞→130世代で全消滅">
+                                    <span aria-hidden="true" class="block mb-1 text-lg">☄️</span>
+                                    <div class="text-xs">ダイハード</div>
                                 </button>
                             </div>
                         </div>
@@ -835,7 +852,7 @@ select,input[type=text],input[type=number],input[type=email],textarea{min-height
                     <h4 class="font-semibold mb-4" data-translate="footer.contact">お問い合わせ</h4>
                     <p class="text-gray-400 text-sm">
                         <span aria-hidden="true" class="mr-2">✉️</span>
-                        contact@cellular-adventure.com
+                        <a href="mailto:appadaycreator@gmail.com" class="text-gray-400 hover:text-white transition-colors">appadaycreator@gmail.com</a>
                     </p>
                     <div class="flex space-x-3 mt-4">
                         <a href="https://twitter.com/intent/tweet?text=細胞の冒険【無料ゲーム】生物・理科を楽しく学ぶライフゲームRPG&url=https://appadaycreator.com/cellular-adventure-rpg/" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-blue-400 transition-colors" aria-label="Twitterでシェア">
@@ -876,7 +893,11 @@ select,input[type=text],input[type=number],input[type=email],textarea{min-height
             intervalId: null,
             history: [],
             currentLanguage: 'ja',
-            maxPopulation: 0
+            maxPopulation: 0,
+            gameMode: 'sandbox',
+            storyStep: 0,
+            currentChallenge: null,
+            challengeCleared: []
         };
         
         // Translations
@@ -1102,6 +1123,10 @@ select,input[type=text],input[type=number],input[type=email],textarea{min-height
                     showToast(`💀 全滅！ ${gameState.generation}世代で絶滅しました`, 'error');
                 }
             }
+
+            // ゲームモード進行チェック
+            if (gameState.gameMode === 'story') checkStoryProgress(population);
+            else if (gameState.gameMode === 'challenge') checkChallengeProgress(population);
         }
 
         function updateMissionUI() {
@@ -1192,6 +1217,39 @@ select,input[type=text],input[type=number],input[type=email],textarea{min-height
                 [0, 1, 1, 0],
                 [1, 0, 0, 1],
                 [0, 1, 1, 0]
+            ],
+            // パルサー: 最も有名な period-3 振動子（13×13）
+            pulsar: [
+                [0,0,1,1,1,0,0,0,1,1,1,0,0],
+                [0,0,0,0,0,0,0,0,0,0,0,0,0],
+                [1,0,0,0,0,1,0,1,0,0,0,0,1],
+                [1,0,0,0,0,1,0,1,0,0,0,0,1],
+                [1,0,0,0,0,1,0,1,0,0,0,0,1],
+                [0,0,1,1,1,0,0,0,1,1,1,0,0],
+                [0,0,0,0,0,0,0,0,0,0,0,0,0],
+                [0,0,1,1,1,0,0,0,1,1,1,0,0],
+                [1,0,0,0,0,1,0,1,0,0,0,0,1],
+                [1,0,0,0,0,1,0,1,0,0,0,0,1],
+                [1,0,0,0,0,1,0,1,0,0,0,0,1],
+                [0,0,0,0,0,0,0,0,0,0,0,0,0],
+                [0,0,1,1,1,0,0,0,1,1,1,0,0]
+            ],
+            // ブロック: 2×2の最小安定パターン
+            block: [
+                [1, 1],
+                [1, 1]
+            ],
+            // R五面体: 5細胞から1103世代にわたり変化し続けるカオスパターン
+            rpentomino: [
+                [0, 1, 1],
+                [1, 1, 0],
+                [0, 1, 0]
+            ],
+            // ダイハード: 7細胞→130世代で全消滅するメトセラパターン
+            diehard: [
+                [0, 0, 0, 0, 0, 0, 1, 0],
+                [1, 1, 0, 0, 0, 0, 0, 0],
+                [0, 1, 0, 0, 0, 1, 1, 1]
             ],
             gun: [
                 [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0],
@@ -1362,6 +1420,7 @@ select,input[type=text],input[type=number],input[type=email],textarea{min-height
             const speedSlider = document.getElementById('speedSlider');
             speedSlider.addEventListener('input', (e) => {
                 gameState.speed = parseInt(e.target.value);
+                e.target.setAttribute('aria-valuenow', gameState.speed);
                 updateUI();
                 
                 if (gameState.isRunning) {
@@ -1436,17 +1495,18 @@ select,input[type=text],input[type=number],input[type=email],textarea{min-height
             });
 
             // Game mode buttons
-            document.getElementById('storyMode').addEventListener('click', () => {
-                showToast('🚧 ストーリーモードは近日公開予定です！', 'info');
-            });
+            document.getElementById('storyMode').addEventListener('click', startStoryMode);
 
             document.getElementById('sandboxMode').addEventListener('click', () => {
+                gameState.gameMode = 'sandbox';
+                gameState.currentChallenge = null;
+                const banner = document.getElementById('challengeBanner');
+                if (banner) banner.remove();
+                updateGameModeButtons();
                 resetGame();
             });
 
-            document.getElementById('challengeMode').addEventListener('click', () => {
-                showToast('🚧 チャレンジモードは近日公開予定です！', 'info');
-            });
+            document.getElementById('challengeMode').addEventListener('click', startChallengeMode);
             
             // Start game button
             document.getElementById('startGameBtn').addEventListener('click', () => {
@@ -1636,6 +1696,268 @@ select,input[type=text],input[type=number],input[type=email],textarea{min-height
                 </div>
             `;
             modal.addEventListener('click', (e) => { if (e.target === modal) modal.remove(); });
+            document.body.appendChild(modal);
+        }
+
+        // ====== ゲームモード管理 ======
+
+        // チャレンジクリア記録をlocalStorageから読み込み
+        try { gameState.challengeCleared = JSON.parse(localStorage.getItem('cellular_challenges') || '[]'); } catch(e) { gameState.challengeCleared = []; }
+
+        // ストーリーモードのステップ定義
+        const STORY_STEPS = [
+            {
+                title: '第1章: 最初の命の誕生',
+                narration: '宇宙の片隅、ある惑星に最初の細胞が誕生した。\n孤独に漂う小さな命が、やがて奇跡を起こす。',
+                icon: '🌱',
+                pattern: 'glider',
+                targetGen: 25,
+                hint: 'グライダーが移動する様子を観察しよう！'
+            },
+            {
+                title: '第2章: 生命のリズム',
+                narration: '細胞は独自のリズムを持つようになった。\n収縮と拡張を繰り返す、生命の鼓動が生まれた。',
+                icon: '💫',
+                pattern: 'pulsar',
+                targetGen: 20,
+                hint: 'パルサーが美しいリズムを刻む様子を見てみよう！'
+            },
+            {
+                title: '第3章: 命の連鎖反応',
+                narration: '驚くべきことが起きた！\n細胞が永続的に新しい命を生み出すシステムを発見したのだ！',
+                icon: '🌌',
+                pattern: 'gun',
+                targetGen: 50,
+                hint: 'グライダーガンが次々とグライダーを射出する！'
+            },
+            {
+                title: 'エピローグ: 生命の神秘',
+                narration: '単純な3つのルールから、これほど豊かな世界が生まれた。\nこれがライフゲームの、そして生命の神秘だ。\n\nあなたも自由にパターンを作ろう！',
+                icon: '🏆',
+                pattern: null,
+                targetGen: 0,
+                hint: null
+            }
+        ];
+
+        // チャレンジ定義
+        const CHALLENGES = [
+            {
+                id: 1,
+                icon: '🌱',
+                title: '挑戦1: 生存者',
+                desc: 'グライダーを配置して\n30世代間、細胞を生き残らせよ！',
+                setup: () => { placePattern('glider'); },
+                check: (gen, pop) => gen >= 30 && pop >= 1,
+                reward: 'グライダーマスター'
+            },
+            {
+                id: 2,
+                icon: '🌿',
+                title: '挑戦2: 大繁殖',
+                desc: 'ランダム配置から\n細胞を50個以上同時に存在させよ！',
+                setup: () => { randomize(); },
+                check: (gen, pop) => pop >= 50,
+                reward: '個体群拡大マスター'
+            },
+            {
+                id: 3,
+                icon: '🏆',
+                title: '挑戦3: 永遠の命',
+                desc: '好きなパターンを配置して\n100世代まで細胞を生き残らせよ！',
+                setup: () => {},
+                check: (gen, pop) => gen >= 100 && pop >= 1,
+                reward: '100世代マスター'
+            }
+        ];
+
+        function updateGameModeButtons() {
+            const modes = { story: 'storyMode', sandbox: 'sandboxMode', challenge: 'challengeMode' };
+            Object.entries(modes).forEach(([mode, id]) => {
+                const btn = document.getElementById(id);
+                if (!btn) return;
+                if (gameState.gameMode === mode) {
+                    btn.className = 'w-full text-left p-2 bg-green-600 hover:bg-green-700 rounded-lg transition-colors';
+                } else {
+                    btn.className = 'w-full text-left p-2 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors';
+                }
+            });
+        }
+
+        // ストーリーモード開始
+        function startStoryMode() {
+            if (gameState.isRunning) playPause();
+            gameState.gameMode = 'story';
+            gameState.storyStep = 0;
+            const banner = document.getElementById('challengeBanner');
+            if (banner) banner.remove();
+            updateGameModeButtons();
+            showStoryStep(0);
+        }
+
+        function showStoryStep(stepIndex) {
+            gameState.storyStep = stepIndex;
+            const step = STORY_STEPS[stepIndex];
+            if (!step) return;
+
+            if (step.pattern) placePattern(step.pattern);
+
+            const isLast = stepIndex === STORY_STEPS.length - 1;
+            const existing = document.getElementById('storyModal');
+            if (existing) existing.remove();
+
+            const modal = document.createElement('div');
+            modal.id = 'storyModal';
+            modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.82);display:flex;align-items:center;justify-content:center;z-index:9999;padding:16px;';
+            modal.innerHTML = `
+                <div style="background:linear-gradient(135deg,#1f2937,#111827);border:1px solid #374151;border-radius:16px;padding:28px;max-width:400px;width:100%;text-align:center;box-shadow:0 16px 48px rgba(0,0,0,0.5);">
+                    <div style="font-size:3rem;margin-bottom:8px;">${step.icon}</div>
+                    <div style="font-size:0.75rem;color:#6ee7b7;font-weight:600;letter-spacing:0.05em;margin-bottom:4px;">STEP ${stepIndex + 1} / ${STORY_STEPS.length}</div>
+                    <h3 style="font-size:1.15rem;font-weight:700;color:#10b981;margin-bottom:12px;">${step.title}</h3>
+                    <p style="color:#d1d5db;line-height:1.9;white-space:pre-line;margin-bottom:16px;">${step.narration}</p>
+                    ${step.hint ? `<p style="font-size:0.8rem;color:#6ee7b7;background:rgba(16,185,129,0.12);border:1px solid rgba(16,185,129,0.25);border-radius:8px;padding:8px 12px;margin-bottom:16px;">💡 ${step.hint}</p>` : ''}
+                    ${isLast
+                        ? `<button onclick="document.getElementById('storyModal').remove();gameState.gameMode='sandbox';updateGameModeButtons();"
+                               style="background:#10b981;color:white;border:none;padding:12px 32px;border-radius:10px;font-weight:bold;cursor:pointer;font-size:1rem;width:100%;">
+                               🎉 ストーリークリア！サンドボックスへ
+                           </button>`
+                        : `<button id="storyPlayBtn" style="background:#10b981;color:white;border:none;padding:12px 32px;border-radius:10px;font-weight:bold;cursor:pointer;font-size:1rem;width:100%;">
+                               ▶ シミュレーション開始
+                           </button>`
+                    }
+                </div>
+            `;
+            document.body.appendChild(modal);
+
+            if (!isLast) {
+                modal.querySelector('#storyPlayBtn').addEventListener('click', () => {
+                    modal.remove();
+                    if (!gameState.isRunning) playPause();
+                });
+            }
+        }
+
+        // ストーリー進行チェック（updateStats から呼ばれる）
+        function checkStoryProgress(population) {
+            if (gameState.gameMode !== 'story') return;
+            const step = STORY_STEPS[gameState.storyStep];
+            if (!step || !step.targetGen) return;
+            if (gameState.generation >= step.targetGen) {
+                if (gameState.isRunning) playPause();
+                const nextStep = gameState.storyStep + 1;
+                if (nextStep < STORY_STEPS.length) showStoryStep(nextStep);
+            }
+        }
+
+        // チャレンジモード開始
+        function startChallengeMode() {
+            if (gameState.isRunning) playPause();
+            gameState.gameMode = 'challenge';
+            gameState.currentChallenge = null;
+            const banner = document.getElementById('challengeBanner');
+            if (banner) banner.remove();
+            updateGameModeButtons();
+            showChallengeSelect();
+        }
+
+        function showChallengeSelect() {
+            const existing = document.getElementById('challengeModal');
+            if (existing) existing.remove();
+
+            const clearedCount = gameState.challengeCleared.length;
+            const challengeHTML = CHALLENGES.map(c => {
+                const cleared = gameState.challengeCleared.includes(c.id);
+                return `
+                    <div onclick="startChallenge(${c.id});document.getElementById('challengeModal').remove();"
+                         style="background:${cleared ? 'rgba(16,185,129,0.12)' : 'rgba(255,255,255,0.04)'};border:1px solid ${cleared ? '#10b981' : '#374151'};border-radius:12px;padding:14px;text-align:center;cursor:pointer;transition:all .2s;"
+                         onmouseover="this.style.borderColor='#10b981';this.style.background='rgba(16,185,129,0.18)';"
+                         onmouseout="this.style.borderColor='${cleared ? '#10b981' : '#374151'}';this.style.background='${cleared ? 'rgba(16,185,129,0.12)' : 'rgba(255,255,255,0.04)'}';">
+                        <div style="font-size:2rem;">${c.icon}</div>
+                        <div style="font-weight:bold;color:#e5e7eb;margin:4px 0;font-size:0.9rem;">${c.title}</div>
+                        <div style="font-size:0.76rem;color:#9ca3af;white-space:pre-line;line-height:1.6;">${c.desc}</div>
+                        ${cleared ? '<div style="color:#10b981;font-size:0.75rem;margin-top:6px;font-weight:600;">✅ クリア済み</div>' : ''}
+                    </div>
+                `;
+            }).join('');
+
+            const modal = document.createElement('div');
+            modal.id = 'challengeModal';
+            modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.82);display:flex;align-items:center;justify-content:center;z-index:9999;padding:16px;';
+            modal.innerHTML = `
+                <div style="background:linear-gradient(135deg,#1f2937,#111827);border:1px solid #374151;border-radius:16px;padding:24px;max-width:480px;width:100%;box-shadow:0 16px 48px rgba(0,0,0,0.5);">
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+                        <h3 style="font-size:1.15rem;font-weight:700;color:#a78bfa;">🏆 チャレンジモード</h3>
+                        <button onclick="document.getElementById('challengeModal').remove();gameState.gameMode='sandbox';updateGameModeButtons();"
+                                style="color:#9ca3af;background:none;border:none;cursor:pointer;font-size:1.5rem;line-height:1;">✕</button>
+                    </div>
+                    <p style="font-size:0.78rem;color:#6b7280;margin-bottom:16px;">クリア: ${clearedCount} / ${CHALLENGES.length}</p>
+                    <div style="display:grid;gap:10px;">${challengeHTML}</div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+
+        function startChallenge(challengeId) {
+            const challenge = CHALLENGES.find(c => c.id === challengeId);
+            if (!challenge) return;
+            gameState.currentChallenge = challengeId;
+
+            resetGame();
+            challenge.setup();
+
+            const existBanner = document.getElementById('challengeBanner');
+            if (existBanner) existBanner.remove();
+            const banner = document.createElement('div');
+            banner.id = 'challengeBanner';
+            banner.style.cssText = 'position:fixed;top:72px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#4c1d95,#7c3aed);color:white;padding:10px 20px;border-radius:12px;z-index:9998;text-align:center;box-shadow:0 4px 16px rgba(0,0,0,0.4);max-width:340px;width:calc(100% - 32px);pointer-events:none;';
+            banner.innerHTML = `<div style="font-weight:bold;font-size:0.9rem;">${challenge.icon} ${challenge.title}</div><div style="font-size:0.76rem;opacity:0.9;margin-top:2px;white-space:pre-line;">${challenge.desc}</div>`;
+            document.body.appendChild(banner);
+
+            if (challenge.id === 3) {
+                showToast('💡 好きなパターンを配置して▶再生ボタンを押そう！', 'info');
+            } else {
+                setTimeout(() => { if (!gameState.isRunning) playPause(); }, 600);
+            }
+        }
+
+        // チャレンジ進行チェック（updateStats から呼ばれる）
+        function checkChallengeProgress(population) {
+            if (gameState.gameMode !== 'challenge' || !gameState.currentChallenge) return;
+            const challenge = CHALLENGES.find(c => c.id === gameState.currentChallenge);
+            if (!challenge || !challenge.check(gameState.generation, population)) return;
+
+            if (gameState.isRunning) playPause();
+            gameState.currentChallenge = null;
+            if (!gameState.challengeCleared.includes(challenge.id)) {
+                gameState.challengeCleared.push(challenge.id);
+                try { localStorage.setItem('cellular_challenges', JSON.stringify(gameState.challengeCleared)); } catch(e) {}
+            }
+            const banner = document.getElementById('challengeBanner');
+            if (banner) banner.remove();
+            showChallengeSuccess(challenge);
+        }
+
+        function showChallengeSuccess(challenge) {
+            const modal = document.createElement('div');
+            modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.82);display:flex;align-items:center;justify-content:center;z-index:9999;padding:16px;';
+            modal.innerHTML = `
+                <div style="background:linear-gradient(135deg,#065f46,#047857);border:2px solid #10b981;border-radius:16px;padding:32px;max-width:360px;width:100%;text-align:center;box-shadow:0 16px 48px rgba(0,0,0,0.5);">
+                    <div style="font-size:3.5rem;margin-bottom:8px;">🎉</div>
+                    <h3 style="font-size:1.4rem;font-weight:700;color:#d1fae5;margin-bottom:8px;">チャレンジクリア！</h3>
+                    <p style="color:#6ee7b7;font-weight:600;margin-bottom:6px;">${challenge.title}</p>
+                    <p style="color:#a7f3d0;font-size:0.9rem;margin-bottom:24px;">🏅 称号獲得: <strong>${challenge.reward}</strong></p>
+                    <div style="display:flex;gap:10px;justify-content:center;">
+                        <button onclick="showChallengeSelect();this.closest('[style*=fixed]').remove();"
+                                style="background:#10b981;color:white;border:none;padding:10px 20px;border-radius:10px;font-weight:bold;cursor:pointer;flex:1;">
+                            次の挑戦へ
+                        </button>
+                        <button onclick="gameState.gameMode='sandbox';updateGameModeButtons();this.closest('[style*=fixed]').remove();"
+                                style="background:#374151;color:white;border:none;padding:10px 20px;border-radius:10px;cursor:pointer;flex:1;">
+                            終了
+                        </button>
+                    </div>
+                </div>
+            `;
             document.body.appendChild(modal);
         }
 
