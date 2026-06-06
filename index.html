@@ -147,7 +147,18 @@
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-10px); }
         }
-    
+
+        @keyframes missionPopIn {
+            0% { transform: scale(0.5) rotate(-5deg); opacity: 0; }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1) rotate(0); opacity: 1; }
+        }
+
+        @keyframes patternGlow {
+            0%, 100% { box-shadow: 0 0 8px #10b981; }
+            50% { box-shadow: 0 0 16px #10b981; }
+        }
+
 /* Phase 8: Mobile Optimization */
 html, body { overflow-x: hidden; max-width: 100%; }
 input, select, textarea { font-size: 16px !important; }
@@ -179,6 +190,7 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;}
 .related-link{padding:10px;text-align:center;border:1px solid #374151;border-radius:4px;text-decoration:none;color:#93c5fd;display:block;transition:background 0.15s;background:#1f2937;}
 .related-link:hover{background:#374151;color:#bfdbfe;}
+.pattern-btn.active{border:2px solid #10b981;box-shadow:0 0 12px #10b981;animation:patternGlow 1s ease-in-out infinite;}
 
 /* AdSense unfilled: collapse empty ad slots */
 ins.adsbygoogle[data-ad-status="unfilled"]{display:none!important;margin:0!important;height:0!important}
@@ -458,7 +470,7 @@ select,input[type=text],input[type=number],input[type=email],textarea{min-height
                             </h2>
 
                             <div class="flex flex-wrap gap-2 w-full sm:w-auto justify-center sm:justify-end">
-                                <button id="playPauseBtn" class="px-3 sm:px-4 py-2 bg-green-600 hover:bg-green-700 rounded-lg transition-colors" aria-label="再生・一時停止">
+                                <button id="playPauseBtn" class="px-3 sm:px-4 py-2 bg-green-600 hover:bg-green-700 rounded-lg transition-colors" aria-label="再生・一時停止" aria-pressed="false">
                                     <span aria-hidden="true">▶</span>
                                     <span class="ml-1 sm:ml-2" data-translate="game.play">再生</span>
                                 </button>
@@ -512,37 +524,37 @@ select,input[type=text],input[type=number],input[type=email],textarea{min-height
 
                         <!-- Pattern Presets -->
                         <div class="mt-6">
-                            <h3 class="text-lg font-semibold mb-3" data-translate="game.patterns">パターン選択:</h3>
+                            <h3 class="text-lg font-semibold mb-3" data-translate="game.patterns">パターン選択: <span style="font-size:0.75rem;color:#9ca3af;">（キーボード: G/O/S/U/P/B/E/D）</span></h3>
                             <div class="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3">
-                                <button class="pattern-btn p-2 md:p-3 bg-gray-700 hover:bg-gray-600 rounded-lg transition-all transform hover:scale-105 text-xs sm:text-sm tooltip" data-pattern="glider" data-tooltip="移動するパターン（period-4）" aria-label="グライダーパターン">
+                                <button class="pattern-btn p-2 md:p-3 bg-gray-700 hover:bg-gray-600 rounded-lg transition-all transform hover:scale-105 text-xs sm:text-sm tooltip" data-pattern="glider" data-tooltip="移動するパターン（period-4）\nキー: G" aria-label="グライダーパターン (Gキー)">
                                     <span aria-hidden="true" class="block mb-1 text-lg">✈</span>
                                     <div>グライダー</div>
                                 </button>
-                                <button class="pattern-btn p-2 md:p-3 bg-gray-700 hover:bg-gray-600 rounded-lg transition-all transform hover:scale-105 text-xs sm:text-sm tooltip" data-pattern="oscillator" data-tooltip="3マスの振動子（blinker）" aria-label="振動子パターン">
+                                <button class="pattern-btn p-2 md:p-3 bg-gray-700 hover:bg-gray-600 rounded-lg transition-all transform hover:scale-105 text-xs sm:text-sm tooltip" data-pattern="oscillator" data-tooltip="3マスの振動子（blinker）\nキー: O" aria-label="振動子パターン (Oキー)">
                                     <span aria-hidden="true" class="block mb-1 text-lg">🔄</span>
                                     <div>振動子</div>
                                 </button>
-                                <button class="pattern-btn p-2 md:p-3 bg-gray-700 hover:bg-gray-600 rounded-lg transition-all transform hover:scale-105 text-xs sm:text-sm tooltip" data-pattern="still" data-tooltip="変化しない安定パターン（beehive）" aria-label="静物パターン">
+                                <button class="pattern-btn p-2 md:p-3 bg-gray-700 hover:bg-gray-600 rounded-lg transition-all transform hover:scale-105 text-xs sm:text-sm tooltip" data-pattern="still" data-tooltip="変化しない安定パターン（beehive）\nキー: S" aria-label="静物パターン (Sキー)">
                                     <span aria-hidden="true" class="block mb-1 text-lg">⬛</span>
                                     <div>静物</div>
                                 </button>
-                                <button class="pattern-btn p-2 md:p-3 bg-gray-700 hover:bg-gray-600 rounded-lg transition-all transform hover:scale-105 text-xs sm:text-sm tooltip" data-pattern="gun" data-tooltip="グライダーを無限に射出" aria-label="ガンパターン">
+                                <button class="pattern-btn p-2 md:p-3 bg-gray-700 hover:bg-gray-600 rounded-lg transition-all transform hover:scale-105 text-xs sm:text-sm tooltip" data-pattern="gun" data-tooltip="グライダーを無限に射出\nキー: U" aria-label="ガンパターン (Uキー)">
                                     <span aria-hidden="true" class="block mb-1 text-lg">🎯</span>
                                     <div>ガン</div>
                                 </button>
-                                <button class="pattern-btn p-2 md:p-3 bg-gray-700 hover:bg-gray-600 rounded-lg transition-all transform hover:scale-105 text-xs sm:text-sm tooltip" data-pattern="pulsar" data-tooltip="美しい対称振動子（period-3）" aria-label="パルサーパターン">
+                                <button class="pattern-btn p-2 md:p-3 bg-gray-700 hover:bg-gray-600 rounded-lg transition-all transform hover:scale-105 text-xs sm:text-sm tooltip" data-pattern="pulsar" data-tooltip="美しい対称振動子（period-3）\nキー: P" aria-label="パルサーパターン (Pキー)">
                                     <span aria-hidden="true" class="block mb-1 text-lg">💫</span>
                                     <div>パルサー</div>
                                 </button>
-                                <button class="pattern-btn p-2 md:p-3 bg-gray-700 hover:bg-gray-600 rounded-lg transition-all transform hover:scale-105 text-xs sm:text-sm tooltip" data-pattern="block" data-tooltip="2×2の最小安定パターン" aria-label="ブロックパターン">
+                                <button class="pattern-btn p-2 md:p-3 bg-gray-700 hover:bg-gray-600 rounded-lg transition-all transform hover:scale-105 text-xs sm:text-sm tooltip" data-pattern="block" data-tooltip="2×2の最小安定パターン\nキー: B" aria-label="ブロックパターン (Bキー)">
                                     <span aria-hidden="true" class="block mb-1 text-lg">🟩</span>
                                     <div>ブロック</div>
                                 </button>
-                                <button class="pattern-btn p-2 md:p-3 bg-gray-700 hover:bg-gray-600 rounded-lg transition-all transform hover:scale-105 text-xs sm:text-sm tooltip" data-pattern="rpentomino" data-tooltip="5細胞から1103世代変化し続ける" aria-label="R五面体パターン">
+                                <button class="pattern-btn p-2 md:p-3 bg-gray-700 hover:bg-gray-600 rounded-lg transition-all transform hover:scale-105 text-xs sm:text-sm tooltip" data-pattern="rpentomino" data-tooltip="5細胞から1103世代変化し続ける\nキー: E" aria-label="R五面体パターン (Eキー)">
                                     <span aria-hidden="true" class="block mb-1 text-lg">🌀</span>
                                     <div>R五面体</div>
                                 </button>
-                                <button class="pattern-btn p-2 md:p-3 bg-gray-700 hover:bg-gray-600 rounded-lg transition-all transform hover:scale-105 text-xs sm:text-sm tooltip" data-pattern="diehard" data-tooltip="7細胞→130世代で全消滅" aria-label="ダイハードパターン">
+                                <button class="pattern-btn p-2 md:p-3 bg-gray-700 hover:bg-gray-600 rounded-lg transition-all transform hover:scale-105 text-xs sm:text-sm tooltip" data-pattern="diehard" data-tooltip="7細胞→130世代で全消滅\nキー: D" aria-label="ダイハードパターン (Dキー)">
                                     <span aria-hidden="true" class="block mb-1 text-lg">☄️</span>
                                     <div>ダイハード</div>
                                 </button>
@@ -886,6 +898,10 @@ select,input[type=text],input[type=number],input[type=email],textarea{min-height
         let dragMode = false;
         let touchDrawing = false;
         let lastTouchCell = null;
+        let isScrolling = false;
+        let scrollTimeout = null;
+        let lastScrollX = 0;
+        let lastScrollY = 0;
 
         // Initialize Game
         function initGame() {
@@ -942,6 +958,7 @@ select,input[type=text],input[type=number],input[type=email],textarea{min-height
         
         // Toggle Cell State
         function toggleCell(x, y) {
+            if (isScrolling) return;
             gameState.grid[y][x] = !gameState.grid[y][x];
             updateCellDisplay(x, y);
             updateStats();
@@ -1102,11 +1119,17 @@ select,input[type=text],input[type=number],input[type=email],textarea{min-height
         }
 
         function showMissionClear(mission) {
-            const banner = document.createElement('div');
-            banner.style.cssText = 'position:fixed;top:20px;right:20px;background:linear-gradient(135deg,#10b981,#059669);color:white;padding:16px 20px;border-radius:14px;z-index:9999;font-weight:bold;box-shadow:0 8px 24px rgba(0,0,0,0.3);animation:slideIn 0.5s ease;max-width:280px;';
-            banner.innerHTML = `<div style="font-size:1.1em;">🎉 ミッション達成！</div><div style="font-size:0.9em;margin-top:4px;">${mission.name}</div>`;
-            document.body.appendChild(banner);
-            setTimeout(() => banner.remove(), 3000);
+            const missionCount = gameState.clearedMissions.length;
+            const titles = { 1: '初心者', 2: '探索家', 3: '生物学者', 4: 'マスター', 5: '伝説' };
+            const title = titles[missionCount] || '未知の者';
+            const modal = document.createElement('div');
+            modal.style.cssText = `position:fixed;inset:0;background:rgba(0,0,0,0.7);display:flex;align-items:center;justify-content:center;z-index:10000;`;
+            const content = document.createElement('div');
+            content.style.cssText = `background:linear-gradient(135deg,#10b981,#059669);border-radius:16px;padding:32px;text-align:center;max-width:400px;color:white;box-shadow:0 12px 48px rgba(0,0,0,0.4);animation:missionPopIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);`;
+            content.innerHTML = `<div style="font-size:3em;margin-bottom:16px;">🎉</div><div style="font-size:1.6em;font-weight:bold;margin-bottom:8px;">ミッション達成！</div><div style="font-size:1.2em;color:#c6f6d5;margin-bottom:16px;">${mission.name}</div><div style="font-size:0.9em;background:rgba(255,255,255,0.2);padding:8px;border-radius:8px;margin-bottom:16px;">🏆 称号: ${title} (${missionCount}/5)</div><button onclick="this.parentElement.parentElement.remove()" style="background:#ffffff;color:#059669;border:none;padding:10px 20px;border-radius:8px;font-weight:bold;cursor:pointer;transition:transform 0.2s;">閉じる</button>`;
+            modal.appendChild(content);
+            document.body.appendChild(modal);
+            setTimeout(() => modal.remove(), 5000);
             updateMissionUI();
         }
 
@@ -1117,16 +1140,19 @@ select,input[type=text],input[type=number],input[type=email],textarea{min-height
         
         // Game Control Functions
         function playPause() {
+            const btn = document.getElementById('playPauseBtn');
             if (gameState.isRunning) {
                 clearInterval(gameState.intervalId);
                 gameState.isRunning = false;
-                document.getElementById('playPauseBtn').innerHTML = '<span aria-hidden="true">▶</span><span class="ml-2">再生</span>';
+                btn.setAttribute('aria-pressed', 'false');
+                btn.querySelector('span:last-child').textContent = '再生';
                 saveToStorage(true);
             } else {
                 const delay = 1100 - gameState.speed * 100;
                 gameState.intervalId = setInterval(nextGeneration, delay);
                 gameState.isRunning = true;
-                document.getElementById('playPauseBtn').innerHTML = '<span aria-hidden="true">⏸</span><span class="ml-2">一時停止</span>';
+                btn.setAttribute('aria-pressed', 'true');
+                btn.querySelector('span:last-child').textContent = '一時停止';
             }
         }
         
@@ -1134,7 +1160,9 @@ select,input[type=text],input[type=number],input[type=email],textarea{min-height
             if (gameState.isRunning) {
                 clearInterval(gameState.intervalId);
                 gameState.isRunning = false;
-                document.getElementById('playPauseBtn').innerHTML = '<span aria-hidden="true">▶</span><span class="ml-2">再生</span>';
+                const btn = document.getElementById('playPauseBtn');
+                btn.setAttribute('aria-pressed', 'false');
+                btn.querySelector('span:last-child').textContent = '再生';
             }
             gameState.grid = Array(gameState.height).fill().map(() => Array(gameState.width).fill(false));
             gameState.generation = 0;
@@ -1253,6 +1281,23 @@ select,input[type=text],input[type=number],input[type=email],textarea{min-height
             updateAllCells();
             updateStats();
             saveToStorage(true);
+
+            const patternNames = {
+                glider: 'グライダー',
+                oscillator: '振動子',
+                still: '静物',
+                gun: 'ガン',
+                pulsar: 'パルサー',
+                block: 'ブロック',
+                rpentomino: 'R五面体',
+                diehard: 'ダイハード'
+            };
+            showToast(`✅ ${patternNames[patternName] || patternName}を配置しました`, 'success');
+
+            const patternBtns = document.querySelectorAll('.pattern-btn');
+            patternBtns.forEach(btn => btn.classList.remove('active'));
+            const activeBtn = document.querySelector(`[data-pattern="${patternName}"]`);
+            if (activeBtn) activeBtn.classList.add('active');
         }
         
         // UI Functions
@@ -1386,12 +1431,25 @@ select,input[type=text],input[type=number],input[type=email],textarea{min-height
             
             // Grid size control（変更時は実行中なら自動停止）
             document.getElementById('gridSize').addEventListener('change', (e) => {
+                const newValue = e.target.value;
+                const [width, height] = newValue.split('x').map(Number);
+
+                if (gameState.generation > 0) {
+                    if (!confirm('現在のパターンが失われます。グリッドサイズを変更しますか？')) {
+                        e.target.value = gameState.width + 'x' + gameState.height;
+                        return;
+                    }
+                    history.push({ grid: gameState.grid, size: gameState.width + 'x' + gameState.height, gen: gameState.generation });
+                }
+
                 if (gameState.isRunning) playPause();
-                const [width, height] = e.target.value.split('x').map(Number);
                 gameState.width = width;
                 gameState.height = height;
+                gameState.generation = 0;
+                gameState.maxPopulation = 0;
                 createGrid();
                 updateStats();
+                saveToStorage(true);
             });
             
             // Pattern buttons
@@ -1510,7 +1568,18 @@ select,input[type=text],input[type=number],input[type=email],textarea{min-height
                 }, 200);
             });
 
-            // キーボードショートカット（Space=再生/停止 / →=1ステップ / R=リセット）
+            // キーボードショートカット（Space=再生/停止 / →=1ステップ / R=リセット / G/O/S/U/P/B/E/D=パターン）
+            const patternShortcuts = {
+                'g': 'glider',      // グライダー
+                'o': 'oscillator',  // 振動子
+                's': 'still',       // 静物
+                'u': 'gun',         // ガン（U for gUn）
+                'p': 'pulsar',      // パルサー
+                'b': 'block',       // ブロック
+                'e': 'rpentomino',  // R五面体（E for pEntomino）
+                'd': 'diehard'      // ダイハード
+            };
+
             document.addEventListener('keydown', (e) => {
                 const tag = e.target.tagName;
                 if (tag === 'INPUT' || tag === 'SELECT' || tag === 'TEXTAREA') return;
@@ -1522,6 +1591,17 @@ select,input[type=text],input[type=number],input[type=email],textarea{min-height
                     if (!gameState.isRunning) nextGeneration();
                 } else if (e.key === 'r' || e.key === 'R') {
                     if (!gameState.isRunning) resetGame();
+                } else if (patternShortcuts[e.key.toLowerCase()]) {
+                    e.preventDefault();
+                    const pattern = patternShortcuts[e.key.toLowerCase()];
+                    placePattern(pattern);
+                    // ボタンのビジュアルハイライト
+                    const btn = document.querySelector(`[data-pattern="${pattern}"]`);
+                    if (btn) {
+                        const origBg = btn.style.background;
+                        btn.style.background = 'rgba(16, 185, 129, 0.5)';
+                        setTimeout(() => { btn.style.background = origBg; }, 300);
+                    }
                 }
             });
 
