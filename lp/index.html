@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>細胞の冒険 / Cellular Adventure — ライフゲーム×RPG×生物学</title>
+<meta name="description" content="コンウェイのライフゲームとRPGを融合した無料の教育ゲーム。細胞を配置してシミュレーションし、生物学・数学の基礎を遊びながら学ぼう。">
+<meta name="keywords" content="ライフゲーム,Game of Life,RPG,生物学,セルオートマトン,コンウェイ,無料ゲーム,教育">
+<meta name="theme-color" content="#02151b">
+<meta name="robots" content="index, follow">
+
+<meta property="og:title" content="細胞の冒険 / Cellular Adventure">
+<meta property="og:description" content="ライフゲーム × RPG × 生物学学習。細胞たちの進化と冒険を指揮する、無料の教育ゲーム。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://appadaycreator.com/cellular-adventure-rpg/lp/">
+<meta property="og:image" content="https://appadaycreator.com/cellular-adventure-rpg/ogp.png">
+<meta property="og:site_name" content="細胞の冒険">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="細胞の冒険 / Cellular Adventure">
+<meta name="twitter:description" content="ライフゲーム×RPG×生物学。無料・登録不要の教育ゲーム。">
+<meta name="twitter:image" content="https://appadaycreator.com/cellular-adventure-rpg/ogp.png">
+
+<link rel="canonical" href="https://appadaycreator.com/cellular-adventure-rpg/lp/">
+<link rel="manifest" href="/cellular-adventure-rpg/manifest.json">
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-TXQGZRF9');</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZDPNYD2875"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZDPNYD2875',{send_page_view:false});</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"VideoGame","name":"細胞の冒険 / Cellular Adventure","description":"コンウェイのライフゲームとRPGを融合した無料の教育ゲーム。","url":"https://appadaycreator.com/cellular-adventure-rpg/","applicationCategory":"GameApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"JPY"}}
+</script>
+
+<style>
+:root{
+    --bg-0:#020c12;--bg-1:#04161e;--bg-2:#072733;
+    --bg-glass:rgba(8,34,42,.72);--bg-glass-2:rgba(5,22,30,.82);
+    --bio:#7dff6a;--bio-soft:#aef79b;--born:#d6ff5a;
+    --cyan:#3fe6e0;--cyan-soft:#7af3ee;--aqua:#39b8ff;--violet:#9b7dff;
+    --lime-1:#dcf95a;--lime-2:#74e64f;--gold:#f4c64b;--danger:#ef5b6b;
+    --ink:#e9f7f3;--ink-2:#bfe0db;--ink-dim:#84aaa8;--ink-faint:#5b817f;
+    --line:rgba(74,176,170,.34);--line-soft:rgba(74,176,170,.18);--line-strong:rgba(96,224,214,.55);
+    --r:14px;--maxw:1180px;
+    --glow-bio:0 0 8px rgba(125,255,106,.55),0 0 22px rgba(125,255,106,.28);
+    --glow-cyan:0 0 8px rgba(63,230,224,.5),0 0 24px rgba(63,230,224,.25);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans JP',system-ui,sans-serif;color:var(--ink);background:var(--bg-0);line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:clip}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+
+.bg-field{position:fixed;inset:0;z-index:-2;background:radial-gradient(1200px 800px at 78% -8%,rgba(18,86,86,.55),transparent 60%),radial-gradient(900px 700px at 8% 22%,rgba(20,70,96,.42),transparent 55%),radial-gradient(1000px 900px at 92% 88%,rgba(14,78,70,.38),transparent 58%),linear-gradient(180deg,var(--bg-1),var(--bg-0) 60%,#01080c)}
+.bg-field::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(120,220,210,.10) 1px,transparent 1.4px);background-size:34px 34px;mask-image:radial-gradient(1200px 900px at 50% 30%,#000,transparent 80%);opacity:.5}
+.bg-orb{position:fixed;border-radius:50%;z-index:-1;filter:blur(1px);background:radial-gradient(circle at 35% 30%,rgba(125,255,160,.22),rgba(40,120,120,.05) 60%,transparent 70%);box-shadow:0 0 40px rgba(63,230,224,.10);pointer-events:none;animation:drift 26s ease-in-out infinite}
+@keyframes drift{0%,100%{transform:translate(0,0)}50%{transform:translate(22px,-30px)}}
+
+.font-display{font-family:'Orbitron',sans-serif;letter-spacing:.04em}
+.num{font-family:'Orbitron',sans-serif;font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:.02em}
+.neon{color:#fff;text-shadow:0 0 6px rgba(125,255,160,.65),0 0 18px rgba(63,230,224,.4)}
+.eyebrow{font-family:'Orbitron',sans-serif;font-size:12px;letter-spacing:.34em;color:var(--cyan-soft);text-transform:uppercase;font-weight:600}
+
+.section-title{display:flex;align-items:center;justify-content:center;gap:18px;font-family:'Orbitron',sans-serif;font-weight:700;font-size:clamp(22px,3vw,30px);color:#fff;text-shadow:var(--glow-cyan);margin-bottom:34px;text-align:center}
+.section-title::before,.section-title::after{content:"";height:1px;width:min(90px,12vw);background:linear-gradient(90deg,transparent,var(--line-strong))}
+.section-title::after{transform:scaleX(-1)}
+
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+section{padding:64px 0}
+
+.panel{position:relative;background:linear-gradient(155deg,var(--bg-glass),var(--bg-glass-2));border:1px solid var(--line);border-radius:var(--r);box-shadow:inset 0 0 32px rgba(20,90,96,.16),0 10px 30px rgba(0,0,0,.4);backdrop-filter:blur(4px)}
+.panel--cut{border-radius:0;clip-path:polygon(18px 0,100% 0,100% calc(100% - 18px),calc(100% - 18px) 100%,0 100%,0 18px)}
+.panel--cut::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(135deg,var(--line-strong) 0 1px,transparent 1px) top left/22px 22px no-repeat,linear-gradient(-45deg,var(--line-strong) 0 1px,transparent 1px) bottom right/22px 22px no-repeat;opacity:.9}
+
+.btn{display:inline-flex;align-items:center;gap:10px;cursor:pointer;border:0;font-family:'Orbitron',sans-serif;font-weight:600;font-size:15px;letter-spacing:.02em;padding:13px 26px;border-radius:11px;transition:.18s;white-space:nowrap;text-decoration:none}
+.btn-primary{color:#06270f;background:linear-gradient(100deg,var(--lime-1),var(--lime-2));box-shadow:0 0 0 1px rgba(220,249,90,.5),0 8px 26px rgba(116,230,79,.35),inset 0 1px 0 rgba(255,255,255,.4)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 0 0 1px rgba(220,249,90,.7),0 12px 34px rgba(116,230,79,.5),inset 0 1px 0 rgba(255,255,255,.5)}
+.btn-ghost{color:var(--ink);background:rgba(10,40,46,.55);border:1px solid var(--line)}
+.btn-ghost:hover{border-color:var(--line-strong);box-shadow:var(--glow-cyan);color:#fff}
+.btn-icn{width:18px;height:18px;object-fit:contain}
+.btn-lg{font-size:17px;padding:16px 30px}
+
+.chip{display:inline-flex;align-items:center;gap:8px;padding:8px 15px;border-radius:999px;border:1px solid var(--line);background:rgba(8,32,38,.6);font-size:13px;color:var(--ink-2);font-weight:500}
+.chip img{width:16px;height:16px}
+.badge-free{display:inline-flex;align-items:center;gap:7px;padding:7px 14px;border-radius:999px;border:1px solid rgba(220,249,90,.4);background:rgba(116,230,79,.1);color:var(--lime-1);font-size:12px;font-weight:700;font-family:'Orbitron';letter-spacing:.05em}
+.itile{width:56px;height:56px;display:grid;place-items:center;border-radius:13px;background:radial-gradient(circle at 40% 30%,rgba(63,230,224,.16),rgba(8,34,42,.7));border:1px solid var(--line);box-shadow:inset 0 0 18px rgba(63,230,224,.12)}
+.itile img{width:30px;height:30px;object-fit:contain;filter:drop-shadow(0 0 6px rgba(125,255,160,.4))}
+
+.site-header{position:sticky;top:0;z-index:50;background:linear-gradient(180deg,rgba(3,16,22,.92),rgba(3,16,22,.6));backdrop-filter:blur(10px);border-bottom:1px solid var(--line-soft)}
+.site-header .wrap{display:flex;align-items:center;justify-content:space-between;height:74px;gap:18px}
+.brand{display:flex;align-items:center;gap:13px}
+.brand-mark{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 38% 32%,rgba(63,230,224,.3),rgba(6,30,38,.9));border:1px solid var(--line-strong);box-shadow:var(--glow-cyan)}
+.brand-mark img{width:30px;height:30px}
+.brand-name{font-family:'Orbitron';font-weight:700;font-size:20px;color:#fff;line-height:1.05;text-shadow:var(--glow-cyan)}
+.brand-sub{font-family:'Orbitron';font-size:10px;letter-spacing:.28em;color:var(--cyan-soft);text-transform:uppercase}
+.nav{display:flex;align-items:center;gap:30px}
+.nav a{font-weight:500;font-size:15px;color:var(--ink-2);transition:.15s;position:relative}
+.nav a:hover{color:#fff;text-shadow:var(--glow-cyan)}
+.nav a::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:2px;background:var(--cyan);transition:.2s;box-shadow:var(--glow-cyan)}
+.nav a:hover::after{width:100%}
+.header-cta{display:flex;align-items:center;gap:14px}
+.hamburger{display:none;width:46px;height:46px;border-radius:11px;border:1px solid var(--line);background:rgba(10,40,46,.6);cursor:pointer;place-items:center}
+.hamburger img{width:22px;height:22px}
+
+.drawer{position:fixed;inset:0;z-index:100;display:none}
+.drawer.open{display:block}
+.drawer-bg{position:absolute;inset:0;background:rgba(2,10,14,.7);backdrop-filter:blur(4px)}
+.drawer-panel{position:absolute;top:0;right:0;height:100%;width:min(80vw,320px);background:linear-gradient(160deg,var(--bg-2),var(--bg-0));border-left:1px solid var(--line-strong);box-shadow:-20px 0 60px rgba(0,0,0,.6);padding:26px 22px;transform:translateX(100%);transition:transform .28s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;gap:6px}
+.drawer.open .drawer-panel{transform:translateX(0)}
+.drawer-panel a{padding:15px 12px;border-radius:10px;font-weight:600;font-size:16px;color:var(--ink-2);border-bottom:1px solid var(--line-soft)}
+.drawer-panel a:hover{background:rgba(63,230,224,.08);color:#fff}
+.drawer-close{align-self:flex-end;width:42px;height:42px;border-radius:10px;border:1px solid var(--line);background:transparent;color:var(--ink-2);font-size:22px;cursor:pointer;margin-bottom:10px}
+
+.hero{padding:54px 0 30px}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:46px;align-items:center}
+.hero-title{font-family:'Orbitron',sans-serif;font-weight:800;font-size:clamp(34px,5vw,58px);line-height:1.18;color:#fff;margin:16px 0 14px;text-shadow:0 0 22px rgba(63,230,224,.25)}
+.hero-lead{font-family:'Orbitron';font-size:clamp(14px,1.6vw,18px);color:var(--cyan-soft);letter-spacing:.04em;margin-bottom:12px}
+.hero-desc{color:var(--ink-2);font-size:16px;max-width:520px;margin-bottom:28px}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:24px}
+.hero-chips{display:flex;gap:12px;flex-wrap:wrap}
+
+.hero-dish{position:relative;justify-self:center;width:100%;max-width:520px}
+.dish{position:relative;aspect-ratio:1;width:100%}
+.dish-rim{position:absolute;inset:0;border-radius:50%;overflow:hidden;background:radial-gradient(circle at 50% 42%,#07242b,#03141a 78%);border:2px solid rgba(96,224,214,.4);box-shadow:0 0 0 10px rgba(10,40,46,.5),0 0 0 11px rgba(96,224,214,.25),0 0 60px rgba(63,230,224,.3),inset 0 0 70px rgba(0,0,0,.7),inset 0 8px 40px rgba(96,224,214,.18)}
+#heroLife{width:100%;height:100%;display:block;-webkit-mask:radial-gradient(circle at 50% 50%,#000 70%,transparent 73%);mask:radial-gradient(circle at 50% 50%,#000 70%,transparent 73%)}
+.dish-sheen{position:absolute;inset:0;border-radius:50%;pointer-events:none;background:radial-gradient(120px 80px at 32% 22%,rgba(255,255,255,.16),transparent 60%),radial-gradient(circle at 50% 50%,transparent 60%,rgba(96,224,214,.12) 70%,transparent 74%)}
+.dish-hud{position:absolute;top:12px;right:12px;display:flex;flex-direction:column;gap:6px;z-index:3}
+.dish-hud div{display:flex;align-items:center;justify-content:space-between;gap:14px;background:rgba(4,20,26,.8);border:1px solid var(--line);border-radius:8px;padding:6px 12px;backdrop-filter:blur(4px)}
+.dish-hud span{font-size:11px;color:var(--ink-dim)}
+.dish-hud b{font-size:16px;color:var(--bio);text-shadow:var(--glow-bio)}
+.dish-label{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);font-size:10px;letter-spacing:.22em;color:var(--cyan-soft);opacity:.8;z-index:3}
+.dish-mini{position:absolute;bottom:-6px;right:-6px;width:120px;height:120px;border-radius:14px;background:rgba(4,20,26,.9);border:1px solid var(--line-strong);box-shadow:var(--glow-cyan);display:grid;place-items:center;overflow:hidden}
+.dish-mini canvas{width:104px;height:104px}
+
+.modes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.mode-card{padding:26px;display:flex;flex-direction:column;gap:14px;min-height:330px}
+.mode-head{display:flex;align-items:center;gap:14px}
+.mode-ico{width:54px;height:54px;flex:none;display:grid;place-items:center;border-radius:13px;background:radial-gradient(circle at 40% 30%,rgba(125,255,120,.18),rgba(8,34,42,.7));border:1px solid var(--line);box-shadow:inset 0 0 18px rgba(125,255,120,.14)}
+.mode-ico img{width:30px;height:30px;filter:drop-shadow(0 0 6px rgba(125,255,160,.5))}
+.mode-card h3{font-family:'Orbitron';font-size:23px;color:#fff;text-shadow:var(--glow-cyan)}
+.mode-card .sub{color:var(--cyan-soft);font-size:13px;margin-top:2px}
+.mode-art{flex:1;border-radius:10px;border:1px solid var(--line-soft);position:relative;overflow:hidden;min-height:96px;background:linear-gradient(160deg,rgba(6,28,34,.6),rgba(3,16,22,.6))}
+.mode-art canvas{position:absolute;inset:0;width:100%;height:100%}
+.mode-card p{color:var(--ink-2);font-size:14px}
+
+.feat-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
+.feat{padding:22px 16px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px}
+.feat h4{font-family:'Orbitron';font-size:15px;color:#fff}
+.feat p{font-size:12.5px;color:var(--ink-dim);line-height:1.55}
+
+.bio-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.bio-card{overflow:hidden;display:flex;flex-direction:column}
+.bio-img{height:150px;position:relative;overflow:hidden;display:grid;place-items:center}
+.bio-img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(4,18,24,.85))}
+.bio-img img{width:74px;height:74px;z-index:1;filter:drop-shadow(0 0 14px rgba(63,230,224,.6))}
+.bio-c1{background:radial-gradient(circle at 50% 40%,#0e4a52,#05242c)}
+.bio-c2{background:radial-gradient(circle at 50% 40%,#123a5a,#06202c)}
+.bio-c3{background:radial-gradient(circle at 50% 40%,#0f4a36,#062018)}
+.bio-c4{background:radial-gradient(circle at 50% 40%,#103a52,#061c26)}
+.bio-body{padding:18px 18px 20px;display:flex;flex-direction:column;gap:8px;flex:1}
+.bio-body h4{font-family:'Orbitron';font-size:18px;color:#fff;text-shadow:var(--glow-cyan)}
+.bio-body p{font-size:13px;color:var(--ink-2);flex:1}
+.bio-link{display:inline-flex;align-items:center;gap:6px;color:var(--cyan-soft);font-family:'Orbitron';font-size:13px}
+.bio-link::after{content:"›";font-size:18px}
+.lg-mini{display:grid;grid-template-columns:repeat(8,1fr);gap:3px;width:110px;height:110px;z-index:1}
+.lg-mini i{border-radius:3px;background:rgba(57,184,255,.1)}
+.lg-mini i.on{background:radial-gradient(circle,#7af3ee,#39b8ff);box-shadow:0 0 8px rgba(57,184,255,.8)}
+
+.howto-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;align-items:stretch}
+.step{padding:22px 18px;display:flex;flex-direction:column;gap:12px;position:relative}
+.step-n{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-family:'Orbitron';font-weight:700;color:#06270f;background:linear-gradient(120deg,var(--lime-1),var(--lime-2));box-shadow:var(--glow-bio)}
+.step h4{font-family:'Orbitron';font-size:16px;color:#fff}
+.step p{font-size:13px;color:var(--ink-2)}
+.step-art{height:74px;border-radius:9px;border:1px solid var(--line-soft);background:rgba(4,18,24,.5);display:grid;place-items:center;overflow:hidden;position:relative}
+.step-art img{width:38px;height:38px;filter:drop-shadow(0 0 6px rgba(125,255,160,.5))}
+.step-arrow{position:absolute;right:-13px;top:50%;transform:translateY(-50%);z-index:4;color:var(--cyan);font-size:20px;width:26px;height:26px;display:grid;place-items:center}
+
+.stats-band{background:linear-gradient(180deg,rgba(5,26,32,.7),rgba(3,16,22,.7));border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)}
+.stats-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:18px}
+.stat{padding:24px 20px}
+.stat .label{font-size:13px;color:var(--ink-dim);margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.stat .label img{width:18px;height:18px}
+.stat .val{font-family:'Orbitron';font-weight:800;font-size:clamp(24px,2.6vw,34px);color:var(--bio);text-shadow:var(--glow-bio)}
+.stat .en{font-size:11px;color:var(--ink-faint);letter-spacing:.12em;text-transform:uppercase;margin-top:4px}
+.stat-spark{height:38px;margin-top:10px}
+
+.faq-wrap{max-width:820px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+.faq-item{padding:0 20px;cursor:pointer;transition:.2s}
+.faq-q{display:flex;align-items:center;gap:12px;padding:18px 0;font-weight:600;color:#fff;font-size:15.5px}
+.faq-q img{width:20px;height:20px}
+.faq-q .pm{margin-left:auto;color:var(--cyan);font-size:22px;transition:.25s;font-family:'Orbitron'}
+.faq-item.open .pm{transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease;color:var(--ink-2);font-size:14px}
+.faq-item.open .faq-a{max-height:240px;padding-bottom:18px}
+
+.site-footer{border-top:1px solid var(--line-soft);background:linear-gradient(180deg,transparent,rgba(2,12,18,.8));padding:54px 0 30px;position:relative}
+.foot-grid{display:grid;grid-template-columns:1.4fr repeat(3,1fr) 1fr;gap:34px}
+.foot-col h4{font-family:'Orbitron';font-size:12px;letter-spacing:.2em;color:var(--cyan-soft);margin-bottom:16px;text-transform:uppercase}
+.foot-col a{display:block;color:var(--ink-dim);font-size:14px;padding:5px 0;transition:.15s}
+.foot-col a:hover{color:var(--cyan-soft)}
+.foot-tag{color:var(--ink-dim);font-size:14px;margin:14px 0 18px;max-width:240px}
+.socials{display:flex;gap:12px}
+.soc{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;border:1px solid var(--line);background:rgba(10,40,46,.5);color:var(--ink-2);transition:.18s}
+.soc:hover{border-color:var(--line-strong);color:#fff;box-shadow:var(--glow-cyan);transform:translateY(-2px)}
+.soc svg{width:18px;height:18px}
+.copyright{text-align:center;color:var(--ink-faint);font-size:12.5px;margin-top:40px;padding-top:22px;border-top:1px solid var(--line-soft)}
+
+.reveal{opacity:1;transform:translateY(18px);transition:transform .7s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{transform:none}
+
+@media (prefers-reduced-motion:reduce){
+    .bg-orb{animation:none}
+    .reveal{opacity:1;transform:none;transition:none}
+}
+@media(max-width:980px){
+    .feat-grid{grid-template-columns:repeat(3,1fr)}
+    .bio-grid{grid-template-columns:repeat(2,1fr)}
+    .stats-grid{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:900px){
+    .nav{display:none}
+    .header-cta .btn{display:none}
+    .hamburger{display:grid}
+    .foot-grid{grid-template-columns:1fr 1fr;gap:26px}
+    .foot-col.brandcol{grid-column:1/-1}
+}
+@media(max-width:820px){
+    .hero-grid{grid-template-columns:1fr;gap:34px}
+    .hero-dish{max-width:420px;margin:0 auto}
+    .modes-grid{grid-template-columns:1fr}
+    .howto-grid{grid-template-columns:1fr 1fr}
+    .step-arrow{display:none}
+}
+@media(max-width:560px){
+    section{padding:46px 0}
+    .feat-grid{grid-template-columns:repeat(2,1fr)}
+    .bio-grid{grid-template-columns:1fr}
+    .stats-grid{grid-template-columns:1fr 1fr}
+    .howto-grid{grid-template-columns:1fr}
+    .hero-cta .btn{flex:1;justify-content:center}
+    .foot-grid{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TXQGZRF9" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+<div class="bg-field"></div>
+<div class="bg-orb" style="width:180px;height:180px;top:14%;left:6%"></div>
+<div class="bg-orb" style="width:120px;height:120px;top:58%;left:88%;animation-delay:-8s"></div>
+<div class="bg-orb" style="width:90px;height:90px;top:80%;left:12%;animation-delay:-14s"></div>
+
+<header class="site-header">
+    <div class="wrap">
+        <a class="brand" href="../">
+            <span class="brand-mark"><img src="assets/icons/01-02.png" alt=""></span>
+            <span>
+                <span class="brand-name">細胞の冒険</span><br>
+                <span class="brand-sub">Cellular Adventure</span>
+            </span>
+        </a>
+        <nav class="nav">
+            <a href="#modes">ゲーム</a>
+            <a href="#biology">学習</a>
+            <a href="#howto">使い方</a>
+            <a href="#faq">FAQ</a>
+        </nav>
+        <div class="header-cta">
+            <a class="btn btn-primary" href="../"><img class="btn-icn" src="assets/icons/07-01.png" alt="">ゲーム開始</a>
+            <button class="hamburger" aria-label="メニュー"><img src="assets/icons/08-04.png" alt=""></button>
+        </div>
+    </div>
+</header>
+
+<div class="drawer" id="drawer">
+    <div class="drawer-bg"></div>
+    <div class="drawer-panel">
+        <button class="drawer-close" aria-label="閉じる">&times;</button>
+        <a href="#modes">ゲームモード</a>
+        <a href="#features">主な特徴</a>
+        <a href="#biology">学べる生物学</a>
+        <a href="#howto">遊び方</a>
+        <a href="#stats">実績・統計</a>
+        <a href="#faq">FAQ</a>
+        <a class="btn btn-primary" style="justify-content:center;margin-top:18px" href="../"><img class="btn-icn" src="assets/icons/07-01.png" alt="">ゲーム開始</a>
+    </div>
+</div>
+
+<section class="hero">
+    <div class="wrap hero-grid">
+        <div class="hero-copy">
+            <div class="eyebrow reveal">Life × RPG × Biology</div>
+            <h1 class="hero-title reveal">生命の神秘を、<br><span class="neon">遊びながら発見</span>しよう。</h1>
+            <p class="hero-lead reveal">ライフゲーム × RPG × 生物学学習</p>
+            <p class="hero-desc reveal">細胞たちの進化と冒険を指揮する、無料の教育ゲーム。<br>グリッドに生命を配置し、世代を超えて広がる秩序とカオスを観察しよう。</p>
+            <div class="hero-cta reveal">
+                <a class="btn btn-primary btn-lg" href="../"><img class="btn-icn" src="assets/icons/07-01.png" alt="">ゲーム開始</a>
+                <a class="btn btn-ghost btn-lg" href="../"><img class="btn-icn" src="assets/icons/03-01.png" alt="">チュートリアル</a>
+            </div>
+            <div class="hero-chips reveal">
+                <span class="chip"><span class="badge-free">FREE</span>無料</span>
+                <span class="chip"><img src="assets/icons/09-02.png" alt="">登録不要</span>
+                <span class="chip"><img src="assets/icons/11-01.png" alt="">PC・スマホ対応</span>
+            </div>
+        </div>
+
+        <div class="hero-dish reveal">
+            <div class="dish">
+                <div class="dish-rim">
+                    <canvas id="heroLife"></canvas>
+                    <div class="dish-sheen"></div>
+                </div>
+                <div class="dish-hud">
+                    <div><span>世代</span><b class="num">128</b></div>
+                    <div><span>ミッション</span><b class="num">2-3</b></div>
+                </div>
+                <div class="dish-label font-display">CA-01 · PETRI DISH LAB</div>
+            </div>
+            <div class="dish-mini">
+                <canvas id="heroMini" width="120" height="120"></canvas>
+            </div>
+        </div>
+    </div>
+</section>
+
+<main>
+<section id="modes" class="wrap">
+    <h2 class="section-title reveal">ゲームモード</h2>
+    <div class="modes-grid">
+        <article class="panel panel--cut mode-card reveal">
+            <div class="mode-head">
+                <span class="mode-ico"><img src="assets/icons/11-05.png" alt=""></span>
+                <div><h3>ストーリー</h3><div class="sub">細胞たちの物語を進めよう</div></div>
+            </div>
+            <div class="mode-art"><canvas data-pattern="glider" class="mode-life"></canvas></div>
+            <p>RPGのようにミッションを進め、新しい細胞や能力を解放しながら物語の謎を解き明かそう。章ごとに広がる生命のドラマを体験。</p>
+        </article>
+        <article class="panel panel--cut mode-card reveal">
+            <div class="mode-head">
+                <span class="mode-ico"><img src="assets/icons/11-02.png" alt=""></span>
+                <div><h3>サンドボックス</h3><div class="sub">自由に創造・実験しよう</div></div>
+            </div>
+            <div class="mode-art"><canvas data-pattern="pulsar" class="mode-life"></canvas></div>
+            <p>ルールも目的も自由自在。あなただけの生命世界を作り、パターンを配置して創造と実験を楽しもう。</p>
+        </article>
+        <article class="panel panel--cut mode-card reveal">
+            <div class="mode-head">
+                <span class="mode-ico"><img src="assets/icons/05-04.png" alt=""></span>
+                <div><h3>チャレンジ</h3><div class="sub">腕試しに挑戦しよう</div></div>
+            </div>
+            <div class="mode-art"><canvas data-pattern="glidergun" class="mode-life"></canvas></div>
+            <p>様々な条件やお題に挑戦！自分の戦略と発想力でハイスコアを目指そう。★の数で難易度が上がる。</p>
+        </article>
+    </div>
+</section>
+
+<section id="features" class="wrap">
+    <h2 class="section-title reveal">主な特徴</h2>
+    <div class="feat-grid">
+        <div class="panel feat reveal"><span class="itile"><img src="assets/icons/07-01.png" alt=""></span><h4>シミュレーション</h4><p>ライフゲームの力で生命の動きを再現</p></div>
+        <div class="panel feat reveal"><span class="itile"><img src="assets/icons/04-08.png" alt=""></span><h4>ミッション達成</h4><p>RPG要素で目標をクリアして報酬獲得</p></div>
+        <div class="panel feat reveal"><span class="itile"><img src="assets/icons/11-04.png" alt=""></span><h4>パターン選択</h4><p>有名なパターンを簡単に配置・活用</p></div>
+        <div class="panel feat reveal"><span class="itile"><img src="assets/icons/03-01.png" alt=""></span><h4>生物学学習</h4><p>詳しい解説で楽しく生物学を学べる</p></div>
+        <div class="panel feat reveal"><span class="itile"><img src="assets/icons/10-08.png" alt=""></span><h4>自動保存</h4><p>進行状況は自動で保存されて安心</p></div>
+        <div class="panel feat reveal"><span class="itile"><img src="assets/icons/10-01.png" alt=""></span><h4>多言語対応</h4><p>日本語・英語など多言語に対応</p></div>
+    </div>
+</section>
+
+<section id="biology" class="wrap">
+    <h2 class="section-title reveal">学べる生物学</h2>
+    <div class="bio-grid">
+        <article class="panel bio-card reveal">
+            <div class="bio-img bio-c1"><img src="assets/icons/01-02.png" alt=""></div>
+            <div class="bio-body"><h4>細胞について</h4><p>細胞の構造や働きなど、生命の基本を学ぼう。</p><a class="bio-link" href="../">詳しく見る</a></div>
+        </article>
+        <article class="panel bio-card reveal">
+            <div class="bio-img bio-c2"><img src="assets/icons/01-06.png" alt=""></div>
+            <div class="bio-body"><h4>進化論</h4><p>進化の仕組みと多様性の成り立ちを探ろう。</p><a class="bio-link" href="../">詳しく見る</a></div>
+        </article>
+        <article class="panel bio-card reveal">
+            <div class="bio-img bio-c3"><img src="assets/icons/12-02.png" alt=""></div>
+            <div class="bio-body"><h4>生態系</h4><p>生物どうしのつながりと環境のバランスを学ぼう。</p><a class="bio-link" href="../">詳しく見る</a></div>
+        </article>
+        <article class="panel bio-card reveal">
+            <div class="bio-img bio-c4"><div class="lg-mini" id="lgMini"></div></div>
+            <div class="bio-body"><h4>ライフゲーム</h4><p>ルールやパターンの奥深い世界を理解しよう。</p><a class="bio-link" href="../">詳しく見る</a></div>
+        </article>
+    </div>
+</section>
+
+<section id="howto" class="wrap">
+    <h2 class="section-title reveal">遊び方</h2>
+    <div class="howto-grid">
+        <div class="panel step reveal">
+            <span class="step-n">1</span>
+            <div class="step-art"><img src="assets/icons/17-02.png" alt=""></div>
+            <h4>細胞を配置</h4><p>クリックやドラッグで細胞を配置しよう。</p>
+            <span class="step-arrow">›</span>
+        </div>
+        <div class="panel step reveal">
+            <span class="step-n">2</span>
+            <div class="step-art"><img src="assets/icons/07-01.png" alt=""></div>
+            <h4>シミュレーション開始</h4><p>実行して生命の動きを見守ろう。</p>
+            <span class="step-arrow">›</span>
+        </div>
+        <div class="panel step reveal">
+            <span class="step-n">3</span>
+            <div class="step-art"><img src="assets/icons/06-04.png" alt=""></div>
+            <h4>世代の変化を観察</h4><p>世代が進むにつれ形が変化していくよ。</p>
+            <span class="step-arrow">›</span>
+        </div>
+        <div class="panel step reveal">
+            <span class="step-n">4</span>
+            <div class="step-art"><img src="assets/icons/05-04.png" alt=""></div>
+            <h4>ミッションを達成</h4><p>目標を達成して報酬を獲得！次のステージへ。</p>
+        </div>
+    </div>
+</section>
+</main>
+
+<section id="stats" class="stats-band">
+    <div class="wrap">
+        <h2 class="section-title reveal">実績・統計</h2>
+        <div class="stats-grid">
+            <div class="panel stat reveal">
+                <div class="label"><img src="assets/icons/06-04.png" alt="">総世代数</div>
+                <div class="val"><span data-count="1248912">0</span></div>
+                <div class="en">Generations</div>
+                <svg class="stat-spark" viewBox="0 0 120 38" preserveAspectRatio="none"><polyline points="0,34 18,30 34,31 52,22 70,24 88,14 104,12 120,4" fill="none" stroke="var(--bio)" stroke-width="2" style="filter:drop-shadow(0 0 4px rgba(125,255,106,.7))"/></svg>
+            </div>
+            <div class="panel stat reveal">
+                <div class="label"><img src="assets/icons/01-01.png" alt="">総個体数</div>
+                <div class="val"><span data-count="38765214">0</span></div>
+                <div class="en">Cells</div>
+                <svg class="stat-spark" viewBox="0 0 120 38" preserveAspectRatio="none"><polyline points="0,30 20,28 40,18 60,22 80,12 100,16 120,6" fill="none" stroke="var(--cyan)" stroke-width="2" style="filter:drop-shadow(0 0 4px rgba(63,230,224,.7))"/></svg>
+            </div>
+            <div class="panel stat reveal">
+                <div class="label"><img src="assets/icons/06-05.png" alt="">平均生存率</div>
+                <div class="val"><span data-count="23.7" data-dec="1" data-suffix="%">0</span></div>
+                <div class="en">Survival Rate</div>
+                <svg class="stat-spark" viewBox="0 0 120 38"><circle cx="60" cy="19" r="14" fill="none" stroke="rgba(96,224,214,.2)" stroke-width="4"/><circle cx="60" cy="19" r="14" fill="none" stroke="var(--bio)" stroke-width="4" stroke-dasharray="88" stroke-dashoffset="67" transform="rotate(-90 60 19)" style="filter:drop-shadow(0 0 4px rgba(125,255,106,.8))"/></svg>
+            </div>
+            <div class="panel stat reveal">
+                <div class="label"><img src="assets/icons/06-03.png" alt="">最大個体数</div>
+                <div class="val"><span data-count="12345">0</span></div>
+                <div class="en">Max Cells</div>
+                <svg class="stat-spark" viewBox="0 0 120 38" preserveAspectRatio="none"><g fill="var(--bio)" style="filter:drop-shadow(0 0 3px rgba(125,255,106,.6))"><rect x="6" y="24" width="10" height="14"/><rect x="24" y="18" width="10" height="20"/><rect x="42" y="20" width="10" height="18"/><rect x="60" y="12" width="10" height="26"/><rect x="78" y="14" width="10" height="24"/><rect x="96" y="6" width="10" height="32"/></g></svg>
+            </div>
+            <div class="panel stat reveal">
+                <div class="label"><img src="assets/icons/09-03.png" alt="">登録ユーザー数</div>
+                <div class="val"><span data-count="56789" data-suffix="+">0</span></div>
+                <div class="en">Players</div>
+                <svg class="stat-spark" viewBox="0 0 120 38" preserveAspectRatio="none"><polyline points="0,32 24,26 48,20 72,16 96,10 120,5" fill="none" stroke="var(--cyan)" stroke-width="2" style="filter:drop-shadow(0 0 4px rgba(63,230,224,.7))"/></svg>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="faq" class="wrap">
+    <h2 class="section-title reveal">よくある質問</h2>
+    <div class="faq-wrap">
+        <div class="panel faq-item reveal"><div class="faq-q"><img src="assets/icons/03-08.png" alt="">本当に無料で遊べますか？<span class="pm">+</span></div><div class="faq-a">はい。すべてのモードを完全無料・登録不要で遊べます。広告収益で運営しているため、ユーザーの皆さまに費用は一切かかりません。</div></div>
+        <div class="panel faq-item reveal"><div class="faq-q"><img src="assets/icons/11-01.png" alt="">スマホでも遊べますか？<span class="pm">+</span></div><div class="faq-a">PC・タブレット・スマートフォンに対応しています。タッチ操作で細胞を配置でき、画面サイズに合わせてレイアウトが最適化されます。</div></div>
+        <div class="panel faq-item reveal"><div class="faq-q"><img src="assets/icons/03-02.png" alt="">ライフゲームとは何ですか？<span class="pm">+</span></div><div class="faq-a">数学者コンウェイが考案したセルオートマトン。「生・死」のシンプルな4つのルールから、驚くほど複雑で美しい生命のような振る舞いが生まれます。本作ではそれをRPGとして体験できます。</div></div>
+        <div class="panel faq-item reveal"><div class="faq-q"><img src="assets/icons/10-08.png" alt="">進行状況は保存されますか？<span class="pm">+</span></div><div class="faq-a">はい。プレイ状況は自動的にお使いの端末に保存されます。次回アクセス時に続きから再開できます。</div></div>
+    </div>
+</section>
+
+<footer class="site-footer">
+    <div class="wrap foot-grid">
+        <div class="foot-col brandcol">
+            <a class="brand" href="../">
+                <span class="brand-mark"><img src="assets/icons/01-02.png" alt=""></span>
+                <span><span class="brand-name">細胞の冒険</span><br><span class="brand-sub">Cellular Adventure</span></span>
+            </a>
+            <p class="foot-tag">遊びながら学び、創造し、生命の不思議を探求しよう。</p>
+            <div class="socials">
+                <a class="soc" href="https://x.com/appadaycreator" aria-label="X" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-7.3 8.3L23 22h-6.6l-5.2-6.8L5.3 22H2.2l7.8-8.9L1.5 2h6.8l4.7 6.2zm-1.2 18h1.8L7.4 3.9H5.5z"/></svg></a>
+                <a class="soc" href="https://note.com/appadaycreator" aria-label="Note" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 4h10l4 4v12a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1zm2 5v2h10V9H7zm0 4v2h10v-2H7zm0 4v2h6v-2H7z"/></svg></a>
+            </div>
+        </div>
+        <div class="foot-col"><h4>リンク</h4><a href="#modes">ゲーム</a><a href="#biology">学習コンテンツ</a><a href="#howto">使い方</a><a href="#faq">FAQ</a></div>
+        <div class="foot-col"><h4>サポート</h4><a href="/cellular-adventure-rpg/contact.html">お問い合わせ</a><a href="/cellular-adventure-rpg/contact.html">不具合の報告</a></div>
+        <div class="foot-col"><h4>その他</h4><a href="/cellular-adventure-rpg/terms.html">利用規約</a><a href="/cellular-adventure-rpg/privacy-policy.html">プライバシーポリシー</a></div>
+        <div class="foot-col"><h4>はじめる</h4><a class="btn btn-primary" style="justify-content:center;margin-top:4px" href="../"><img class="btn-icn" src="assets/icons/07-01.png" alt="">ゲーム開始</a></div>
+    </div>
+    <div class="wrap"><div class="copyright">© 2026 細胞の冒険 / Cellular Adventure by AppADayCreator. All rights reserved.</div></div>
+</footer>
+
+<script>
+/* life engine */
+(function(global){
+    'use strict';
+    class LifeGrid{
+        constructor(cols,rows){this.resize(cols,rows);}
+        resize(cols,rows){this.cols=cols;this.rows=rows;this.cur=new Uint8Array(cols*rows);this.next=new Uint8Array(cols*rows);this.born=new Uint8Array(cols*rows);this.dying=new Uint8Array(cols*rows);}
+        set(x,y,v){if(x<0||y<0||x>=this.cols||y>=this.rows)return;this.cur[y*this.cols+x]=v?1:0;}
+        clear(){this.cur.fill(0);this.born.fill(0);this.dying.fill(0);}
+        randomize(p){p=p==null?0.28:p;for(let i=0;i<this.cur.length;i++)this.cur[i]=Math.random()<p?1:0;this.born.fill(0);this.dying.fill(0);this.markDying();}
+        countNeighbors(arr,x,y){const c=this.cols,r=this.rows;let n=0;for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){if(!dx&&!dy)continue;let nx=x+dx,ny=y+dy;if(nx<0||ny<0||nx>=c||ny>=r)continue;n+=arr[ny*c+nx];}return n;}
+        markDying(){const{cur,cols,rows}=this;for(let y=0;y<rows;y++)for(let x=0;x<cols;x++){const i=y*cols+x;if(cur[i]){const n=this.countNeighbors(cur,x,y);this.dying[i]=(n<2||n>3)?1:0;}else this.dying[i]=0;}}
+        step(){const{cur,next,cols,rows}=this;let pop=0;this.born.fill(0);for(let y=0;y<rows;y++)for(let x=0;x<cols;x++){const i=y*cols+x;const n=this.countNeighbors(cur,x,y);let alive=cur[i];let nv=alive?(n===2||n===3?1:0):(n===3?1:0);next[i]=nv;if(nv){pop++;if(!alive)this.born[i]=1;}}const t=this.cur;this.cur=next;this.next=t;this.markDying();return{population:pop};}
+        place(pattern,cx,cy){let maxx=0,maxy=0;pattern.forEach(([x,y])=>{maxx=Math.max(maxx,x);maxy=Math.max(maxy,y);});const ox=cx-Math.floor(maxx/2),oy=cy-Math.floor(maxy/2);pattern.forEach(([x,y])=>this.set(ox+x,oy+y,1));this.markDying();}
+    }
+    const PATTERNS={glider:[[1,0],[2,1],[0,2],[1,2],[2,2]],blinker:[[0,0],[1,0],[2,0]],block:[[0,0],[1,0],[0,1],[1,1]],beehive:[[1,0],[2,0],[0,1],[3,1],[1,2],[2,2]],pulsar:(()=>{const p=[];const a=[2,3,4,8,9,10];a.forEach(x=>{[0,5,7,12].forEach(y=>p.push([x,y]));});[0,5,7,12].forEach(x=>{[2,3,4,8,9,10].forEach(y=>p.push([x,y]));});return p;})(),lwss:[[1,0],[4,0],[0,1],[0,2],[4,2],[0,3],[1,3],[2,3],[3,3]]};
+    global.LifeGrid=LifeGrid;global.LIFE_PATTERNS=PATTERNS;
+})(window);
+
+/* drawer */
+(function(){
+    const ham=document.querySelector('.hamburger'),drawer=document.getElementById('drawer');
+    if(!ham||!drawer)return;
+    const close=drawer.querySelector('.drawer-close');
+    const open=()=>{drawer.classList.add('open');document.body.style.overflow='hidden';};
+    const shut=()=>{drawer.classList.remove('open');document.body.style.overflow='';};
+    ham.addEventListener('click',open);
+    close&&close.addEventListener('click',shut);
+    drawer.querySelector('.drawer-bg').addEventListener('click',shut);
+    drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click',shut));
+})();
+
+/* reveal */
+(function(){
+    const els=Array.from(document.querySelectorAll('.reveal'));
+    els.forEach((e,i)=>{e.style.transitionDelay=(Math.min(i%6,5)*60)+'ms';});
+    const show=e=>e.classList.add('in');
+    const check=()=>{const vh=window.innerHeight;els.forEach(e=>{if(e.classList.contains('in'))return;const r=e.getBoundingClientRect();if(r.top<vh*0.92&&r.bottom>0)show(e);});};
+    requestAnimationFrame(check);
+    window.addEventListener('scroll',check,{passive:true});
+    window.addEventListener('resize',check);
+    setTimeout(()=>els.forEach(show),1600);
+})();
+
+/* count-up */
+(function(){
+    const els=document.querySelectorAll('[data-count]');
+    const fmt=n=>n.toLocaleString('en-US');
+    const run=el=>{
+        if(el.dataset.done)return;el.dataset.done='1';
+        const target=parseFloat(el.dataset.count),dec=el.dataset.dec?1:0,suf=el.dataset.suffix||'',t0=performance.now(),dur=1400;
+        function tick(now){const p=Math.min((now-t0)/dur,1),e2=1-Math.pow(1-p,3),v=target*e2;el.textContent=(dec?v.toFixed(1):fmt(Math.round(v)))+suf;if(p<1)requestAnimationFrame(tick);}
+        requestAnimationFrame(tick);
+    };
+    const check=()=>{const vh=innerHeight;els.forEach(el=>{const r=el.getBoundingClientRect();if(r.top<vh*0.9&&r.bottom>0)run(el);});};
+    requestAnimationFrame(check);
+    addEventListener('scroll',check,{passive:true});
+    setTimeout(()=>els.forEach(run),2000);
+})();
+
+/* hero petri dish life */
+(function(){
+    const cv=document.getElementById('heroLife');if(!cv)return;
+    const ctx=cv.getContext('2d');
+    const reduced=matchMedia('(prefers-reduced-motion:reduce)').matches;
+    const COLS=46,ROWS=46;
+    const grid=new LifeGrid(COLS,ROWS);
+    function seed(){grid.clear();grid.randomize(0.16);grid.place(LIFE_PATTERNS.glider,10,12);grid.place(LIFE_PATTERNS.pulsar,30,30);grid.place(LIFE_PATTERNS.lwss,34,10);}
+    seed();
+    let dpr=Math.min(devicePixelRatio||1,2);
+    function size(){const r=cv.getBoundingClientRect();cv.width=r.width*dpr;cv.height=r.height*dpr;}
+    size();addEventListener('resize',size);
+    function rrect(c,x,y,w,h,r){c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath();}
+    function draw(){
+        const W=cv.width,H=cv.height,cw=W/COLS,ch=H/ROWS;
+        ctx.clearRect(0,0,W,H);
+        ctx.strokeStyle='rgba(80,180,180,.07)';ctx.lineWidth=1*dpr;
+        for(let x=0;x<=COLS;x++){ctx.beginPath();ctx.moveTo(x*cw,0);ctx.lineTo(x*cw,H);ctx.stroke();}
+        for(let y=0;y<=ROWS;y++){ctx.beginPath();ctx.moveTo(0,y*ch);ctx.lineTo(W,y*ch);ctx.stroke();}
+        for(let y=0;y<ROWS;y++)for(let x=0;x<COLS;x++){
+            const i=y*COLS+x;if(!grid.cur[i])continue;
+            const px=x*cw,py=y*ch,pad=cw*0.14;
+            let c1,c2;
+            if(grid.born[i]){c1='rgba(214,255,90,.95)';c2='rgba(150,230,60,.5)';}
+            else if(grid.dying[i]){c1='rgba(120,255,170,.5)';c2='rgba(40,140,120,.2)';}
+            else{c1='rgba(125,255,120,.95)';c2='rgba(40,180,150,.45)';}
+            const g=ctx.createRadialGradient(px+cw/2,py+ch/2,1,px+cw/2,py+ch/2,cw);
+            g.addColorStop(0,c1);g.addColorStop(1,c2);
+            ctx.fillStyle=g;
+            rrect(ctx,px+pad,py+pad,cw-pad*2,ch-pad*2,cw*0.28);ctx.fill();
+        }
+    }
+    draw();if(reduced)return;
+    let acc=0,last=performance.now(),stable=0,lastPop=0;
+    function loop(now){const dt=now-last;last=now;acc+=dt;if(acc>180){acc=0;const{population}=grid.step();if(Math.abs(population-lastPop)<2)stable++;else stable=0;lastPop=population;if(population<8||stable>22){seed();stable=0;}draw();}requestAnimationFrame(loop);}
+    requestAnimationFrame(loop);
+})();
+
+/* hero mini canvas */
+(function(){
+    const cv=document.getElementById('heroMini');if(!cv)return;
+    const x=cv.getContext('2d');const N=12,s=cv.width/N;
+    x.fillStyle='rgba(57,184,255,.06)';x.fillRect(0,0,cv.width,cv.height);
+    const cells=[[2,2],[3,3],[1,4],[2,4],[3,4],[7,6],[8,6],[7,7],[8,7],[5,9],[6,9],[7,9],[9,2],[10,3]];
+    cells.forEach(([cx,cy])=>{const g=x.createRadialGradient(cx*s+s/2,cy*s+s/2,1,cx*s+s/2,cy*s+s/2,s);g.addColorStop(0,'#aef7ff');g.addColorStop(1,'rgba(57,184,255,.4)');x.fillStyle=g;x.fillRect(cx*s+1,cy*s+1,s-2,s-2);});
+})();
+
+/* mini lg grid in bio card */
+(function(){
+    const host=document.getElementById('lgMini');if(!host)return;
+    const on=new Set([1,2,9,17,18,19,11,20,28,34,35,36,42,44,50,51,52,58]);
+    for(let i=0;i<64;i++){const c=document.createElement('i');if(on.has(i))c.className='on';host.appendChild(c);}
+})();
+
+/* mode card live sims */
+(function(){
+    document.querySelectorAll('.mode-life').forEach(cv=>{
+        const ctx=cv.getContext('2d');
+        const dpr=Math.min(devicePixelRatio||1,2);
+        const COLS=26,ROWS=12;
+        const grid=new LifeGrid(COLS,ROWS);
+        const pat=cv.dataset.pattern;
+        function seed(){grid.clear();if(pat==='glider'){grid.randomize(0.12);grid.place(LIFE_PATTERNS.glider,4,3);grid.place(LIFE_PATTERNS.glider,16,7);}else if(pat==='pulsar'){grid.randomize(0.1);grid.place(LIFE_PATTERNS.beehive,8,5);grid.place(LIFE_PATTERNS.blinker,18,8);}else{grid.randomize(0.22);}}
+        seed();
+        function size(){const r=cv.getBoundingClientRect();cv.width=r.width*dpr;cv.height=r.height*dpr;}
+        size();
+        function draw(){
+            const W=cv.width,H=cv.height,cw=W/COLS,ch=H/ROWS;
+            ctx.clearRect(0,0,W,H);
+            ctx.strokeStyle='rgba(80,180,180,.06)';ctx.lineWidth=1;
+            for(let i=0;i<COLS;i++){ctx.beginPath();ctx.moveTo(i*cw,0);ctx.lineTo(i*cw,H);ctx.stroke();}
+            for(let i=0;i<ROWS;i++){ctx.beginPath();ctx.moveTo(0,i*ch);ctx.lineTo(W,i*ch);ctx.stroke();}
+            for(let y=0;y<ROWS;y++)for(let x=0;x<COLS;x++){
+                if(!grid.cur[y*COLS+x])continue;
+                const born=grid.born[y*COLS+x];
+                const g=ctx.createRadialGradient(x*cw+cw/2,y*ch+ch/2,1,x*cw+cw/2,y*ch+ch/2,cw);
+                g.addColorStop(0,born?'rgba(214,255,90,.95)':'rgba(125,255,120,.95)');
+                g.addColorStop(1,'rgba(40,170,140,.4)');
+                ctx.fillStyle=g;ctx.fillRect(x*cw+cw*.16,y*ch+ch*.16,cw*.68,ch*.68);
+            }
+        }
+        draw();if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+        let acc=0,last=performance.now(),stable=0,lp=0;
+        function loop(now){const dt=now-last;last=now;acc+=dt;if(acc>240){acc=0;const{population}=grid.step();if(Math.abs(population-lp)<2)stable++;else stable=0;lp=population;if(population<5||stable>16){seed();stable=0;}draw();}requestAnimationFrame(loop);}
+        requestAnimationFrame(loop);
+    });
+})();
+
+/* faq */
+document.querySelectorAll('.faq-item').forEach(it=>{
+    it.querySelector('.faq-q').addEventListener('click',()=>it.classList.toggle('open'));
+});
+</script>
+</body>
+</html>

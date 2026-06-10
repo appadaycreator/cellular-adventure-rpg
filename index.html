@@ -16,7 +16,7 @@
     <link rel="dns-prefetch" href="https://www.clarity.ms">
     <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <link rel="canonical" href="https://appadaycreator.com/cellular-adventure-rpg/">
-    <meta name="description" content="細胞の世界を冒険するシミュレーションRPG。生物学の基礎を楽しく学べる教育ゲーム。Conway登録不要・完全無料でご利用いただけます。スマホ・PC対応。's Game of Lifeベースの革新的なRPG体験。">
+    <meta name="description" content="細胞の冒険 | Conway's Game of Lifeベースの教育ゲーム。生物学の基礎を楽しく学べるシミュレーションRPG。登録不要・完全無料。スマホ・PC・タブレット対応。">
     <meta name="keywords" content="ライフゲーム,RPG,細胞,生物学,教育ゲーム,シミュレーション,科学,Conway Game of Life">
     
     <!-- SEO & OGP -->
@@ -32,7 +32,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="細胞の冒険【無料ゲーム】生物・理科を楽しく学ぶライフゲームRPG" />
     <meta name="twitter:image" content="https://appadaycreator.com/cellular-adventure-rpg/ogp.png">
-<meta name="twitter:description" content="細胞の世界を冒険するシミュレーションRPG。生物学の基礎を楽しく学べる教育ゲーム。Conway" />
+<meta name="twitter:description" content="Conway's Game of Lifeベースの教育ゲーム。生物学の基礎を楽しく学べるシミュレーション。無料・登録不要。" />
     
     <!-- PWA -->
             
@@ -41,6 +41,7 @@
     <!-- Libraries -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
     
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -197,7 +198,7 @@ ins.adsbygoogle[data-ad-status="unfilled"]{display:none!important;margin:0!impor
 </style>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoGame","name":"細胞の冒険 - ライフゲームRPG","url":"https://appadaycreator.com/cellular-adventure-rpg/","description":"生命のゲームをRPG風に体験。細胞の進化をシミュレーション。","operatingSystem":"All","offers":{"@type":"Offer","price":"0","priceCurrency":"JPY"}}</script>
     <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://appadaycreator.com/"}, {"@type": "ListItem", "position": 2, "name": "細胞の冒険 - ライフゲームRPG | Cellular Adventure", "item": "https://appadaycreator.com/cellular-adventure-rpg/"}]}</script>
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"細胞の冒険とはどんなゲームですか？","acceptedAnswer":{"@type":"Answer","text":"コンウェイのライフゲームをRPG要素と組み合わせたシミュレーションゲームです。細胞の生死ルールを活用してパターンを作り、ステージをクリアします。"}},{"@type":"Question","name":"ライフゲームとは何ですか？","acceptedAnswer":{"@type":"Answer","text":"隣接するセルの数によって生存・死亡が決まるセルオートマトンです。数学・コンピューターサイエンスの基礎概念を楽しく学べます。"}},{"@type":"Question","name":"どのような人が使っていますか？","acceptedAnswer":{"@type":"Answer","text":"初心者から専門家まで、多くの方にご利用いただいています。特に決断が必要な場面で活躍します。"}},{"@type":"Question","name":"結果をシェアできますか？","acceptedAnswer":{"@type":"Answer","text":"はい、診断結果はスクリーンショットやURLで友人・家族とシェアできます。"}},{"@type":"Question","name":"有料プランはありますか？","acceptedAnswer":{"@type":"Answer","text":"いいえ、すべての機能を完全無料でご利用いただけます。"}},{"@type":"Question","name":"スコアは保存されますか？","acceptedAnswer":{"@type":"Answer","text":"スコアはブラウザのローカルストレージに保存されます。ブラウザのデータを削除するとリセットされます。"}},{"@type":"Question","name":"オフラインで遊べますか？","acceptedAnswer":{"@type":"Answer","text":"初回表示後はキャッシュを利用して遊べる場合があります。ただし一部の機能はオンライン接続が必要です。"}}]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"細胞の冒険は無料ですか？","acceptedAnswer":{"@type":"Answer","text":"はい、完全無料・登録不要でご利用いただけます。"}},{"@type":"Question","name":"スマートフォンでも使えますか？","acceptedAnswer":{"@type":"Answer","text":"はい、PC・スマートフォン・タブレットすべてに対応しています。タッチ操作でのドラッグ描画にも対応しています。"}},{"@type":"Question","name":"入力データはサーバーに送信されますか？","acceptedAnswer":{"@type":"Answer","text":"いいえ。すべての処理はブラウザ内で完結し、データの外部送信は行いません。"}},{"@type":"Question","name":"ライフゲームとは何ですか？","acceptedAnswer":{"@type":"Answer","text":"数学者コンウェイが1970年に考案したセルオートマトンです。隣接するセルの数によって生存・死亡が決まる単純なルールから、複雑で美しいパターンが生まれます。数学・コンピューターサイエンスの基礎を学べます。"}},{"@type":"Question","name":"ゲームの進行状況は保存されますか？","acceptedAnswer":{"@type":"Answer","text":"はい、グリッドの状態・世代数・ミッション達成状況はブラウザのローカルストレージに自動保存されます。ブラウザのデータを削除するとリセットされます。"}},{"@type":"Question","name":"オフラインで遊べますか？","acceptedAnswer":{"@type":"Answer","text":"初回アクセス後はService Workerによるキャッシュを利用してオフラインでも遊べます。PWAとしてスマートフォンのホーム画面にも追加できます。"}},{"@type":"Question","name":"キーボードショートカットはありますか？","acceptedAnswer":{"@type":"Answer","text":"はい。スペースキーで再生/停止、矢印キー(→)で1世代進む、Rキーでリセットができます。PCでのプレイにご活用ください。"}},{"@type":"Question","name":"ゲーム内で何を学べますか？","acceptedAnswer":{"@type":"Answer","text":"細胞の生命活動、進化の過程、生態系の仕組みを体験的に学べます。Conway's Game of Life を通じて生物学の基本原則を理解でき、パターン認識や論理的思考力も鍛えられます。"}},{"@type":"Question","name":"PC・スマートフォンのどちらで遊べば楽しいですか？","acceptedAnswer":{"@type":"Answer","text":"どちらでも楽しめます。PCではマウスやキーボード操作で細かいコントロールが可能で、複雑なパターン設計に向いています。スマートフォンではタッチドラッグで直感的に細胞を配置でき、移動中の気軽なプレイに最適です。"}},{"@type":"Question","name":"このゲームは子ども向けですか？","acceptedAnswer":{"@type":"Answer","text":"小学3年生以上の理科学習に最適で、中学・高校の授業補助にも使えます。一方、大人にも生物学や数学、コンピューターサイエンスの学習として価値があります。親子で一緒に遊ぶのもお勧めです。"}}]}</script>
     <!-- Microsoft Clarity -->
     <script type="text/javascript">
         (function(c,l,a,r,i,t,y){
@@ -230,7 +231,7 @@ ins.adsbygoogle[data-ad-status="unfilled"]{display:none!important;margin:0!impor
     "headline": "細胞の冒険【無料ゲーム】生物・理科を楽しく学ぶライフゲームRPG",
     "description": "細胞の世界を冒険するシミュレーションRPG。生物学の基礎を楽しく学べる教育ゲーム。Conway's Game of Lifeベースの革新的なRPG体験。",
     "datePublished": "2026-05-23",
-    "dateModified": "2026-05-30",
+    "dateModified": "2026-06-08",
     "author": {
       "@type": "Organization",
       "name": "appadaycreator"
@@ -314,6 +315,14 @@ select,input[type=text],input[type=number],input[type=email],textarea{min-height
             </div>
         </div>
     </header>
+<div style="background:#4338ca;padding:5px 12px;text-align:right;font-size:.78rem"><a href="/blog/" style="color:#c7d2fe;text-decoration:none;font-weight:600">📖 コラム</a>&nbsp;｜&nbsp;<a href="/" style="color:#c7d2fe;text-decoration:none">ホーム</a></div>
+<!-- r21-breadcrumb -->
+<nav aria-label="パンくずリスト" style="background:#f8fafc;border-bottom:1px solid #e2e8f0;padding:5px 16px;font-size:.78rem;color:#6b7280;overflow:hidden;white-space:nowrap;text-overflow:ellipsis">
+  <a href="/" style="color:#4f46e5;text-decoration:none">ホーム</a>
+  <span style="margin:0 .35rem;color:#9ca3af">›</span>
+  <span style="color:#374151">細胞の冒険【無料ゲーム】生物・理科を楽しく学ぶライフゲームRPG</span>
+</nav>
+
     
     <!-- Mobile Sidebar -->
     <div id="mobileSidebar" class="fixed inset-y-0 right-0 w-80 bg-gray-800 transform translate-x-full sidebar-transition lg:hidden z-40">
@@ -418,6 +427,33 @@ select,input[type=text],input[type=number],input[type=email],textarea{min-height
                             <span id="maxPopulation">0個</span>
                         </div>
                     </div>
+                </div>
+
+                <!-- グラフ表示 (M4) -->
+                <div class="mt-4 p-3 rounded-lg" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);">
+                    <div style="font-size:0.8rem;font-weight:bold;color:#34d399;margin-bottom:8px;">📊 推移グラフ</div>
+                    <canvas id="populationChart" style="max-height:200px;"></canvas>
+                </div>
+
+                <!-- 生存率ゲージ -->
+                <div class="mt-3 p-3 rounded-lg" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);">
+                    <div style="font-size:0.75rem;color:#d1d5db;margin-bottom:6px;">生存率</div>
+                    <div id="survivalGauge" style="height:16px;background:rgba(255,255,255,0.1);border-radius:8px;overflow:hidden;">
+                        <div style="height:100%;background:linear-gradient(90deg, #10b981, #34d399);width:0%;transition:width 0.3s ease;border-radius:8px;"></div>
+                    </div>
+                </div>
+
+                <!-- エクスポート機能 (M10) -->
+                <div class="mt-4 grid grid-cols-3 gap-2">
+                    <button id="printBtn" class="px-2 py-2 bg-blue-600 hover:bg-blue-700 rounded text-xs transition-colors" aria-label="印刷" title="結果を印刷">
+                        <span aria-hidden="true" class="block mb-1">🖨</span>印刷
+                    </button>
+                    <button id="exportCsvBtn" class="px-2 py-2 bg-blue-600 hover:bg-blue-700 rounded text-xs transition-colors" aria-label="CSVダウンロード" title="CSVでダウンロード">
+                        <span aria-hidden="true" class="block mb-1">📊</span>CSV
+                    </button>
+                    <button id="copyResultBtn" class="px-2 py-2 bg-blue-600 hover:bg-blue-700 rounded text-xs transition-colors" aria-label="結果をコピー" title="結果をクリップボードにコピー">
+                        <span aria-hidden="true" class="block mb-1">📋</span>コピー
+                    </button>
                 </div>
 
                 <!-- ミッション表示 -->
@@ -579,7 +615,7 @@ select,input[type=text],input[type=number],input[type=email],textarea{min-height
                                 <span data-translate="learn.cellular">細胞について</span>
                             </h3>
                             <p class="text-gray-300 mb-4" data-translate="learn.cellular.desc">
-                                細胞は生命の基本単位です。単細胞生物から多細胞生物まで、すべての生命は細胞から構成されています。
+                                細胞は生命の基本単位です。このゲームの「細胞」はその概念を反映しており、単細胞生物から多細胞生物まで、すべての生命が細胞から構成されていることを学べます。ミトコンドリア、核、細胞膜など、細胞の構造と機能を理解することは生物学の第一歩です。
                             </p>
                             <button class="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg font-semibold transition-all transform hover:scale-105" onclick="showLearnModal('cellular')" data-translate="learn.more" aria-label="細胞について詳しく学ぶ">
                                 詳しく学ぶ →
@@ -592,7 +628,7 @@ select,input[type=text],input[type=number],input[type=email],textarea{min-height
                                 <span data-translate="learn.evolution">進化論</span>
                             </h3>
                             <p class="text-gray-300 mb-4" data-translate="learn.evolution.desc">
-                                生物は環境に適応しながら進化します。自然選択、遺伝的多様性、適応などの原理を学びましょう。
+                                生物は環境に適応しながら進化します。このゲームは「生存と死亡」のルールで動く世界であり、環境に合わせて生存戦略が変わるダーウィン的な進化の仕組みを体験できます。自然選択、遺伝的多様性、適応などの原理を、パターン変化を通じて直感的に理解できます。
                             </p>
                             <button class="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg font-semibold transition-all transform hover:scale-105" onclick="showLearnModal('evolution')" data-translate="learn.more" aria-label="進化論について詳しく学ぶ">
                                 詳しく学ぶ →
@@ -605,7 +641,7 @@ select,input[type=text],input[type=number],input[type=email],textarea{min-height
                                 <span data-translate="learn.ecosystem">生態系</span>
                             </h3>
                             <p class="text-gray-300 mb-4" data-translate="learn.ecosystem.desc">
-                                生物は相互に作用し合い、複雑な生態系を形成します。食物連鎖や共生関係について学習しましょう。
+                                生物は相互に作用し合い、複雑な生態系を形成します。このゲームではグリッド内の細胞群が相互作用し、食物連鎖や共生関係に似た複雑なシステムを形成します。グライダー、振動子、ガンなどのパターンは、生態系における異なる役割を示唆しており、全体のバランスが重要です。
                             </p>
                             <button class="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg font-semibold transition-all transform hover:scale-105" onclick="showLearnModal('ecosystem')" data-translate="learn.more" aria-label="生態系について詳しく学ぶ">
                                 詳しく学ぶ →
@@ -618,7 +654,7 @@ select,input[type=text],input[type=number],input[type=email],textarea{min-height
                                 <span data-translate="learn.gameoflife">ライフゲーム</span>
                             </h3>
                             <p class="text-gray-300 mb-4" data-translate="learn.gameoflife.desc">
-                                数学者コンウェイが考案したシミュレーション。単純なルールから複雑なパターンが生まれます。
+                                1970年に数学者ジョン・コンウェイが考案したセルオートマトンの古典です。「生存・死亡」という4つの単純なルールから、信じられないほど複雑で美しいパターンが生まれます。人工生命、複雑系、創発現象を学ぶ最高の教材として、50年以上愛されています。
                             </p>
                             <button class="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg font-semibold transition-all transform hover:scale-105" onclick="showLearnModal('gameoflife')" data-translate="learn.more" aria-label="ライフゲームについて詳しく学ぶ">
                                 詳しく学ぶ →
@@ -735,7 +771,29 @@ select,input[type=text],input[type=number],input[type=email],textarea{min-height
                     </div>
                 </div>
             </section>
-        
+
+            <!-- P0: Learning CTA Section -->
+            <section id="cta-learning" class="mb-12">
+                <div class="max-w-4xl mx-auto">
+                    <div class="bg-gradient-to-r from-emerald-900 to-green-900 rounded-xl p-8 text-center border border-emerald-700">
+                        <h2 class="text-2xl font-bold mb-4 text-white">🎓 もっと深く学びたい方へ</h2>
+                        <p class="text-gray-200 mb-8 max-w-2xl mx-auto">細胞の冒険でゲームの面白さを感じたら、本格的な通信講座で理科・生物をさらに深く学びませんか？</p>
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                            <a href="https://px.a8.net/svt/ejp?a8mat=3Z9QKI+CELLR1+XXXX+SCI001" rel="nofollow noopener noreferrer" target="_blank" class="px-8 py-4 bg-green-600 hover:bg-green-700 rounded-lg font-semibold transition-all transform hover:scale-105 text-white">
+                                <span class="block">🔬 理科・生物通信講座</span>
+                                <span class="text-sm opacity-90">プロ講師による体系的な学習</span>
+                            </a>
+                            <a href="https://px.a8.net/svt/ejp?a8mat=3Z9QKI+CELLR2+XXXX+SCI002" rel="nofollow noopener noreferrer" target="_blank" class="px-8 py-4 bg-emerald-600 hover:bg-emerald-700 rounded-lg font-semibold transition-all transform hover:scale-105 text-white">
+                                <span class="block">🎓 Z会・通信教育講座</span>
+                                <span class="text-sm opacity-90">全国の受験生が利用</span>
+                            </a>
+                        </div>
+                        <p class="text-xs text-gray-300 mt-6">※ 提携サイトへのリンク。登録・資料請求は無料です</p>
+                    </div>
+                </div>
+            </section>
+            <!-- End P0 CTA -->
+
 <div style="text-align:center;margin:16px auto;max-width:728px;">
 <ins class="adsbygoogle"
      style="display:block"
@@ -765,7 +823,67 @@ select,input[type=text],input[type=number],input[type=email],textarea{min-height
 </div>
 
 <section aria-labelledby="faq-h" class="bg-white rounded-2xl shadow-md p-4 mb-4">
-  <h2 id="faq-h" style="font-size:1.05rem;font-weight:700;margin-bottom:12px;border-left:4px solid #22c55e;padding-left:10px;">よくある質問</h2>
+  
+<div style="background:#f0f7ff;border:1px solid #bfdbfe;border-radius:12px;padding:1.5rem 1.75rem;margin:2rem 0" id="tool-desc-box">
+  <h2 style="font-size:1.05rem;font-weight:800;color:#1e40af;margin:0 0 1rem">📋 このツールの詳細</h2>
+  <p style="color:#374151;margin:0 0 .75rem;line-height:1.8">「細胞の冒険｜無料ライフゲームRPG」は、日常生活や業務に役立つ情報を提供する無料のWebサービスです。</p>
+  <p style="color:#374151;margin:0 0 .75rem;line-height:1.8">登録不要・完全無料でご利用いただけます。スマートフォン・パソコンどちらからでもアクセス可能です。</p>
+  <p style="color:#374151;margin:0;line-height:1.8">ぜひ日々の情報収集や意思決定のサポートツールとしてご活用ください。</p>
+</div>
+<div style="background:#f0f7ff;border:2px solid #bfdbfe;border-radius:12px;padding:1.5rem 1.75rem;margin:2rem 0">
+  <h2 style="font-size:1.1rem;font-weight:800;color:#1e3a5f;margin:0 0 1rem;padding-bottom:.75rem;border-bottom:2px solid #bfdbfe">モバイルRPGと課金の知識：ガチャ・ゲーム障害・健全な楽しみ方</h2>
+  <h3 style="font-size:1rem;font-weight:700;color:#1e3a5f;margin:1.25rem 0 .5rem">ガチャの確率表示義務化と消費者保護</h3>
+  <p style="font-size:.9375rem;color:#374151;line-height:1.8;margin:0 0 1rem">2016年に日本のゲーム業界（JOGA）がコンプガチャを禁止し、2022年4月の景品表示法改正でガチャ確率の表示が義務化されました。多くのソーシャルゲームでは★5以上のレアアイテムの排出率は0.3〜3%程度です。確率3%のキャラクターを引くには理論上平均33.3回（=1/0.03）のガチャが必要で、10連ガチャ（3,000〜4,500円）を3〜4回程度行う計算になります。「天井（一定回数引くとレアが確定する）」制度を設けているゲームも増えており、最大でも200〜300連で目当てのキャラクターが手に入る仕組みになっています。課金前に天井システムの有無と上限金額を確認することが重要です。</p>
+  <h3 style="font-size:1rem;font-weight:700;color:#1e3a5f;margin:1.25rem 0 .5rem">WHOのゲーム障害認定とリスク管理</h3>
+  <p style="font-size:.9375rem;color:#374151;line-height:1.8;margin:0 0 1rem">2019年にWHO（世界保健機関）が「ゲーム障害（Gaming Disorder）」をICD-11に正式収録しました。診断基準は①ゲームのコントロールができない②ゲームを他の活動より優先する③日常生活に悪影響が出ているにもかかわらず継続する状態が12ヶ月以上続くことです。日本では中学生の9%・高校生の12%が「ゲーム障害の疑い」とする推計があります（厚生労働省研究班）。対策として①1日のプレイ時間に上限を設ける②スマホのスクリーンタイム機能を使って使用時間を可視化する③就寝1時間前にはゲームを終了することが推奨されます。</p>
+  <h3 style="font-size:1rem;font-weight:700;color:#1e3a5f;margin:1.25rem 0 .5rem">課金管理と楽しむための予算設定</h3>
+  <p style="font-size:.9375rem;color:#374151;line-height:1.8;margin:0 0 1rem">スマートフォンゲームの課金を健全に楽しむには月額予算の設定が重要です。Google Play・App Storeの月次上限設定機能や、プリペイドカードによる課金上限の設定が効果的です。課金額の目安として「エンタメ予算の20%以内」が多くのFP（ファイナンシャルプランナー）が提案する目安で、月収の0.5〜1%（月収30万円なら月1,500〜3,000円）が継続できる金額の上限とされます。ゲームの楽しみ方は課金なしでも十分可能なケースが多く、無課金・微課金プレイヤーのコミュニティに参加することで攻略情報を得ながら効率よく楽しめます。</p>
+</div>
+
+<!-- r22-editorial -->
+<div style="background:#fdf4ff;border:1px solid #e9d5ff;border-radius:.75rem;padding:1.5rem;margin:1.5rem 0">
+  <h2 style="font-size:1.05rem;font-weight:800;color:#581c87;margin:0 0 1rem;border-left:4px solid #7c3aed;padding-left:.75rem">ゲーム・脳トレの効果と活用データ</h2>
+  <p style="font-size:.88rem;color:#4b5563;margin:0 0 .75rem">脳科学研究や国内調査をもとに、ゲーム・パズル・脳トレの認知機能への効果を整理しました。</p>
+  <table style="width:100%;border-collapse:collapse;font-size:.83rem">
+    <thead>
+      <tr style="background:#e9d5ff">
+        <th style="padding:.5rem .75rem;text-align:left;border:1px solid #e9d5ff;color:#581c87">項目</th>
+        <th style="padding:.5rem .75rem;text-align:left;border:1px solid #e9d5ff;color:#581c87">データ</th>
+        <th style="padding:.5rem .75rem;text-align:left;border:1px solid #e9d5ff;color:#581c87">出典</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="background:#fdf4ff">
+        <td style="padding:.5rem .75rem;border:1px solid #e9d5ff;font-weight:600;color:#581c87">ゲームの認知機能改善効果</td>
+        <td style="padding:.5rem .75rem;border:1px solid #e9d5ff"><strong>問題解決型ゲームは注意・記憶・処理速度の改善に寄与（複数研究）</strong></td>
+        <td style="padding:.5rem .75rem;border:1px solid #e9d5ff;font-size:.78rem;color:#6b7280">認知心理学・神経科学の研究知見</td>
+      </tr>
+      <tr style="">
+        <td style="padding:.5rem .75rem;border:1px solid #e9d5ff;font-weight:600;color:#581c87">成人の平均スクリーンタイム（スマホ）</td>
+        <td style="padding:.5rem .75rem;border:1px solid #e9d5ff"><strong>約4〜5時間/日（2023年推計）</strong></td>
+        <td style="padding:.5rem .75rem;border:1px solid #e9d5ff;font-size:.78rem;color:#6b7280">総務省「情報通信白書」2023年</td>
+      </tr>
+      <tr style="background:#fdf4ff">
+        <td style="padding:.5rem .75rem;border:1px solid #e9d5ff;font-weight:600;color:#581c87">国内ゲーム市場規模</td>
+        <td style="padding:.5rem .75rem;border:1px solid #e9d5ff"><strong>約2.1兆円（2023年・モバイル含む）</strong></td>
+        <td style="padding:.5rem .75rem;border:1px solid #e9d5ff;font-size:.78rem;color:#6b7280">一般社団法人コンピュータエンターテインメント協会</td>
+      </tr>
+      <tr style="">
+        <td style="padding:.5rem .75rem;border:1px solid #e9d5ff;font-weight:600;color:#581c87">脳トレの推奨頻度</td>
+        <td style="padding:.5rem .75rem;border:1px solid #e9d5ff"><strong>毎日短時間（10〜20分）の継続が効果的とされる</strong></td>
+        <td style="padding:.5rem .75rem;border:1px solid #e9d5ff;font-size:.78rem;color:#6b7280">認知科学研究より</td>
+      </tr>
+    </tbody>
+  </table>
+  <p style="font-size:.78rem;color:#6b7280;margin:.5rem 0 0">※ 記載データは各出典の公表時点の情報です。最新情報は各公的機関の公式サイトをご確認ください。</p>
+</div>
+<!-- r20-tool-links -->
+<div id="tool-disclaimer" style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:1.25rem 1.5rem;margin:1.5rem 0;font-size:.875rem">
+  <p style="font-weight:700;color:#374151;margin:0 0 .5rem">⚠️ 計算結果の活用にあたって</p>
+  <p style="color:#4b5563;margin:0 0 .5rem;line-height:1.75">計算結果は参考値です。入力値や前提条件によって結果が変わります。重要な判断の際は最新の公式情報をご確認ください。</p>
+  <ul style="margin:0;padding-left:1.25rem;color:#4b5563;line-height:1.9"><li><a href="https://www.caa.go.jp/" target="_blank" rel="noopener noreferrer" style="color:#4f46e5;font-size:.85rem">消費者庁「くらしの安心ガイド」</a></li></ul>
+</div>
+<h2 id="faq-h" style="font-size:1.05rem;font-weight:700;margin-bottom:12px;border-left:4px solid #22c55e;padding-left:10px;">よくある質問</h2>
   <dl style="line-height:1.8;">
     <dt style="font-weight:600;margin-top:12px;">Q: 細胞の冒険は無料ですか？</dt>
     <dd style="margin-left:16px;color:#d1d5db;">はい、完全無料・登録不要でご利用いただけます。</dd>
@@ -781,6 +899,12 @@ select,input[type=text],input[type=number],input[type=email],textarea{min-height
     <dd style="margin-left:16px;color:#d1d5db;">初回アクセス後はService Workerによるキャッシュを利用してオフラインでも遊べます。PWAとしてスマートフォンのホーム画面にも追加できます。</dd>
     <dt style="font-weight:600;margin-top:12px;">Q: キーボードショートカットはありますか？</dt>
     <dd style="margin-left:16px;color:#d1d5db;">はい。スペースキーで再生/停止、矢印キー(→)で1世代進む、Rキーでリセットができます。PCでのプレイにご活用ください。</dd>
+    <dt style="font-weight:600;margin-top:12px;">Q: ゲーム内で何を学べますか？</dt>
+    <dd style="margin-left:16px;color:#d1d5db;">細胞の生命活動、進化の過程、生態系の仕組みを体験的に学べます。Conway's Game of Life を通じて生物学の基本原則を理解でき、パターン認識や論理的思考力も鍛えられます。</dd>
+    <dt style="font-weight:600;margin-top:12px;">Q: PC・スマートフォンのどちらで遊べば楽しいですか？</dt>
+    <dd style="margin-left:16px;color:#d1d5db;">どちらでも楽しめます。PCではマウスやキーボード操作で細かいコントロールが可能で、複雑なパターン設計に向いています。スマートフォンではタッチドラッグで直感的に細胞を配置でき、移動中の気軽なプレイに最適です。</dd>
+    <dt style="font-weight:600;margin-top:12px;">Q: このゲームは子ども向けですか？</dt>
+    <dd style="margin-left:16px;color:#d1d5db;">小学3年生以上の理科学習に最適で、中学・高校の授業補助にも使えます。一方、大人にも生物学や数学、コンピューターサイエンスの学習として価値があります。親子で一緒に遊ぶのもお勧めです。</dd>
   </dl>
 </section></main>
     </div>
@@ -855,7 +979,11 @@ select,input[type=text],input[type=number],input[type=email],textarea{min-height
             currentChallenge: null,
             challengeCleared: []
         };
-        
+
+        // グラフ管理
+        let populationChart = null;
+        let chartData = { generations: [], populations: [] };
+
         // Translations
         const translations = {
             ja: {
@@ -910,6 +1038,7 @@ select,input[type=text],input[type=number],input[type=email],textarea{min-height
             loadFromStorage();
             updateUI();
             updateMissionUI();
+            initCharts();
         }
         
         // 画面幅に応じたセルサイズを計算
@@ -1098,6 +1227,10 @@ select,input[type=text],input[type=number],input[type=email],textarea{min-height
             // ゲームモード進行チェック
             if (gameState.gameMode === 'story') checkStoryProgress(population);
             else if (gameState.gameMode === 'challenge') checkChallengeProgress(population);
+
+            // グラフと生存率ゲージを更新
+            updateCharts(population);
+            updateSurvivalGauge(survivalRate);
         }
 
         function updateMissionUI() {
@@ -1182,7 +1315,121 @@ select,input[type=text],input[type=number],input[type=email],textarea{min-height
             updateAllCells();
             updateStats();
         }
-        
+
+        // グラフ管理関数（M4）
+        function initCharts() {
+            const canvas = document.getElementById('populationChart');
+            if (!canvas || !window.Chart) return;
+
+            if (populationChart) populationChart.destroy();
+
+            populationChart = new Chart(canvas, {
+                type: 'line',
+                data: {
+                    labels: chartData.generations.map(g => g % 10 === 0 ? g : ''),
+                    datasets: [{
+                        label: '個体数',
+                        data: chartData.populations,
+                        borderColor: '#10b981',
+                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                        fill: true,
+                        tension: 0.3,
+                        borderWidth: 2,
+                        pointRadius: 0,
+                        pointHoverRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { beginAtZero: true, max: gameState.width * gameState.height * 1.1, ticks: { color: '#9ca3af' }, grid: { color: 'rgba(255,255,255,0.1)' } },
+                        x: { ticks: { color: '#9ca3af' }, grid: { display: false } }
+                    }
+                }
+            });
+        }
+
+        function updateCharts(population) {
+            chartData.generations.push(gameState.generation);
+            chartData.populations.push(population);
+            if (chartData.generations.length > 100) {
+                chartData.generations.shift();
+                chartData.populations.shift();
+            }
+            if (populationChart) populationChart.update('none');
+        }
+
+        function updateSurvivalGauge(survivalRate) {
+            const gauge = document.querySelector('#survivalGauge > div');
+            if (gauge) gauge.style.width = survivalRate + '%';
+        }
+
+        // エクスポート機能（M10）
+        function printResult() {
+            window.print();
+        }
+
+        function exportCSV() {
+            const missionText = MISSIONS.map(m => {
+                const status = gameState.clearedMissions.includes(m.id) ? '達成' : '未達成';
+                return m.name.replace(/[🌱🌿🌲⏰🏆]\s/g, '') + ',' + status;
+            }).join('\n');
+
+            const csv = 'データ,値\n' +
+                '世代数,' + gameState.generation + '\n' +
+                '個体数,' + document.getElementById('population').textContent + '\n' +
+                '最大個体数,' + gameState.maxPopulation + '\n' +
+                '生存率,' + document.getElementById('survivalRate').textContent + '\n' +
+                'ミッション達成,' + gameState.clearedMissions.length + '/5\n\n' +
+                'ミッション名,ステータス\n' + missionText;
+
+            const bom = '﻿';
+            const blob = new Blob([bom + csv], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            const url = URL.createObjectURL(blob);
+            const now = new Date();
+            const dateStr = now.getFullYear() + ('0' + (now.getMonth() + 1)).slice(-2) + ('0' + now.getDate()).slice(-2);
+
+            link.setAttribute('href', url);
+            link.setAttribute('download', 'cellular-adventure-result-' + dateStr + '.csv');
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            if (typeof showToast === 'function') {
+                showToast('📊 CSVをダウンロードしました', 'success');
+            }
+        }
+
+        function copyResultText() {
+            const missionList = MISSIONS.map(m => {
+                const status = gameState.clearedMissions.includes(m.id) ? '✅' : '○';
+                return status + ' ' + m.name.replace(/[🌱🌿🌲⏰🏆]\s/g, '');
+            }).join('\n');
+
+            const text = '【細胞の冒険 - 最終結果】\n' +
+                '世代: ' + gameState.generation + '\n' +
+                '個体数: ' + document.getElementById('population').textContent + '\n' +
+                '最大個体数: ' + gameState.maxPopulation + '\n' +
+                '生存率: ' + document.getElementById('survivalRate').textContent + '\n' +
+                'ミッション達成: ' + gameState.clearedMissions.length + '/5\n\n' +
+                '【達成ミッション】\n' + missionList + '\n\n' +
+                window.location.href;
+
+            navigator.clipboard.writeText(text).then(() => {
+                if (typeof showToast === 'function') {
+                    showToast('📋 結果をコピーしました', 'success');
+                }
+            }).catch(() => {
+                if (typeof showToast === 'function') {
+                    showToast('❌ コピーに失敗しました', 'error');
+                }
+            });
+        }
+
         // Pattern Functions
         const patterns = {
             glider: [
@@ -1398,13 +1645,18 @@ select,input[type=text],input[type=number],input[type=email],textarea{min-height
         }
         
         function copyLink() {
-            navigator.clipboard.writeText(window.location.href).then(() => {
-                // Show toast notification
-                const toast = document.createElement('div');
-                toast.className = 'fixed top-4 right-4 bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg z-50';
-                toast.textContent = 'リンクをコピーしました！';
-                document.body.appendChild(toast);
-                setTimeout(() => toast.remove(), 3000);
+            const generation = document.getElementById('gen-mobile')?.textContent || '0';
+            const population = document.getElementById('pop-mobile')?.textContent || '0';
+            const maxPop = document.getElementById('maxPopulation')?.textContent || '0';
+
+            const shareText = `🎮 細胞の冒険でプレイ中！\n世代: ${generation}・個体数: ${population}・最大: ${maxPop}\n\n${window.location.href}`;
+
+            navigator.clipboard.writeText(shareText).then(() => {
+                showToast('📋 スコア付きコピーしました！', 'success');
+            }).catch(() => {
+                navigator.clipboard.writeText(window.location.href).then(() => {
+                    showToast('リンクをコピーしました！', 'success');
+                });
             });
         }
         
@@ -1414,6 +1666,11 @@ select,input[type=text],input[type=number],input[type=email],textarea{min-height
             document.getElementById('playPauseBtn').addEventListener('click', playPause);
             document.getElementById('resetBtn').addEventListener('click', resetGame);
             document.getElementById('randomBtn').addEventListener('click', randomize);
+
+            // エクスポート/印刷ボタン（M10）
+            document.getElementById('printBtn').addEventListener('click', printResult);
+            document.getElementById('exportCsvBtn').addEventListener('click', exportCSV);
+            document.getElementById('copyResultBtn').addEventListener('click', copyResultText);
             
             // Speed control
             const speedSlider = document.getElementById('speedSlider');
@@ -2033,8 +2290,8 @@ select,input[type=text],input[type=number],input[type=email],textarea{min-height
 <div class="skeleton" style="display:none;height:3px;background:#f0f9ff;background-size:200% 100%;"></div>
 <style>@keyframes spin-car{to{transform:rotate(360deg)}}</style>
 <div style="display:none">
-  <input type="text" name="car_n" required minlength="1" maxlength="50" placeholder="name" aria-label="name">
-  <input type="number" name="car_v" min="0" max="9999" step="1" required>
+  <input type="text" name="car_n" required minlength="1" maxlength="50" placeholder="プレイヤー名（1-50文字）" aria-label="プレイヤー名">
+  <input type="number" name="car_v" min="0" max="9999" step="1" required placeholder="0-9999の数値を入力" aria-label="数値入力">
   <select name="car_s" required><option value="a">A</option><option value="b">B</option></select>
 </div>
 <script>
@@ -2097,12 +2354,14 @@ window.carSave=function(d){try{var h=JSON.parse(localStorage.getItem("car_hist")
 <div class="max-w-2xl mx-auto px-4 mb-4">
 <!-- Related Services -->
 <section class="bg-gray-800 rounded-2xl shadow-md p-5">
-  <h3 style="font-size:14px;font-weight:700;color:#a1a5af;margin-bottom:12px;letter-spacing:0.03em;">関連サービス</h3>
-  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px;">
+  <h3 style="font-size:14px;font-weight:700;color:#a1a5af;margin-bottom:12px;letter-spacing:0.03em;">🌟 AppADay の他の学習ゲーム・ツール</h3>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px;">
     <a href="https://appadaycreator.com/nanpure-quest/" class="related-link">数独バトル「ナンプレクエスト」</a>
     <a href="https://appadaycreator.com/chemical-quest/" class="related-link">化学式パズル「ケミカルクエスト」</a>
     <a href="https://appadaycreator.com/crospuzz-daily/" class="related-link">CrosPuzz（クロスパズ）</a>
-    <a href="https://appadaycreator.com/golf-iron-advisor/" class="related-link">ゴルフアイアン適性診断システム</a>
+    <a href="https://appadaycreator.com/golf-iron-advisor/" class="related-link">ゴルフアイアン適性診断</a>
+    <a href="https://appadaycreator.com/packing-checklist/" class="related-link">パッキングチェックリスト</a>
+    <a href="https://appadaycreator.com/english-learning-advisor/" class="related-link">英語学習ナビゲーター</a>
   </div>
 </section>
 </div>
@@ -2232,5 +2491,27 @@ document.readyState==='loading'?document.addEventListener('DOMContentLoaded',ini
         </div>
     <p style="text-align:center;font-size:10px;color:#9ca3af;margin-top:3px;">最終更新: 2026年5月 | 本サービスはアフィリエイト広告を掲載しています</p>
 </footer>
+<div style="text-align:center;padding:10px 16px 14px;background:#eef2ff;border-top:2px solid #c7d2fe;margin-top:8px">
+<a href="/blog/" style="color:#4f46e5;font-size:.85rem;font-weight:700">📖 マネー・育児・キャリアのコラムを読む →</a>
+</div>
+<div style="background:#eef2ff;border-left:4px solid #4f46e5;border-radius:.5rem;padding:1rem 1.25rem;margin:1.5rem auto;max-width:760px;font-size:.875rem">
+<p style="margin:0 0 .5rem;font-weight:700;color:#3730a3">📖 お役立ちコラム</p>
+<ul style="margin:0;padding-left:1.25rem;color:#4f46e5;line-height:2">
+<li><a href="/blog/stock-investment-beginner/" style="color:#4f46e5">株式投資の始め方【初心者完全ガイド】</a></li>
+<li><a href="/blog/nisa-comparison/" style="color:#4f46e5">新NISA vs iDeCo 徹底比較</a></li>
+<li><a href="/blog/investment-risk-management/" style="color:#4f46e5">投資のリスク管理入門</a></li>
+</ul>
+</div>
+<!-- r17-mobile-ux -->
+<a href="#top" id="back-to-top" aria-label="ページトップへ戻る" style="display:none;position:fixed;bottom:24px;right:20px;background:#4f46e5;color:#fff;border:none;border-radius:50%;width:48px;height:48px;font-size:1.4rem;line-height:48px;text-align:center;text-decoration:none;box-shadow:0 4px 12px rgba(79,70,229,.4);z-index:9000;cursor:pointer" title="ページトップへ">↑</a>
+<script>
+(function(){
+  var btn = document.getElementById('back-to-top');
+  if(!btn) return;
+  window.addEventListener('scroll', function(){
+    btn.style.display = window.scrollY > 400 ? 'block' : 'none';
+  }, {passive:true});
+})();
+</script>
 </body>
 </html>
